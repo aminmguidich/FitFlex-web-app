@@ -1,0 +1,31 @@
+
+<div class="container">
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+    <div class="form-group">
+        {{ form_label(form.titreevent,"Titre event") }}
+        {{ form_widget(form.titreevent,{ 'attr': {'class': 'form-control'} }) }} 
+        {% if form_errors(form.titreevent) is not empty %}
+            <div class="alert alert-danger" >
+            {{ form_errors(form.titreevent) }}
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class="form-group">
+    {{ form_label(form.nomcoach,"Votre Coach") }}
+    {{ form_widget(form.nomcoach,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.nomcoach) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.nomcoach) }}
+</div>
+{% endif %}
+</div>
+
+
+
+
+<br>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+</div>
