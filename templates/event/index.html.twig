@@ -1,0 +1,52 @@
+{% extends 'base_front_ranim.html.twig' %}
+<!DOCTYPE html>
+
+<title>Events index</title>
+
+{% block body %}
+    <h1>Events index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idevent</th>
+                <th>Titreevent</th>
+                <th>Nomcoach</th>
+                <th>Typeevent</th>
+                <th>Adresseevent</th>
+                <th>Prixevent</th>
+                <th>Dateevent</th>
+                <th>Imgevent</th>
+                <th>Nombreplacesreservees</th>
+                <th>Nombreplacestotal</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.idevent }}</td>
+                <td>{{ event.titreevent }}</td>
+                <td>{{ event.nomcoach }}</td>
+                <td>{{ event.typeevent }}</td>
+                <td>{{ event.adresseevent }}</td>
+                <td>{{ event.prixevent }}</td>
+                <td>{{ event.dateevent ? event.dateevent|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.imgevent }}</td>
+                <td>{{ event.nombreplacesreservees }}</td>
+                <td>{{ event.nombreplacestotal }}</td>
+                <td>
+                    <a href="{{ path('app_event_show', {'idevent': event.idevent}) }}">show</a>
+                    <a href="{{ path('app_event_edit', {'idevent': event.idevent}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_event_new') }}">Create new</a>
+{% endblock %}

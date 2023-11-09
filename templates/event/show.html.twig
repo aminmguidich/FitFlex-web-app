@@ -1,0 +1,59 @@
+{% extends 'base_front_ranim.html.twig'%}
+<!DOCTYPE html>
+
+<title>Events</title>
+
+{% block body %}
+    <h1>Events</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idevent</th>
+                <td>{{ event.idevent }}</td>
+            </tr>
+            <tr>
+                <th>Titreevent</th>
+                <td>{{ event.titreevent }}</td>
+            </tr>
+            <tr>
+                <th>Nomcoach</th>
+                <td>{{ event.nomcoach }}</td>
+            </tr>
+            <tr>
+                <th>Typeevent</th>
+                <td>{{ event.typeevent }}</td>
+            </tr>
+            <tr>
+                <th>Adresseevent</th>
+                <td>{{ event.adresseevent }}</td>
+            </tr>
+            <tr>
+                <th>Prixevent</th>
+                <td>{{ event.prixevent }}</td>
+            </tr>
+            <tr>
+                <th>Dateevent</th>
+                <td>{{ event.dateevent ? event.dateevent|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Imgevent</th>
+                <td>{{ event.imgevent }}</td>
+            </tr>
+            <tr>
+                <th>Nombreplacesreservees</th>
+                <td>{{ event.nombreplacesreservees }}</td>
+            </tr>
+            <tr>
+                <th>Nombreplacestotal</th>
+                <td>{{ event.nombreplacestotal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_event_index') }}">back to list</a>
+
+    <a href="{{ path('app_event_edit', {'idevent': event.idevent}) }}">edit</a>
+
+    {{ include('event/_delete_form.html.twig') }}
+{% endblock %}
