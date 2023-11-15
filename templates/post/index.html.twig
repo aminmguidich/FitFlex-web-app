@@ -1,15 +1,13 @@
-{%extends "base_front_asma.html.twig"%}
-<!DOCTYPE html>
-
-<title>Post index</title>
+{%extends "base_back_asma.html.twig"%}
+ {% block title %} index{% endblock %}
 
 {% block body %}
     <h1>Post index</h1>
-
+    
     <table class="table">
         <thead>
             <tr>
-                <th>Idpost</th>
+                <th>idpost</th>
                 <th>Description</th>
                 <th>Image</th>
                 <th>actions</th>
@@ -18,12 +16,12 @@
         <tbody>
         {% for post in posts %}
             <tr>
-                <td>{{ post.idpost }}</td>
+                <td>{{ post.idPost }}</td>
                 <td>{{ post.description }}</td>
                 <td>{{ post.image }}</td>
                 <td>
-                    <a href="{{ path('app_post_show', {'idpost': post.idpost}) }}">show</a>
-                    <a href="{{ path('app_post_edit', {'idpost': post.idpost}) }}">edit</a>
+                    <a href="{{ path('app_post_show', {'idPost': post.idPost}) }}">show</a>
+                    <a href="{{ path('app_post_edit', {'idPost': post.idPost}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

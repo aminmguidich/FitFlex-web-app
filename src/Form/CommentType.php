@@ -7,13 +7,26 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\User;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content')
+        ->add('content', TextType::class, [
+            'constraints' => [
+                new NotBlank(['message' => 'Le contenu ne peut pas être vide.']),
+                new Length([
+                    'max' => 255,
+                    'maxMessage' => 'Le contenu ne peut pas dépasser {{ limit }} caractères.',
+                ]),
+            ],
+        ])
             ->add('idpost', EntityType::class, [
                 'class' => 'App\Entity\Post',
                 'choice_label' => 'idpost', // ou une autre propriété de l'entité Post à afficher dans le champ

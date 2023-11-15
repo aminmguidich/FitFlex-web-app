@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use App\Repository\CommentRepository;
+use App\Entity\Post;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -16,12 +18,15 @@ class Comment
     #[ORM\Column(length: 255)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comment')]
-    #[ORM\JoinColumn(nullable: false , referencedColumnName: "idpost",name: "idpost",onDelete: "CASCADE")]
-    private ?Post $idpost = null;
+    #[ORM\ManyToOne(inversedBy:'post')]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName:"idPost", name:"idPost",onDelete:"CASCADE")]
+    
+    private ?Post $idPost = null;
+    
+   
 
     #[ORM\ManyToOne(inversedBy: 'comment')]
-    #[ORM\JoinColumn(nullable: false, referencedColumnName: "Id", name: "idUser", onDelete: "CASCADE")]
+    #[ORM\JoinColumn(nullable: false , referencedColumnName: "Id",name: "idUser",onDelete: "CASCADE")]
     private ?User $idUser = null;
 
     public function getIdc(): ?int
@@ -41,14 +46,14 @@ class Comment
         return $this;
     }
 
-    public function getIdpost(): ?Post
+    public function getIdPost(): ?Post
     {
-        return $this->idpost;
+        return $this->idPost;
     }
 
-    public function setIdpost(?Post $idpost): static
+    public function setIdPost(?Post $idPost): static
     {
-        $this->idpost = $idpost;
+        $this->idPost = $idPost;
 
         return $this;
     }
@@ -65,4 +70,6 @@ class Comment
 
         return $this;
     }
+
+   
 }

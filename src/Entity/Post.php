@@ -13,7 +13,7 @@ class Post
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(name :"idpost")]
+    #[ORM\Column(name :"idPost")]
     private ?int $idPost= null;
     
 
@@ -31,7 +31,8 @@ class Post
 
     
 
-#[ORM\OneToMany(mappedBy: 'idc', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Comment::class)]
+  
 private Collection $post;
 
 
@@ -43,9 +44,9 @@ private Collection $post;
     /**
      * @return Collection<int, Comment>
      */
-    public function getIdpost(): ?int
+    public function getIdPost(): ?int
     {
-        return $this->idpost;
+        return $this->idPost;
     }
 
     public function getDescription(): ?string
