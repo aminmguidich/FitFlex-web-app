@@ -2,26 +2,26 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ActivitesRepository;
 
 
 #[ORM\Entity(repositoryClass: ActivitesRepository::class)]
-#[ORM\Table(name: "activites")]
+
 class Activites
 {
 
-
-     #[ORM\Column]
      #[ORM\Id]
      #[ORM\GeneratedValue]
+     #[ORM\Column(name:"code")]
 
     private ?int $code= null;
     #[ORM\Column(length: 255 )]
 
-    private ?string $categorie=null;
-
+    private ?string $categorie;
 
     #[ORM\Column]
     private ?\DateTime $dateDeb = null;
@@ -38,10 +38,20 @@ class Activites
     #[ORM\Column(length: 255 )]
     private ?string $titre;
 
-    #[ORM\ManyToOne(inversedBy: 'activities')]
-    private ?Categorieactivite $idcategorie=null;
-    #[ORM\ManyToOne(inversedBy: 'activities')]
+    #[ORM\ManyToOne(inversedBy: 'activites')]
+    #[ORM\JoinColumn(nullable: false , referencedColumnName: "id",name: "idcategorie",onDelete: "CASCADE")]
+    private ?Categorieactivite $idcategorie = null;
+    #[ORM\ManyToOne(inversedBy: 'activites')]
+    #[ORM\JoinColumn(nullable: false , referencedColumnName: "Id", name: "idUser", onDelete: "CASCADE")]
     private ?User $idUser = null;
+
+    #[ORM\OneToMany(mappedBy: 'code', targetEntity: ReservationCours::class)]
+    private Collection $activites;
+
+    public function __construct()
+    {
+        $this->activites = new ArrayCollection();
+    }
 
     public function getCode(): ?int
     {
@@ -140,6 +150,36 @@ class Activites
     public function setIdUser(?User $idUser): static
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationCours>
+     */
+    public function getActivites(): Collection
+    {
+        return $this->activites;
+    }
+
+    public function addActivite(ReservationCours $activite): static
+    {
+        if (!$this->activites->contains($activite)) {
+            $this->activites->add($activite);
+            $activite->setCode($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivite(ReservationCours $activite): static
+    {
+        if ($this->activites->removeElement($activite)) {
+            // set the owning side to null (unless already changed)
+            if ($activite->getCode() === $this) {
+                $activite->setCode(null);
+            }
+        }
 
         return $this;
     }

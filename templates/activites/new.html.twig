@@ -1,0 +1,22 @@
+{# activites/_form.html.twig #}
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    {{ form_row(form.idcategorie) }}
+    {{ form_row(form.dateDeb) }}
+    {{ form_row(form.dateFin) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.salle) }}
+    {{ form_row(form.titre) }}
+
+
+    {{ form_row(form.idUser, {'choice_label': 'nomPrenom'}) }}
+
+    {{ form_rest(form) }}
+
+    <button type="submit">Save</button>
+
+    {{ form_end(form) }}
+{% endblock %}

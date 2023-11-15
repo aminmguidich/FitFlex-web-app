@@ -4,47 +4,28 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
-/**
- * ReservationCours
- *
- * @ORM\Table(name="reservation_cours", indexes={@ORM\Index(name="reservation_cours_ibfk_2", columns={"code"})})
- * @ORM\Entity
- */
+use App\Repository\ReservationCoursRepository;
+#[ORM\Entity(repositoryClass: ReservationCoursRepository::class)]
 class ReservationCours
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name:"id")]
+    private ?int $id=null;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_res", type="datetime", nullable=true)
-     */
-    private $dateRes;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer", nullable=false)
-     */
-    private $idUser;
+    #[ORM\Column]
+    private ?\dateRes $dateRes;
 
-    /**
-     * @var \Activites
-     *
-     * @ORM\ManyToOne(targetEntity="Activites")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="code", referencedColumnName="code")
-     * })
-     */
-    private $code;
+
+    #[ORM\Column]
+    private ?int $idUser= null;
+
+
+    #[ORM\ManyToOne(inversedBy: 'reservation')]
+    #[ORM\JoinColumn(nullable: false , referencedColumnName: "code",name: "code",onDelete: "CASCADE")]
+    private ?Activites $code = null;
+
 
     public function getId(): ?int
     {

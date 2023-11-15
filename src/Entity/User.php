@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 
 
-#[ORM\Entity(repositoryClass:UserRepository::class)]
-#[ORM\Table(name: "user")]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+
 class User
 {
 
@@ -47,11 +47,11 @@ class User
     #[ORM\Column]
     private ?int $age=null;
 
-
-
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Activites::class)]
+    private Collection $activites;
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->activites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,6 +141,40 @@ class User
         $this->age = $age;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Activites>
+     */
+    public function getActivites(): Collection
+    {
+        return $this->activites;
+    }
+
+    public function addActivite(Activites $activite): static
+    {
+        if (!$this->activites->contains($activite)) {
+            $this->activites->add($activite);
+            $activite->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivite(Activites $activite): static
+    {
+        if ($this->activites->removeElement($activite)) {
+            // set the owning side to null (unless already changed)
+            if ($activite->getIdUser() === $this) {
+                $activite->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->getNom() . ' ' . $this->getPrenom();
     }
 
 
