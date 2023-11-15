@@ -1,0 +1,26 @@
+{% extends 'base_Front_chayma.html.twig' %}
+
+{% block title %}Abonnement{% endblock %}
+
+{% block body %}
+    <h1>Abonnement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idabonement</th>
+                <td>{{ abonnement.idabonement }}</td>
+            </tr>
+            <tr>
+                <th>Dateabonnement</th>
+                <td>{{ abonnement.dateabonnement ? abonnement.dateabonnement|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_abonnement_index') }}">back to list</a>
+
+    <a href="{{ path('app_abonnement_edit', {'idabonement': abonnement.idabonement}) }}">edit</a>
+
+    {{ include('abonnement/_delete_form.html.twig') }}
+{% endblock %}

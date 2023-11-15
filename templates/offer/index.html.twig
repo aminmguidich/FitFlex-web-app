@@ -1,0 +1,59 @@
+{% extends 'base_Back_chayma.html.twig' %}
+
+{% block title %}Offer{% endblock %}
+
+ {% block nom %}
+ 
+                         <h1 class="mt-4">Offer</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Offer</li>
+                        </ol>
+
+                        
+                        {% endblock %}
+{% block body %}
+
+    <table class="table" border="2px">
+        <thead>
+            <tr>
+             <th style="color: #1b95b2">{{ 'Title offer'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Description offer'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Prix'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Date debut offer'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Date fin offer'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Image'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'actions'|trans|raw  }}</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for offer in offers %}
+            <tr>
+                <td>{{ offer.titleoffer }}</td>
+                <td>{{ offer.descriptionoffer }}</td>
+                <td>{{ offer.prix }}</td>
+                <td>{{ offer.datedeboffer ? offer.datedeboffer|date('Y-m-d') : '' }}</td>
+                <td>{{ offer.datefinoffer ? offer.datefinoffer|date('Y-m-d') : '' }}</td>
+                <td>{{ offer.img }}</td>
+                <td>
+                    <a href="{{ path('app_offer_show', {'idoffer': offer.idoffer}) }}">show</a>
+                    <a href="{{ path('app_offer_edit', {'idoffer': offer.idoffer}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_offer_new') }}">Create new</a>
+{% endblock %}
+
+{% block viewDetails%}
+
+                            {% if app.request.attributes.get('_route') != 'app_offer_index' %}
+                        {% endif %}
+                        {% endblock %}
+

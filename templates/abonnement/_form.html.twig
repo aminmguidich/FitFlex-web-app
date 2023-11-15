@@ -1,0 +1,51 @@
+
+
+
+
+
+{% block body %}
+
+<div class="container">
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<div class="form-group">
+    {{ form_label(form.dateabonnement,"date abonnement") }}
+    {{ form_widget(form.dateabonnement,{ 'attr': {'class': 'form-control'} }) }} 
+    {% if form_errors(form.dateabonnement) is not empty %}
+    <div class="alert alert-danger" >
+    {{ form_errors(form.dateabonnement) }}
+</div>
+{% endif %}
+</div>
+
+<div class="container">
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<div class="form-group">
+    {{ form_label(form.typeabon,"Type Abonnement") }}
+    {{ form_widget(form.typeabon,{ 'attr': {'class': 'form-control'} }) }} 
+    {% if form_errors(form.typeabon) is not empty %}
+    <div class="alert alert-danger" >
+    {{ form_errors(form.typeabon) }}
+</div>
+{% endif %}
+</div>
+
+<div class="container">
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+<div class="form-group">
+    {{ form_label(form.iduser,"Votre nom") }}
+    {{ form_widget(form.iduser,{ 'attr': {'class': 'form-control'} }) }} 
+    {% if form_errors(form.iduser) is not empty %}
+    <div class="alert alert-danger" >
+    {{ form_errors(form.iduser) }}
+</div>
+{% endif %}
+</div>
+
+
+  
+<br>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+</div>
+
+{% endblock %}

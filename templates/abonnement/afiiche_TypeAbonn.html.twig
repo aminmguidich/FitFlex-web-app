@@ -1,0 +1,55 @@
+{% extends 'base_Front_chayma.html.twig' %}
+
+{% block video %}
+ {% if app.request.attributes.get('_route') != 'affiche_TypeAbonn'  %}
+                        {% endif %}
+                        {% endblock %}
+{% block title %}Type Abonnement{% endblock %}
+
+ {% block nom %}
+ 
+                         <h1 class="mt-4">Abonnement</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Abonnement</li>
+                        </ol> 
+                        {% endblock %}
+
+{% block body %}
+
+    <table align="center" class="table" border="2" style="width: 45rem;" >
+        <thead>
+            <tr>
+                             <th style="color: #1b95b2">{{ 'Type abonnement'|trans|raw  }}</th>
+                             <th style="color: #1b95b2">{{ 'Description'|trans|raw  }}</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_abonn in type_abonns %}
+            <tr>
+                <td>{{ type_abonn.type }}</td>
+                <td>{{ type_abonn.description }}</td>
+                
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h1 style="margin-bottom:20px;">
+
+</h1>
+
+    <a href="{{ path('app_abonnement_new') }}">Abonne</a>
+
+{% endblock %}
+
+
+                    
+
+
+
