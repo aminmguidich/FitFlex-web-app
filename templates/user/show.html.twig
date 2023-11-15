@@ -9,42 +9,42 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ user.id }}</td>
+                <td>{{ users.id }}</td>
             </tr>
             <tr>
                 <th>Nom</th>
-                <td>{{ user.nom }}</td>
+                <td>{{ users.nom }}</td>
             </tr>
             <tr>
                 <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
+                <td>{{ users.prenom }}</td>
             </tr>
             <tr>
                 <th>Mdp</th>
-                <td>{{ user.mdp }}</td>
+                <td>{{ users.mdp }}</td>
             </tr>
             <tr>
                 <th>Role</th>
-                <td>{{ user.role }}</td>
+                <td>{{ users.role }}</td>
             </tr>
             <tr>
                 <th>Email</th>
-                <td>{{ user.email }}</td>
+                <td>{{ users.email }}</td>
             </tr>
             <tr>
                 <th>Img</th>
-                <td>{{ user.img }}</td>
+                <td>{{ users.img }}</td>
             </tr>
             <tr>
                 <th>Age</th>
-                <td>{{ user.age }}</td>
+                <td>{{ users.age }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('app_user_edit', {'id': users.id}) }}">edit</a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}
