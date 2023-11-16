@@ -3,10 +3,11 @@
 {% block title %}Activites{% endblock %}
 
 {% block body %}
-    <h1>Activites</h1>
+    <div class="container mt-4">
+        <h1>Activites</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Code</th>
                 <td>{{ activite.code }}</td>
@@ -35,12 +36,13 @@
                 <th>Titre</th>
                 <td>{{ activite.titre }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_activites_index') }}">back to list</a>
+        <a href="{{ path('app_activites_index') }}" class="btn btn-primary">Back to List</a>
 
-    <a href="{{ path('app_activites_edit', {'code': activite.code}) }}">edit</a>
+        <a href="{{ path('app_activites_edit', {'code': activite.code}) }}" class="btn btn-primary">Edit</a>
 
-    {{ include('activites/_delete_form.html.twig') }}
+        {{ include('activites/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

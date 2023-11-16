@@ -1,13 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Activites{% endblock %}
+{% block title %}Edit Activity{% endblock %}
 
 {% block body %}
-    <h1>Edit Activites</h1>
+    <div class="container mt-4">
+        <h1>Edit Activity</h1>
 
-    {{ include('activites/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ form_start(form, {'attr': {'class': 'form'}}) }}
 
-    <a href="{{ path('app_activites_index') }}">back to list</a>
+        <div class="form-group">
+            {{ form_label(form.idcategorie, 'Category') }}
+            {{ form_widget(form.idcategorie, {'attr': {'class': 'form-control'}}) }}
+        </div>
 
-    {{ include('activites/_delete_form.html.twig') }}
+        <div class="form-group">
+            {{ form_label(form.dateDeb, 'Start Date') }}
+            {{ form_widget(form.dateDeb, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.dateFin, 'End Date') }}
+            {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.description, 'Description') }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.salle, 'Room') }}
+            {{ form_widget(form.salle, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.titre, 'Title') }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.idUser, 'User') }}
+            {{ form_widget(form.idUser, {'attr': {'class': 'form-control'}, 'choice_label': 'nomPrenom'}) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+
+        {{ form_end(form) }}
+
+        <a href="{{ path('app_activites_index') }}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
 {% endblock %}
