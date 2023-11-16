@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+{% extends 'base_front_ranim.html.twig' %}
 
-<title>TypeEvent</title>
+{% block title %}Type Event{% endblock %}
+{% block body%}
 
-{% block body %}
     <h1>TypeEvent</h1>
 
     <table class="table">
@@ -23,4 +23,5 @@
     <a href="{{ path('app_type_event_edit', {'id': type_event.id}) }}">edit</a>
 
     {{ include('type_event/_delete_form.html.twig') }}
-{% endblock %}
+
+{%endblock%}

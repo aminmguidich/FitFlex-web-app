@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TypeEventRepository;
 
 #[ORM\Entity(repositoryClass: TypeEventRepository::class)]
 
@@ -16,7 +17,9 @@ class TypeEvent
     private ?int $id= null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "vous devez mettre le type event !!!")]
     private ?string $type = null;
+
     #[ORM\OneToMany(mappedBy: 'idevent', targetEntity: Events::class)]
     private Collection $typeEvent;
 

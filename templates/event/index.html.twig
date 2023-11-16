@@ -1,31 +1,28 @@
-{% extends 'base_front_ranim.html.twig' %}
-<!DOCTYPE html>
-
-<title>Events index</title>
-
+{% extends 'base_back_ranim.html.twig' %}
+{% block title %}List Of Events{% endblock %}
 {% block body %}
-    <h1>Events index</h1>
+
 
     <table class="table">
         <thead>
             <tr>
-                <th>Idevent</th>
-                <th>Titreevent</th>
-                <th>Nomcoach</th>
-                <th>Typeevent</th>
-                <th>Adresseevent</th>
-                <th>Prixevent</th>
-                <th>Dateevent</th>
-                <th>Imgevent</th>
-                <th>Nombreplacesreservees</th>
-                <th>Nombreplacestotal</th>
+               {# <th>Id event</th>#}
+                <th>Titre</th>
+                <th>Coach</th>
+                <th>Type</th>
+                <th>Adresse</th>
+                <th>Prix</th>
+                <th>Date</th>
+                <th>Image</th>
+                <th>Nombre places reservees</th>
+                <th>Nombre places total</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for event in events %}
             <tr>
-                <td>{{ event.idevent }}</td>
+              {#  <td>{{ event.idevent }}</td>#}
                 <td>{{ event.titreevent }}</td>
                 <td>{{ event.nomcoach }}</td>
                 <td>{{ event.typeevent }}</td>
@@ -48,5 +45,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_event_new') }}">Create new</a>
+    <a href="{{ path('app_event_new') }}">create new</a>
 {% endblock %}

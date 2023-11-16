@@ -1,7 +1,5 @@
-{% extends 'base_front_ranim.html.twig'%}
-<!DOCTYPE html>
-
-<title>Events</title>
+{% extends 'base_back_ranim.html.twig'%}
+{% block title %}Events{% endblock %}
 
 {% block body %}
     <h1>Events</h1>
@@ -9,43 +7,43 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Idevent</th>
+                <th>Id event</th>
                 <td>{{ event.idevent }}</td>
             </tr>
             <tr>
-                <th>Titreevent</th>
+                <th>Titre</th>
                 <td>{{ event.titreevent }}</td>
             </tr>
             <tr>
-                <th>Nomcoach</th>
+                <th>Coach</th>
                 <td>{{ event.nomcoach }}</td>
             </tr>
             <tr>
-                <th>Typeevent</th>
+                <th>Type</th>
                 <td>{{ event.typeevent }}</td>
             </tr>
             <tr>
-                <th>Adresseevent</th>
+                <th>Adresse</th>
                 <td>{{ event.adresseevent }}</td>
             </tr>
             <tr>
-                <th>Prixevent</th>
+                <th>Prix</th>
                 <td>{{ event.prixevent }}</td>
             </tr>
             <tr>
-                <th>Dateevent</th>
+                <th>Date</th>
                 <td>{{ event.dateevent ? event.dateevent|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Imgevent</th>
+                <th>Image</th>
                 <td>{{ event.imgevent }}</td>
             </tr>
             <tr>
-                <th>Nombreplacesreservees</th>
+                <th>Nombre places reservees</th>
                 <td>{{ event.nombreplacesreservees }}</td>
             </tr>
             <tr>
-                <th>Nombreplacestotal</th>
+                <th>Nombre places total</th>
                 <td>{{ event.nombreplacestotal }}</td>
             </tr>
         </tbody>

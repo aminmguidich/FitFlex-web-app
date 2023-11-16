@@ -20,12 +20,89 @@
     {{ form_errors(form.nomcoach) }}
 </div>
 {% endif %}
+
+ <div class="form-group">
+    {{ form_label(form.typeevent,"type") }}
+    {{ form_widget(form.typeevent,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.typeevent) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.typeevent) }}
 </div>
+{% endif %}
+
+ <div class="form-group">
+    {{ form_label(form.adresseevent,"Adresse") }}
+    {{ form_widget(form.adresseevent,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.adresseevent) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.adresseevent) }}
+</div>
+{% endif %}
 
 
+ <div class="form-group">
+    {{ form_label(form.prixevent,"prix") }}
+    {{ form_widget(form.prixevent,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.prixevent) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.prixevent) }}
+</div>
+{% endif %}
 
 
+ <div class="form-group">
+    {{ form_label(form.dateevent,"date") }}
+    {{ form_widget(form.dateevent,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.dateevent) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.dateevent) }}
+</div>
+{% endif %}
+
+<div class="form-group">
+    {{ form_label(form.imgevent,"image") }}
+    {{ form_widget(form.imgevent,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.imgevent) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.imgevent) }}
+</div>
+{% endif %}
+<div class="form-group">
+    {{ form_label(form.nombreplacesreservees,"nombreplacesreservees") }}
+    {{ form_widget(form.nombreplacesreservees,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.nombreplacesreservees) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.nombreplacesreservees) }}
+</div>
+{% endif %}
+<div class="form-group">
+    {{ form_label(form.nombreplacestotal,"nombreplacestotal") }}
+    {{ form_widget(form.nombreplacestotal,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.nombreplacestotal) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.nombreplacestotal) }}
+</div>
+{% endif %}
+<div class="form-group">
+    {{ form_label(form.idUser,"idUser") }}
+    {{ form_widget(form.idUser,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.idUser) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.idUser) }}
+</div>
+{% endif %}
+<div class="form-group">
+    {{ form_label(form.idtype,"idtype") }}
+    {{ form_widget(form.idtype,{ 'attr': {'class': 'form-control'} }) }}
+    {% if form_errors(form.idtype) is not empty %}
+    <div class="alert alert-danger">
+    {{ form_errors(form.idtype) }}
+</div>
+{% endif %}
+</div>
+ 
 <br>
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn" style="background-color: blue; color: white;">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}
 </div>

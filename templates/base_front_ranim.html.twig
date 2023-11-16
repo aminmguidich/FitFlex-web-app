@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
-    <title>{% block tittre %}SALLE DE SPORT {% endblock %}</title>
+    <title>{% block title %}SALLE DE SPORT {% endblock %}</title>
 <!--
 
 TemplateMo 548 Training Studio
@@ -52,15 +52,19 @@ https://templatemo.com/tm-548-training-studio
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">FETFLIX<em> GYM</em></a>
+                        <a href="index.html" class="logo">
+    <img src="{{asset('FrontOffice/images/logo.png')}}">
+    <em>FITFLEX</em>
+</a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#features">About</a></li>
-                            <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
-                            <li class="scroll-to-section"><a href="#schedule">Schedules</a></li>
-                            <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
+                            <li class="scroll-to-section"><a href="#features">Events</a></li>
+                            <li class="scroll-to-section"><a href="#our-classes">Offers</a></li>
+                            <li class="scroll-to-section"><a href="#schedule">Activities</a></li>
+                            <li class="scroll-to-section"><a href="#contact-us">Forum</a></li> 
+                            <li class="scroll-to-section"><a href="#contact-us">Shop</a></li> 
                             <li class="main-button"><a href="#">Sign Up</a></li>
                         </ul>        
                         <a class='menu-trigger'>
@@ -488,4 +492,5 @@ https://templatemo.com/tm-548-training-studio
  {% endblock %}
  
   </body>
+  
 </html>

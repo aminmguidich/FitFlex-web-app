@@ -6,10 +6,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\UserRepository;
+use App\Repository\UserRepository;
 
 
-#[ORM\Entity(repositoryClass:UserRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
     
@@ -147,30 +147,29 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, Abonnement>
+     /**
+     * @return Collection<int, Events>
      */
-    public function getUsers(): Collection
+    public function getEvents(): Collection
     {
-        return $this->users;
+        return $this->events;
     }
-
-    public function addUser(Abonnement $user): static
+    public function addEvent(Events $event): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setId($this);
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setIdUser($this);
         }
 
         return $this;
     }
 
-    public function removeUser(Abonnement $user): static
+    public function removeEvent(Events $event): static
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->events->removeElement($event)) {
             // set the owning side to null (unless already changed)
-            if ($user->getId() === $this) {
-                $user->setId(null);
+            if ($event->getIdUser() === $this) {
+                $event->setIdUser(null);
             }
         }
 

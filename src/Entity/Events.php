@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventsRepository;
 
 #[ORM\Entity(repositoryClass: EventsRepository::class)]
 
@@ -30,7 +31,7 @@ class Events
     private ?string $adresseevent = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[ORM\JoinColumn(nullable: false , referencedColumnName: "Id",name: "idUser",onDelete: "CASCADE")]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: "Id", name: "idUser", onDelete: "CASCADE")]
     private ?User $idUser = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
@@ -170,14 +171,21 @@ class Events
         return $this;
     }
 
-    public function getIduser(): ?User
+     /**
+     * @return User|null
+     */
+    public function getIdUser(): ?User
     {
-        return $this->iduser;
+        return $this->idUser;
     }
 
-    public function setIduser(?User $iduser): static
+   /**
+     * @param User|null $idUser
+     * @return $this
+     */
+    public function setIdUser(?User $idUser): static
     {
-        $this->iduser = $iduser;
+        $this->idUser = $idUser;
 
         return $this;
     }
