@@ -1,4 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form '/user/form_design.html.twig' %}
+
+{% block body %}
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary "  style="width: 15% !important; margin-top:20px;">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}
+{% endblock %}
+
