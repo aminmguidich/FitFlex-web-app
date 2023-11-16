@@ -1,0 +1,49 @@
+
+{% extends "base_back_ayari.html.twig" %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Produit</h1>
+
+        <table class="table table-bordered mx-auto">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ produit.id }}</td>
+                </tr>
+                <tr>
+                    <th>Idadmin</th>
+                    <td>{{ produit.idadmin }}</td>
+                </tr>
+                <tr>
+                    <th>Titre</th>
+                    <td>{{ produit.titre }}</td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td>{{ produit.image }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ produit.date ? produit.date|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ produit.description }}</td>
+                </tr>
+                <tr>
+                    <th>Categorie</th>
+                    <td>{{ produit.categorie }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_produit_index') }}" class="btn btn-primary d-block mx-auto mt-3">Back to list</a>
+
+        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning d-block mx-auto mt-3">Edit</a>
+
+        {{ include('produit/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

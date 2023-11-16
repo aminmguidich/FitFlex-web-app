@@ -1,0 +1,18 @@
+
+{% extends "base_back_ayari.html.twig" %}
+
+{% block title %}Edit Produit{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Edit Produit</h1>
+
+        <div class="border p-3">
+            {{ include('produit/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+
+        <a href="{{ path('app_produit_index') }}" class="btn btn-primary d-block mx-auto mt-3">Back to list</a>
+
+        {{ include('produit/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
