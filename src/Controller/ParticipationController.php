@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Participation;
+use App\Repository\EventsRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use App\Repository\ParticipationRepository;
 use App\Form\ParticipationType;
@@ -24,17 +26,33 @@ class ParticipationController extends AbstractController
     }
 
     #[Route('/new', name: 'app_participation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         $participation = new Participation();
         $form = $this->createForm(ParticipationType::class, $participation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($participation);
-            $entityManager->flush();
+            // Check available places before persisting
+            $event = $participation->getIdevent();
+            $availablePlaces = $event->getNombreplacestotal() - $event->getNombreplacesreservees();
 
-            return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
+            if ($availablePlaces > 0) {
+                
+                $event->setNombreplacesreservees($event->getNombreplacesreservees() + 1);
+                $participation->setDatepart(new \DateTime()); 
+
+                $entityManager->persist($participation);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
+            } else {
+                
+                $this->addFlash('error', 'No available places for this event.');
+
+                
+
+            }
         }
 
         return $this->renderForm('participation/new.html.twig', [

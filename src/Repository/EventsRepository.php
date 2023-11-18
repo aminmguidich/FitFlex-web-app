@@ -20,7 +20,23 @@ class EventsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Events::class);
     }
+    public function getAvailablePlaces($idevent): int
+    {
+        // Implement the logic to get available places for the event
+        // For example, you might get the total places and subtract reserved places
+        // Adjust the logic based on your data model
+        // This is a placeholder, and you should replace it with your actual logic
+        $event = $this->find($idevent);
 
+        if ($event) {
+            $totalPlaces = $event->getNombreplacestotal();
+            $reservedPlaces = $event->getNombreplacesreservees();
+
+            return max(0, $totalPlaces - $reservedPlaces);
+        }
+
+        return 0;
+    }
 //    /**
 //     * @return Events[] Returns an array of Events objects
 //     */
