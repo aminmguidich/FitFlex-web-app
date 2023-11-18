@@ -14,6 +14,11 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TypeEvent[]    findAll()
  * @method TypeEvent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
+
+  //@ORM\Entity(repositoryClass: TypeEventRepository::class)
+ 
+ 
 class TypeEventRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

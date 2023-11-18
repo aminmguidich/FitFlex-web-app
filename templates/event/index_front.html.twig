@@ -1,0 +1,50 @@
+{% extends 'base_front_ranim.html.twig' %}
+{% block title %}List Of Events{% endblock %}
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Coach</th>
+                <th>Type</th>
+                <th>Adresse</th>
+                <th>Prix</th>
+                <th>Date</th>
+                <th>Image</th>
+                <th>Nombre places reservees</th>
+                <th>Nombre places total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.titreevent }}</td>
+                    <td>{{ event.nomcoach }}</td>
+                    <td>{{ event.typeevent }}</td>
+                    <td>{{ event.adresseevent }}</td>
+                    <td>{{ event.prixevent }}</td>
+                    <td>{{ event.dateevent ? event.dateevent|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        {% if event.imgevent %}
+                            <img src="{{ asset('uploads/images/' ~ event.imgevent) }}" alt="{{ event.titreevent }}" style="max-width: 50px; max-height: 50px;">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+                    <td>{{ event.nombreplacesreservees }}</td>
+                    <td>{{ event.nombreplacestotal }}</td>
+                    <td>
+                        <a href="{{ path('app_participation_new', {'idevent': event.idevent}) }}" class="btn btn-success">Reserver</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

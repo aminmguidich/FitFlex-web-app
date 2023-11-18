@@ -5,70 +5,40 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Participation
- *
- * @ORM\Table(name="participation", indexes={@ORM\Index(name="participation_ibfk_1", columns={"idEvent"}), @ORM\Index(name="idUser", columns={"idUser"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: ParticipationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+
 class Participation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idPart", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idpart;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idpart= null;
+   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Nom", type="string", length=150, nullable=false)
-     */
-    private $nom;
+    #[ORM\Column(length: 150)]
+    private ?string $nom = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Prenom", type="string", length=150, nullable=false)
-     */
-    private $prenom;
+    #[ORM\Column(length: 150)]
+    private ?string $prenom = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Ntel", type="string", length=150, nullable=false)
-     */
-    private $ntel;
+    #[ORM\Column(length: 150)]
+    private ?string $ntel = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="DatePart", type="date", nullable=false)
-     */
-    private $datepart;
+    #[ORM\Column]
+    private ?\DateTime $datepart = null;
+    
 
-    /**
-     * @var \Events
-     *
-     * @ORM\ManyToOne(targetEntity="Events")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEvent", referencedColumnName="idEvent")
-     * })
-     */
-    private $idevent;
+    #[ORM\ManyToOne(inversedBy: 'participation')]
+    #[ORM\JoinColumn(nullable: false , referencedColumnName: "idevent",name: "idevent",onDelete: "CASCADE")]
 
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idUser", referencedColumnName="Id")
-     * })
-     */
-    private $iduser;
+    private ?Events $idevent = null;
+    
+
+    #[ORM\ManyToOne(inversedBy: 'participation')]
+    #[ORM\JoinColumn(nullable: false , referencedColumnName: "Id",name: "idUser",onDelete: "CASCADE")]
+
+    private ?User $idUser = null;
 
     public function getIdpart(): ?int
     {
@@ -86,6 +56,12 @@ class Participation
 
         return $this;
     }
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        $this->datepart = new \DateTime();
+    }
+
 
     public function getPrenom(): ?string
     {
@@ -134,18 +110,17 @@ class Participation
 
         return $this;
     }
-
-    public function getIduser(): ?User
+    public function getIdUser(): ?User
     {
-        return $this->iduser;
+        return $this->idUser;
     }
 
-    public function setIduser(?User $iduser): static
+    public function setIdUser(?User $idUser): static
     {
-        $this->iduser = $iduser;
+        $this->idUser = $idUser;
 
         return $this;
     }
-
+   
 
 }

@@ -1,41 +1,43 @@
-<!DOCTYPE html>
+{% extends 'base_front_ranim.html.twig' %}
 
-<title>Participation index</title>
+{% block title %}Reservation{% endblock %}
 
 {% block body %}
-    <h1>Participation index</h1>
+    <h1>Reservation</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Idpart</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Ntel</th>
-                <th>Datepart</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for participation in participations %}
-            <tr>
-                <td>{{ participation.idpart }}</td>
-                <td>{{ participation.nom }}</td>
-                <td>{{ participation.prenom }}</td>
-                <td>{{ participation.ntel }}</td>
-                <td>{{ participation.datepart ? participation.datepart|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_participation_show', {'idpart': participation.idpart}) }}">show</a>
-                    <a href="{{ path('app_participation_edit', {'idpart': participation.idpart}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% block table %}
+        <table class="table">
+            <thead>
+                <tr>
+                    {# <th>Idpart</th> #}
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Ntel</th>
+                    <th>Datepart</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for participation in participations %}
+                <tr>
+                    {# <td>{{ participation.idpart }}</td> #}
+                    <td>{{ participation.nom }}</td>
+                    <td>{{ participation.prenom }}</td>
+                    <td>{{ participation.ntel }}</td>
+                    <td>{{ participation.datepart ? participation.datepart|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_participation_show', {'idpart': participation.idpart}) }}" class="btn btn-primary">Show</a>
+                        <a href="{{ path('app_participation_delete', {'idpart': participation.idpart}) }}" class="btn btn-warning">Remove</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
 
-    <a href="{{ path('app_participation_new') }}">Create new</a>
+    <a href="{{ path('app_participation_new') }}" class="btn btn-success">Create New</a>
 {% endblock %}

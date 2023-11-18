@@ -4,106 +4,60 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventsRepository;
+use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Events
- *
- * @ORM\Table(name="events", indexes={@ORM\Index(name="idtype", columns={"idtype"}), @ORM\Index(name="idUser", columns={"idUser"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: EventsRepository::class)]
+
 class Events
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idEvent", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idevent;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name :"idevent")]
+    private ?int $idevent= null;
+    
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="titreEvent", type="string", length=150, nullable=false)
-     */
-    private $titreevent;
+    #[ORM\Column(length: 150)]
+    private ?string $titreevent = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nomCoach", type="string", length=150, nullable=false)
-     */
-    private $nomcoach;
+    #[ORM\Column(length: 150)]
+    private ?string $nomcoach = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="typeEvent", type="string", length=150, nullable=false)
-     */
-    private $typeevent;
+    #[ORM\Column(length: 150)]
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresseEvent", type="string", length=150, nullable=false)
-     */
-    private $adresseevent;
+    private ?string $typeevent = null;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prixEvent", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $prixevent;
+    #[ORM\Column(length: 150)]
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateEvent", type="date", nullable=false)
-     */
-    private $dateevent;
+    private ?string $adresseevent = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="imgEvent", type="string", length=150, nullable=false)
-     */
-    private $imgevent;
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: "Id", name: "idUser", onDelete: "CASCADE")]
+    private ?User $idUser = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nombrePlacesReservees", type="integer", nullable=false)
-     */
-    private $nombreplacesreservees;
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false , referencedColumnName: "Id",name: "idtype",onDelete: "CASCADE")]
+    private ?TypeEvent $idtype = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nombrePlacesTotal", type="integer", nullable=false)
-     */
-    private $nombreplacestotal;
+    
+    #[ORM\Column]
+    private ?float $prixevent = null;
 
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idUser", referencedColumnName="Id")
-     * })
-     */
-    private $iduser;
+    #[ORM\Column]
+    private ?\DateTime $dateevent = null;
 
-    /**
-     * @var \TypeEvent
-     *
-     * @ORM\ManyToOne(targetEntity="TypeEvent")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idtype", referencedColumnName="id")
-     * })
-     */
-    private $idtype;
+    #[ORM\Column(length: 150)]
+
+    private ?string $imgevent = null;
+
+    #[ORM\Column]
+    private ?int $nombreplacesreservees= null;
+    
+
+    #[ORM\Column]
+    private ?int $nombreplacestotal= null;
+   
+    
 
     public function getIdevent(): ?int
     {
@@ -218,14 +172,21 @@ class Events
         return $this;
     }
 
-    public function getIduser(): ?User
+     /**
+     * @return User|null
+     */
+    public function getIdUser(): ?User
     {
-        return $this->iduser;
+        return $this->idUser;
     }
 
-    public function setIduser(?User $iduser): static
+   /**
+     * @param User|null $idUser
+     * @return $this
+     */
+    public function setIdUser(?User $idUser): static
     {
-        $this->iduser = $iduser;
+        $this->idUser = $idUser;
 
         return $this;
     }

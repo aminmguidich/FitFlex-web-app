@@ -2,73 +2,61 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * User
- *
- * @ORM\Table(name="user")
- * @ORM\Entity
- */
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "Id")]
+    private ?int $id=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
-     */
-    private $nom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Prenom", type="string", length=255, nullable=false)
-     */
-    private $prenom;
+    #[ORM\Column(length:255)]
+    private ?string $nom=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Mdp", type="string", length=255, nullable=false)
-     */
-    private $mdp;
+  
+    #[ORM\Column(length:255)]
+    private ?string $prenom=null;
+ 
+    #[ORM\Column(length:255)]
+    private ?string $mdp=null;
+    
+    #[ORM\Column(length:255)]
+    private ?string $role=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Role", type="string", length=255, nullable=false)
-     */
-    private $role;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Email", type="string", length=255, nullable=false)
-     */
-    private $email;
+    #[ORM\Column(length:255)]
+    private ?string $email=null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Img", type="string", length=255, nullable=false)
-     */
-    private $img;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Age", type="integer", nullable=false)
-     */
-    private $age;
+
+    #[ORM\Column(length:255)]
+    private ?string $img=null;
+
+
+
+    #[ORM\Column]
+    private ?int $age=null;
+
+    
+    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Events::class)]
+    private Collection $users;
+    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Participation::class)]
+    private Collection $usersP;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->usersP = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +143,65 @@ class User
     public function setAge(int $age): static
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+     /**
+     * @return Collection<int, Events>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+    public function addEvent(Events $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Events $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getIdUser() === $this) {
+                $event->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getUsersP(): Collection
+    {
+        return $this->usersP;
+    }
+
+    public function addUsersP(Participation $usersP): static
+    {
+        if (!$this->usersP->contains($usersP)) {
+            $this->usersP->add($usersP);
+            $usersP->setId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersP(Participation $usersP): static
+    {
+        if ($this->usersP->removeElement($usersP)) {
+            // set the owning side to null (unless already changed)
+            if ($usersP->getId() === $this) {
+                $usersP->setId(null);
+            }
+        }
 
         return $this;
     }

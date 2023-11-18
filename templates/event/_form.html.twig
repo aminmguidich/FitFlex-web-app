@@ -1,31 +1,22 @@
-
 <div class="container">
-{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
-    <div class="form-group">
-        {{ form_label(form.titreevent,"Titre event") }}
-        {{ form_widget(form.titreevent,{ 'attr': {'class': 'form-control'} }) }} 
-        {% if form_errors(form.titreevent) is not empty %}
-            <div class="alert alert-danger" >
-            {{ form_errors(form.titreevent) }}
-            </div>
-        {% endif %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {% for field in form %}
+        <div class="form-group">
+            {{ form_label(field, null, {'label_attr': {'class': 'font-weight-bold'}}) }}
+            {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+
+            {% if form_errors(field) is not empty %}
+                <div class="alert alert-danger mt-2">
+                    {{ form_errors(field) }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <div class="text-center mt-4">
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
     </div>
 
-
-    <div class="form-group">
-    {{ form_label(form.nomcoach,"Votre Coach") }}
-    {{ form_widget(form.nomcoach,{ 'attr': {'class': 'form-control'} }) }}
-    {% if form_errors(form.nomcoach) is not empty %}
-    <div class="alert alert-danger">
-    {{ form_errors(form.nomcoach) }}
-</div>
-{% endif %}
-</div>
-
-
-
-
-<br>
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    {{ form_end(form) }}
 </div>

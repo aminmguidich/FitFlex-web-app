@@ -22,6 +22,15 @@ class EventController extends AbstractController
         ]);
     }
 
+    #[Route('/list', name: 'app_event_indexf', methods: ['GET'])]
+    public function index_front(EventsRepository $eventsRepository): Response
+    {
+        return $this->render('event/index_front.html.twig', [
+            'events' => $eventsRepository->findAll(),
+        ]);
+    }
+
+
     #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -30,6 +39,15 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('imgevent')->getData();
+            $file->move(
+                $this->getParameter('images_directory'), // defined in services.yaml
+                $fileName
+            );
+    
+            // Set the file name in the entity
+            $event->setImgevent($fileName);
+    
             $entityManager->persist($event);
             $entityManager->flush();
 
@@ -57,6 +75,21 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('imgevent')->getData();
+
+            if ($file) {
+                // Generate a unique name for the file
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+    
+                // Move the file to the directory where images are stored
+                $file->move(
+                    $this->getParameter('images_directory'), // defined in services.yaml
+                    $fileName
+                );
+    
+                // Set the file name in the entity
+                $event->setImgevent($fileName);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);

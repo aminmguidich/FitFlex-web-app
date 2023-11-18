@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Participation;
+
 use App\Repository\ParticipationRepository;
 use App\Form\ParticipationType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -68,7 +69,7 @@ class ParticipationController extends AbstractController
         ]);
     }
 
-    #[Route('/{idpart}', name: 'app_participation_delete', methods: ['POST'])]
+    #[Route('/{idpart}/delete', name: 'app_participation_delete', methods: ['POST'])]
     public function delete(Request $request, Participation $participation, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$participation->getIdpart(), $request->request->get('_token'))) {
