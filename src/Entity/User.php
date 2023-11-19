@@ -48,6 +48,9 @@ class User
 
 
 
+  
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -141,7 +144,17 @@ class User
 
         return $this;
     }
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
 
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
     
   
 

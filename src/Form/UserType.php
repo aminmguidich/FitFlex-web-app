@@ -7,9 +7,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType; // Use Symfony's built-in EmailType
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType; // Use Symfony's built-in EmailType
-
+use Symfony\Component\Form\Extension\Core\Type\FileType; // Use Symfony's built-in EmailType
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -31,7 +32,20 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Email',
             ])
-            ->add('img')//Upload file TO DO
+            ->add('img', FileType::class, [
+                'label' => 'Choose Image',
+                'mapped' => false, 
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => ['image/*'],
+                        'mimeTypesMessage' => 'Please upload a valid image file.',
+                    ]),
+                    new Image([
+                        'maxSize' => '1024k',
+                    ]),
+                ],
+            ])
             ->add('age')
             
         ;

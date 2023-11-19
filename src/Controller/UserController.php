@@ -30,6 +30,19 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('img')->getData();
+
+            // Generate a unique name for the file
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+            // Move the file to the directory where your images are stored
+            $file->move(
+                $this->getParameter('your_images_directory'),
+                $fileName
+            );
+
+            // Save the image name in the database
+            $user->setImg($fileName);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -57,6 +70,19 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('img')->getData();
+
+            // Generate a unique name for the file
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+            // Move the file to the directory where your images are stored
+            $file->move(
+                $this->getParameter('your_images_directory'),
+                $fileName
+            );
+
+            // Save the image name in the database
+            $user->setImg($fileName);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
@@ -65,11 +91,22 @@ class UserController extends AbstractController
         return $this->renderForm('user/edit.html.twig', [
             'users' => $user,
             'form' => $form,
+            'image_path' => $user->getImg()
         ]);
     }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/{id}', name: 'app_user_deletee', methods: ['POST'])]
+    public function deletee(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
