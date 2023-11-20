@@ -10,6 +10,9 @@ use App\Entity\Post;
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
+    
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: "idc")]
@@ -29,6 +32,7 @@ class Comment
     #[ORM\JoinColumn(nullable: false , referencedColumnName: "Id",name: "idUser",onDelete: "CASCADE")]
     private ?User $idUser = null;
 
+    
     public function getIdc(): ?int
     {
         return $this->idc;

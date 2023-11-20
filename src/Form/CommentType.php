@@ -36,6 +36,8 @@ class CommentType extends AbstractType
                 'class' => 'App\Entity\User',
                 'choice_label' => 'id', // Remplacez 'username' par la propriété de l'objet User que vous souhaitez utiliser comme libellé
             ]);
+
+        
     }
         
     
