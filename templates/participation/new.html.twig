@@ -1,9 +1,15 @@
-<!DOCTYPE html>
+{% extends 'base_front_rsv.html.twig' %}
 
-<title>New Participation</title>
+{% block title %}Reservation{% endblock %}
 
 {% block body %}
-    <h1>Create new Participation</h1>
+    <h1>Book an Event</h1>
+
+    {% for flashError in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger">
+            {{ flashError }}
+        </div>
+    {% endfor %}
 
     {{ include('participation/_form.html.twig') }}
 

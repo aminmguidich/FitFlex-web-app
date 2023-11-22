@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ParticipationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 
 class Participation
 {
@@ -55,6 +56,12 @@ class Participation
 
         return $this;
     }
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        $this->datepart = new \DateTime();
+    }
+
 
     public function getPrenom(): ?string
     {
@@ -103,18 +110,17 @@ class Participation
 
         return $this;
     }
-
-    public function getIduser(): ?User
+    public function getIdUser(): ?User
     {
-        return $this->iduser;
+        return $this->idUser;
     }
 
-    public function setIduser(?User $iduser): static
+    public function setIdUser(?User $idUser): static
     {
-        $this->iduser = $iduser;
+        $this->idUser = $idUser;
 
         return $this;
     }
-
+   
 
 }

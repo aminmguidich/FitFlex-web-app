@@ -7,6 +7,7 @@ use App\Entity\Events;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType; 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,14 +42,14 @@ class EventsType extends AbstractType
             ],
         ])
         
-        ->add('typeevent', null, [
+      /*  ->add('typeevent', null, [
             'label' => 'type',
             'attr' => ['class' => 'form-control'],
             'constraints' => [
                 new NotBlank(),
                 new Length(['max' => 255]),
             ],
-        ])
+        ])*/
         ->add('adresseevent', null, [
             'label' => 'adresse',
             'attr' => ['class' => 'form-control'],
@@ -74,24 +75,29 @@ class EventsType extends AbstractType
             'widget' => 'choice',
         ])
 
-->add('imgevent', null, [
-    'label' => 'Votre Coach',
-    'attr' => ['class' => 'form-control'],
-    'constraints' => [
-        new NotBlank(),
-        new Length(['max' => 255]),
-    ],
-])
+        ->add('imgevent', FileType::class, [
+            'label' => 'Image',
+            'attr' => ['class' => 'form-control-file'],
+            'constraints' => [
+                new Assert\NotBlank(),
+                new Assert\File([
+                    'maxSize' => '1024k',
+                    'mimeTypes' => ['image/*'],
+                    'mimeTypesMessage' => 'Please upload a valid image file',
+                ]),
+            ],
+            'data_class' => null, // Allow handling a string (file path)
+        ])
             
             ->add('nombreplacesreservees')
             ->add('nombreplacestotal')
             ->add('idUser', EntityType::class, [ 
                 'class' => 'App\Entity\User',
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('idtype', EntityType::class, [ 
                 'class' => 'App\Entity\TypeEvent',
-                'choice_label' => 'Id',
+                'choice_label' => 'type',
             ])
         ;
     }

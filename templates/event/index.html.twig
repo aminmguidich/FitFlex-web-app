@@ -1,49 +1,57 @@
 {% extends 'base_back_ranim.html.twig' %}
-{% block title %}List Of Events{% endblock %}
-{% block body %}
 
+{% block title %}List Of Events{% endblock %}
+
+{% block body %}
+    <h1>List Of Events</h1>
 
     <table class="table">
         <thead>
             <tr>
-               {# <th>Id event</th>#}
                 <th>Titre</th>
                 <th>Coach</th>
-                <th>Type</th>
+               {# <th>Type</th>#}
                 <th>Adresse</th>
                 <th>Prix</th>
                 <th>Date</th>
                 <th>Image</th>
-                <th>Nombre places reservees</th>
-                <th>Nombre places total</th>
-                <th>actions</th>
+                <th>Places Reserved</th>
+                <th>Total Places</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for event in events %}
             <tr>
-              {#  <td>{{ event.idevent }}</td>#}
                 <td>{{ event.titreevent }}</td>
                 <td>{{ event.nomcoach }}</td>
-                <td>{{ event.typeevent }}</td>
+               {# <td>{{ event.typeevent }}</td>#}
                 <td>{{ event.adresseevent }}</td>
                 <td>{{ event.prixevent }}</td>
                 <td>{{ event.dateevent ? event.dateevent|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ event.imgevent }}</td>
+                <td>
+                    {% if event.imgevent %}
+                        <img src="{{ asset('uploads/images/' ~ event.imgevent) }}" alt="{{ event.titreevent }}" style="max-width: 50px; max-height: 50px;">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                 
+
                 <td>{{ event.nombreplacesreservees }}</td>
                 <td>{{ event.nombreplacestotal }}</td>
                 <td>
-                    <a href="{{ path('app_event_show', {'idevent': event.idevent}) }}">show</a>
-                    <a href="{{ path('app_event_edit', {'idevent': event.idevent}) }}">edit</a>
+                    <a href="{{ path('app_event_show', {'idevent': event.idevent}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('app_event_edit', {'idevent': event.idevent}) }}" class="btn btn-warning">Edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="11">no records found</td>
+                <td colspan="10">No records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_event_new') }}">create new</a>
+    <a href="{{ path('app_event_new') }}" class="btn btn-success">Create New</a>
 {% endblock %}
