@@ -42,14 +42,14 @@ class EventsType extends AbstractType
             ],
         ])
         
-        ->add('typeevent', null, [
+       /* ->add('typeevent', null, [
             'label' => 'type',
             'attr' => ['class' => 'form-control'],
             'constraints' => [
                 new NotBlank(),
                 new Length(['max' => 255]),
             ],
-        ])
+        ])*/
         ->add('adresseevent', null, [
             'label' => 'adresse',
             'attr' => ['class' => 'form-control'],
@@ -93,11 +93,11 @@ class EventsType extends AbstractType
             ->add('nombreplacestotal')
             ->add('idUser', EntityType::class, [ 
                 'class' => 'App\Entity\User',
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('idtype', EntityType::class, [ 
                 'class' => 'App\Entity\TypeEvent',
-                'choice_label' => 'Id',
+                'choice_label' => 'type',
             ])
         ;
     }

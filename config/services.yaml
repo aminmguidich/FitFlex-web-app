@@ -21,6 +21,14 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             
+    App\Service\TwilioService:
+        arguments:
+            $accountSid: '%twilio_account_sid%'
+            $authToken: '%twilio_auth_token%'
+            $twilioPhoneNumber: '%twilio_phone_number%'
+    
+    
+
 
 
 

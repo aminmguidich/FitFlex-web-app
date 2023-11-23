@@ -19,11 +19,11 @@ class ParticipationType extends AbstractType
            # ->add('datepart')
             ->add('idUser', EntityType::class, [ 
                 'class' => 'App\Entity\User',
-                'choice_label' => 'id',
+                'choice_label' => 'email',
             ])
             ->add('idEvent', EntityType::class, [ 
                 'class' => 'App\Entity\Events',
-                'choice_label' => 'idevent',
+                'choice_label' => 'titreevent',
             ])
         ;
     }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participation;
 use App\Repository\EventsRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Service\TwilioService;
 
 use App\Repository\ParticipationRepository;
 use App\Form\ParticipationType;
@@ -26,7 +27,7 @@ class ParticipationController extends AbstractController
     }
 
     #[Route('/new', name: 'app_participation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SessionInterface $session , TwilioService $twilioService): Response
     {
         $participation = new Participation();
         $form = $this->createForm(ParticipationType::class, $participation);
@@ -44,6 +45,11 @@ class ParticipationController extends AbstractController
 
                 $entityManager->persist($participation);
                 $entityManager->flush();
+                // Envoyer un SMS
+            $to = '+21693008976'; // Numéro de téléphone du destinataire
+            $messageBody = 'Votre Reservation est confirmé';
+
+            $messageSid = $twilioService->sendSMS($to, $messageBody);
 
                 return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
             } else {
@@ -87,7 +93,7 @@ class ParticipationController extends AbstractController
         ]);
     }
 
-    #[Route('/{idpart}/delete', name: 'app_participation_delete', methods: ['POST'])]
+     #[Route('/{idpart}', name: 'app_participation_delete', methods: ['POST'])]
     public function delete(Request $request, Participation $participation, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$participation->getIdpart(), $request->request->get('_token'))) {
@@ -96,5 +102,16 @@ class ParticipationController extends AbstractController
         }
 
         return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    public function sendSmsAction(TwilioService $twilioService)
+    {
+        // Utilisez le service TwilioService pour envoyer un SMS
+        $to = '+21693008976'; // Numéro de téléphone du destinataire
+        $messageBody = 'Votre Reservation est confirmé';
+
+        $messageSid = $twilioService->sendSMS($to, $messageBody);
+
+        return $this->json(['messageSid' => $messageSid]);
     }
 }

@@ -32,14 +32,21 @@ class EventController extends AbstractController
 
 
     #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,QrCodeGenerator $qrCodeGenerator): Response
     {
         $event = new Events();
         $form = $this->createForm(EventsType::class, $event);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            // Generate a unique file name
             $file = $form->get('imgevent')->getData();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+    
+            // Handle file upload
+            $file = $form->get('imgevent')->getData();
+    
+            // Move the file to the desired location
             $file->move(
                 $this->getParameter('images_directory'), // defined in services.yaml
                 $fileName
@@ -100,7 +107,6 @@ class EventController extends AbstractController
             'form' => $form,
         ]);
     }
-
     #[Route('/{idevent}', name: 'app_event_delete', methods: ['POST'])]
     public function delete(Request $request, Events $event, EntityManagerInterface $entityManager): Response
     {
