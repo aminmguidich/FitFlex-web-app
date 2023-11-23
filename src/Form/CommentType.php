@@ -29,12 +29,12 @@ class CommentType extends AbstractType
         ])
             ->add('idpost', EntityType::class, [
                 'class' => 'App\Entity\Post',
-                'choice_label' => 'idpost', // ou une autre propriété de l'entité Post à afficher dans le champ
+                'choice_label' => 'description', // ou une autre propriété de l'entité Post à afficher dans le champ
                 
                 ])
             ->add('idUser', EntityType::class, [
                 'class' => 'App\Entity\User',
-                'choice_label' => 'id', // Remplacez 'username' par la propriété de l'objet User que vous souhaitez utiliser comme libellé
+                'choice_label' => 'nom', // Remplacez 'username' par la propriété de l'objet User que vous souhaitez utiliser comme libellé
             ]);
 
         

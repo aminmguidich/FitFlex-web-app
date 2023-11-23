@@ -11,6 +11,12 @@ use App\Repository\PostRepository;
 
 class Post
 {
+    public function getTitle(): ?string
+    {
+        // Ajoutez la logique pour obtenir le titre du post, par exemple, en utilisant la description
+        return $this->getDescription();
+    }
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name :"idPost")]

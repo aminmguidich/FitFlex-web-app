@@ -1,12 +1,15 @@
-{%extends "base_back_asma.html.twig"%}
+{% extends "base_back_asma.html.twig" %}
 
-
-{% block title %}new Post{% endblock %}
+{% block title %}
+    New Post
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Post</h1>
+    <h1>Create New Post</h1>
 
     {{ include('post/_form.html.twig') }}
 
-    <a href="{{ path('app_post_index') }}">back to list</a>
+    <p>
+        <a href="{{ path('app_post_index') }}">Back to List</a>
+    </p>
 {% endblock %}

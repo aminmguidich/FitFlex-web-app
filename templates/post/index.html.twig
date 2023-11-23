@@ -18,10 +18,16 @@
             <tr>
                 <td>{{ post.idPost }}</td>
                 <td>{{ post.description }}</td>
-                <td>{{ post.image }}</td>
+              <td>
+                    {% if post.image %}
+                        <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="{{ post.description }}" style="max-width: 50px; max-height: 50px;">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
                 <td>
-                    <a href="{{ path('app_post_show', {'idPost': post.idPost}) }}">show</a>
-                    <a href="{{ path('app_post_edit', {'idPost': post.idPost}) }}">edit</a>
+                    <a href="{{ path('app_post_show', {'idPost': post.idPost}) }}" class="btn btn-info">Show</a>
+                        <a href="{{ path('app_post_edit', {'idPost': post.idPost}) }}" class="btn btn-warning">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -32,5 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_post_new') }}">Create new</a>
+    <a href="{{ path('app_post_new') }}" class="btn btn-success">Create new</a>
 {% endblock %}

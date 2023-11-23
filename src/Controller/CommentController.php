@@ -30,10 +30,23 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérification des badwords
+            $badwords = ['fuck', 'stupid', 'bitch']; // Remplacez cela par votre liste de badwords
+            $commentContent = $comment->getContent();
+
+            foreach ($badwords as $badword) {
+                if (stripos($commentContent, $badword) !== false) {
+                    $this->addFlash('danger', 'Le commentaire contient des mots inappropriés.');
+                    return $this->redirectToRoute('app_comment_new');
+                }
+            }
+
+            // Si aucun badword n'est trouvé, persistez le commentaire
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Le commentaire a été ajouté avec succès.');
+            return $this->redirectToRoute('app_comment_index');
         }
 
         return $this->renderForm('comment/new.html.twig', [
