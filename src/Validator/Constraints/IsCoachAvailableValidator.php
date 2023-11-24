@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
+
 class IsCoachAvailableValidator extends ConstraintValidator
 {
     private $entityManager;
@@ -18,23 +19,23 @@ class IsCoachAvailableValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        // Ensure that the value is an instance of Activites
         if (!$value instanceof Activites) {
-            // If not, you might want to log an error or handle it appropriately
             return;
         }
 
-        $date = $value->getDateDeb();
+        $dateDeb = $value->getDateDeb();
+        $idUser = $value->getIdUser();
 
-        // Check if the coach is already assigned to an activity on the specified date
+        // Check if the coach has activities on the specified date
         $existingActivity = $this->entityManager->getRepository(Activites::class)
             ->findOneBy([
-                'idUser' => $value->getIdUser(), // Assuming 'idUser' is the coach association in Activites entity
-                'dateDeb' => $date,
+                'idUser' => $idUser,
+                'dateDeb' => $dateDeb,
             ]);
 
         if ($existingActivity) {
             $this->context->buildViolation($constraint->message)
+                ->atPath('idUser') // Specify the field that the error is associated with
                 ->addViolation();
         }
     }

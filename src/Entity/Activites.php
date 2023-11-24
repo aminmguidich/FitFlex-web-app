@@ -24,7 +24,7 @@ class Activites
     #[ORM\Column(length: 255 )]
 
     private ?string $categorie;
-    #[Assert\GreaterThanOrEqual(propertyPath: "dateDeb", message: "La date de fin doit être postérieure à la date de début.")]
+
     #[ORM\Column]
     private ?\DateTime $dateDeb = null;
 
