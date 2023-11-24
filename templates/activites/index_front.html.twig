@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_front_amin.html.twig' %}
 
 {% block title %}Activites{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
-        <h1>Activites Index</h1>
+
 
         <table class="table">
             <thead>
@@ -16,7 +16,6 @@
                 <th>Description</th>
                 <th>Salle</th>
                 <th>Titre</th>
-                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -29,10 +28,7 @@
                     <td>{{ activite.description }}</td>
                     <td>{{ activite.salle }}</td>
                     <td>{{ activite.titre }}</td>
-                    <td>
-                        <a href="{{ path('app_activites_show', {'code': activite.code}) }}" class="btn btn-primary">Show</a>
-                        <a href="{{ path('app_activites_edit', {'code': activite.code}) }}" class="btn btn-primary">Edit</a>
-                    </td>
+
                 </tr>
             {% else %}
                 <tr>
@@ -42,6 +38,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_activites_new') }}" class="btn btn-primary">Create New</a>
+
     </div>
 {% endblock %}

@@ -2,54 +2,51 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ReservationCoursRepository;
+
 #[ORM\Entity(repositoryClass: ReservationCoursRepository::class)]
 class ReservationCours
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name:"id")]
-    private ?int $id=null;
-
-
-    #[ORM\Column]
-    private ?\dateRes $dateRes;
-
+    private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $idUser= null;
+    private ?\DateTime $dateRes = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reservationCours')]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: "Id", name: "idUser", onDelete: "CASCADE")]
+    private ?User $idUser = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservation')]
-    #[ORM\JoinColumn(nullable: false , referencedColumnName: "code",name: "code",onDelete: "CASCADE")]
+    #[ORM\ManyToOne(inversedBy: 'activites')]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: "code", name: "code", onDelete: "CASCADE")]
     private ?Activites $code = null;
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateRes(): ?\DateTimeInterface
+    public function getDateRes(): ?\DateTime
     {
         return $this->dateRes;
     }
 
-    public function setDateRes(?\DateTimeInterface $dateRes): static
+    public function setDateRes(?\DateTime $dateRes): static
     {
         $this->dateRes = $dateRes;
 
         return $this;
     }
 
-    public function getIdUser(): ?int
+    public function getIdUser(): ?User
     {
         return $this->idUser;
     }
 
-    public function setIdUser(int $idUser): static
+    public function setIdUser(?User $idUser): static
     {
         $this->idUser = $idUser;
 
@@ -67,6 +64,5 @@ class ReservationCours
 
         return $this;
     }
-
-
 }
+

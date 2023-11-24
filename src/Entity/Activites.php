@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ActivitesRepository;
-
+//use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActivitesRepository::class)]
 
@@ -19,22 +19,27 @@ class Activites
      #[ORM\Column(name:"code")]
 
     private ?int $code= null;
+    #[Assert\NotBlank(message: "champ obligatoire")]
+    #[Assert\Positive(message: "champ invalid")]
     #[ORM\Column(length: 255 )]
 
     private ?string $categorie;
-
+    #[Assert\GreaterThanOrEqual(propertyPath: "dateDeb", message: "La date de fin doit être postérieure à la date de début.")]
     #[ORM\Column]
     private ?\DateTime $dateDeb = null;
 
     #[ORM\Column]
     private ?\DateTime $dateFin = null;
-
+    #[Assert\NotBlank(message: "champ obligatoire")]
+    #[Assert\Positive(message: "champ invalid")]
     #[ORM\Column(length: 255 )]
     private ?string  $description;
-
+    #[Assert\NotBlank(message: "champ obligatoire")]
+    #[Assert\Positive(message: "champ invalid")]
     #[ORM\Column(length: 255 )]
     private ?string $salle=null;
-
+    #[Assert\NotBlank(message: "champ obligatoire")]
+    #[Assert\Positive(message: "champ invalid")]
     #[ORM\Column(length: 255 )]
     private ?string $titre;
 

@@ -25,6 +25,13 @@ class ActivitesController extends AbstractController
             'activites' => $activitesRepository->findAll(),
         ]);
     }
+    #[Route('/list', name: 'app_activites', methods: ['GET'])]
+    public function indexfront(ActivitesRepository $activitesRepository): Response
+    {
+        return $this->render('activites/index_front.html.twig', [
+            'activites' => $activitesRepository->findAll(),
+        ]);
+    }
 
     #[Route('/new', name: 'app_activites_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

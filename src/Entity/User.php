@@ -49,9 +49,13 @@ class User
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Activites::class)]
     private Collection $activites;
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: ReservationCours::class)]
+    private Collection $reservationCours;
     public function __construct()
     {
         $this->activites = new ArrayCollection();
+        $this->reservationCours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +179,13 @@ class User
     public function __toString()
     {
         return $this->getNom() . ' ' . $this->getPrenom();
+    }
+    /**
+     * @return Collection<int, ReservationCours>
+     */
+    public function getReservationCours(): Collection
+    {
+        return $this->reservationCours;
     }
 
 
