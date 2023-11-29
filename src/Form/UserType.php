@@ -27,7 +27,8 @@ class UserType extends AbstractType
                     'Coach' => 'Coach',
                     // Add more options as needed
                 ],
-                'placeholder' => 'Select Role', // Optional
+                'placeholder' => 'Select Role',
+                'data' => 'Utilisateur', // Set the default value here // Optional
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',

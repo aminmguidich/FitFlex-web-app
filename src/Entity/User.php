@@ -2,59 +2,40 @@
 
 namespace App\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass:UserRepository::class)]
-class User
+class User implements UserInterface
 {
-    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: "Id")]
-    private ?int $id=null;
-
-
-    #[ORM\Column(length:255)]
-    private ?string $nom=null;
-
-  
-    #[ORM\Column(length:255)]
-    private ?string $prenom=null;
- 
-    #[ORM\Column(length:255)]
-    private ?string $mdp=null;
-    
-    #[ORM\Column(length:255)]
-    private ?string $role=null;
-
+    private ?int $id = null;
 
     #[ORM\Column(length:255)]
-    private ?string $email=null;
-
-
+    private ?string $nom = null;
 
     #[ORM\Column(length:255)]
-    private ?string $img=null;
+    private ?string $prenom = null;
 
+    #[ORM\Column(length:255)]
+    private ?string $mdp = null;
 
+    #[ORM\Column(length:255)]
+    private ?string $role = null;
+
+    #[ORM\Column(length:255)]
+    private ?string $email = null;
+
+    #[ORM\Column(length:255)]
+    private ?string $img = null;
 
     #[ORM\Column]
-    private ?int $age=null;
-
-
-
-  
-
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
+    private ?int $age = null;
 
     public function getId(): ?int
     {
@@ -66,7 +47,7 @@ class User
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -78,7 +59,7 @@ class User
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -90,10 +71,13 @@ class User
         return $this->mdp;
     }
 
-    public function setMdp(string $mdp): static
+    public function setMdp(string $mdp): self
     {
-        $this->mdp = $mdp;
-
+        // Hash the password using bcrypt algorithm
+        $hashedPassword = password_hash($mdp, PASSWORD_BCRYPT);
+    
+        $this->mdp = $hashedPassword;
+    
         return $this;
     }
 
@@ -102,7 +86,7 @@ class User
         return $this->role;
     }
 
-    public function setRole(string $role): static
+    public function setRole(string $role): self
     {
         $this->role = $role;
 
@@ -114,7 +98,7 @@ class User
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -126,7 +110,7 @@ class User
         return $this->img;
     }
 
-    public function setImg(string $img): static
+    public function setImg(string $img): self
     {
         $this->img = $img;
 
@@ -138,25 +122,39 @@ class User
         return $this->age;
     }
 
-    public function setAge(int $age): static
+    public function setAge(int $age): self
     {
         $this->age = $age;
 
         return $this;
     }
-    public function getImageName(): ?string
+
+    // Required methods for UserInterface
+
+    public function getRoles(): array
     {
-        return $this->imageName;
+        return [$this->role];
     }
 
-    public function setImageName(?string $imageName): self
+    public function getPassword(): ?string
     {
-        $this->imageName = $imageName;
-
-        return $this;
+        return $this->mdp;
     }
-    
-  
 
+    public function getSalt(): ?string
+    {
+        // You can leave this method blank or return a salt
+        return null;
+    }
 
+    public function getUsername(): ?string
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 }
