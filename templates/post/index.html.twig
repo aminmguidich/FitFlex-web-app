@@ -2,6 +2,25 @@
  {% block title %} index{% endblock %}
 
 {% block body %}
+
+{% if successMessage is defined %}
+        <div class="alert alert-success">
+            {{ successMessage }}
+        </div>
+    {% endif %}
+
+
+
+ <form action="{{ path('app_post_index') }}" method="get">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="Search...">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form> 
     <h1>Post index</h1>
     
     <table class="table">
@@ -14,7 +33,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for post in posts %}
+        {% for post in page %}
             <tr>
                 <td>{{ post.idPost }}</td>
                 <td>{{ post.description }}</td>
@@ -39,4 +58,5 @@
     </table>
 
     <a href="{{ path('app_post_new') }}" class="btn btn-success">Create new</a>
+     {{ knp_pagination_render(page) }}
 {% endblock %}

@@ -20,6 +20,34 @@ class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
+    public function findByDescription($searchTerm)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->andWhere('r.description LIKE :searchTerm ')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->orderBy('r.idPost', 'DESC')
+            ->getQuery();
+    
+        return $qb->getResult();
+    }
+
+    public function save(Post $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Post $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 
 //    /**
 //     * @return Post[] Returns an array of Post objects

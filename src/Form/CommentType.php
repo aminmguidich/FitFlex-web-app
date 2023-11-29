@@ -27,11 +27,13 @@ class CommentType extends AbstractType
                 ]),
             ],
         ])
-            ->add('idpost', EntityType::class, [
-                'class' => 'App\Entity\Post',
-                'choice_label' => 'description', // ou une autre propriété de l'entité Post à afficher dans le champ
-                
-                ])
+        ->add('idpost', EntityType::class, [
+            'class' => 'App\Entity\Post',
+            'choice_label' => function ($post) {
+                // Assuming 'image' is the property in the Post entity holding the image path
+                return $post->getImage();
+            },
+        ])
             ->add('idUser', EntityType::class, [
                 'class' => 'App\Entity\User',
                 'choice_label' => 'nom', // Remplacez 'username' par la propriété de l'objet User que vous souhaitez utiliser comme libellé

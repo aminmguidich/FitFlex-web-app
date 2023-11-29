@@ -13,13 +13,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Firebase\JWT\JWT;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
 #[Route('/post')]
 class PostController extends AbstractController
 {
-    #[Route('/', name: 'app_post_index', methods: ['GET'])]
+   /* #[Route('/', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
         return $this->render('post/index.html.twig', [
+            'posts' => $postRepository->findAll(),
+        ]);
+    }*/
+    #[Route('/list', name: 'app_post_indexf', methods: ['GET'])]
+    public function index_front(PostRepository $postRepository): Response
+    {
+        return $this->render('post/indexf.html.twig', [
             'posts' => $postRepository->findAll(),
         ]);
     }
@@ -63,7 +75,7 @@ class PostController extends AbstractController
         ]);
     }
     
-    private function sendFCMNotification(string $message): void
+    /*private function sendFCMNotification(string $message): void
     {
     $clientToken = 'LE_TOKEN_DU_CLIENT';
 
@@ -101,7 +113,7 @@ class PostController extends AbstractController
             'body' => $message,
         ],
     ], $jwt);
-    }
+    }*/
     #[Route('/{idPost}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
     {
@@ -144,7 +156,7 @@ class PostController extends AbstractController
     }
     
 
-    #[Route('/{idPost}', name: 'app_post_delete', methods: ['POST'])]
+    /*#[Route('/{idPost}', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getIdpost(), $request->request->get('_token'))) {
@@ -153,5 +165,89 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
+    }*/
+
+    /*#[Route('/{idPost}', name: 'app_post_delete', methods: ['POST'])]
+public function delete(Request $request, Post $post, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+{
+    $csrfToken = $request->request->get('_token');
+    if ($this->isCsrfTokenValid('delete'.$post->getIdPost(), $csrfToken)) {
+        $entityManager->remove($post);
+        $entityManager->flush();
+        $email = (new Email())
+            ->from('asma.zakraoui@esprit.tn')
+            ->to('asmazakraoui4@gmail.com')
+            ->subject('Suppression de post')
+            ->html('<p>Un post a été supprimé:</p>' .
+                '<ul>' .
+                '<li>Id du post: ' . $post->getIdPost() . '</li>' .
+                '<li>Description: ' . $post->getDescription() . '</li>' .
+               // '<li>Image: ' . $post->getImage() . '</li>' .
+                '</ul>');
+
+        $mailer->send($email);
     }
+
+    return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
+}*/
+#[Route('/{idPost}', name: 'app_post_delete', methods: ['POST'])]
+    public function delete(Request $request, Post $post, PostRepository $postRepository, MailerInterface $mailer): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$post->getIdPost(), $request->request->get('_token'))) {
+            $postRepository->remove($post, true);
+               
+            $email = (new Email())
+            ->from('asma.zakraoui@esprit.tn')
+            ->to('asmazakraoui4@gmail.com ')
+            ->subject('Supression de post')
+            ->html('<p>Un post a été suprrimé:</p>' .
+            '<ul>' .
+            '<li>id du post: ' . $post->getIdPost() . '</li>' .
+            '<li>description: ' . $post->getDescription() . '</li>' .
+            '<li>image: ' . $post->getImage() . '</li>' .
+            '</ul>');
+
+
+        $mailer->send($email);
+        }
+
+        return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/', name: 'app_post_index', methods: ['GET'])]
+    public function index(EntityManagerInterface $entityManager,PaginatorInterface $paginator,Request $request): Response
+    {   
+        $searchTerm = $request->query->get('q');
+        $post=[];
+        if (!empty($searchTerm)) {
+            $posts = $entityManager
+            ->getRepository(Post::class)
+            ->findByDescription($searchTerm);
+            $page = $paginator->paginate(
+                $posts,
+                $request->query->getInt('page', 1),
+                3 
+            );
+            
+        }
+        else{
+            $posts = $entityManager
+            ->getRepository(Post::class)
+            ->findAll();
+            $page = $paginator->paginate(
+                $posts,
+                $request->query->getInt('page', 1),
+                1
+            );
+           
+        }
+        
+
+        return $this->render('post/index.html.twig', [
+            'page' => $page,
+            'searchTerm' => $searchTerm,
+        ]);
+    }
+    
 }
