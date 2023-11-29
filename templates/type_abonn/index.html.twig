@@ -1,15 +1,22 @@
 {% extends 'base_Back_chayma.html.twig' %}
 
+{# calcul somme des abonnes #}
+{% set s=0 %}
+ {% for i in type_abonns %}
+{% set s=s+i.nb_abonnement %}
+{% endfor%}
+
 {% block title %}Type Abonnement{% endblock %}
 
-{# {% block recherche %}
-    {{ form_start(searchForm, {'attr': {'class': 'd-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0'}}) }}
-    <div class="input-group">
-        {{ form_row(searchForm.search, {'attr': {'class': 'form-control', 'placeholder': 'Search for...'}}) }}
-        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-    </div>
-    {{ form_end(searchForm) }}
-{% endblock %} #}
+{% block recherche %}
+   <form action="{{ path('search_type_abonn') }}" method="get" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" id="searchInput" name="q" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+</form>
+{% endblock %}
 
 
 
@@ -23,7 +30,7 @@
 
 {% block body %}
 
-    <table class="table" border="2" style="width: 45rem;" >
+    <table class="table" border="2" style="width: 60rem;" >
         <thead>
             <tr>
                              <th style="color: #1b95b2">{{ 'Type abonnement'|trans|raw  }}</th>
@@ -33,12 +40,12 @@
                
             </tr>
         </thead>
-        <tbody>
+        <tbody id="searchResults">
         {% for type_abonn in type_abonns %}
             <tr>
                 <td>{{ type_abonn.type }}</td>
                 <td>{{ type_abonn.description }}</td>
-                <td>{{ type_abonn.getNbAbonnement() }}</td>
+                <td>{{ type_abonn.getnb_abonnement() }}</td>
 
                 
                 <td>
@@ -54,11 +61,38 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_type_abonn_new') }}" >Create new</a>
-    <h1 style="margin-bottom:20px;">
 
-</h1>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchInput').on('input', function() {
+            var query = $(this).val();
 
+            $.ajax({
+                type: 'GET',
+                url: '{{ path('search_type_abonn') }}',
+                data: { q: query },
+                success: function(data) {
+                    // Update the table with the search results
+                    $('#searchResults').html(data);
+                }
+            });
+        });
+    });
+</script>
+
+<table align="center">
+<tr>
+    <td> <form action = "{{path('app_type_abonn_new') }}"> <button style="background-color: #1b95b2; color: white;">Create new</button></form></td>
+ </tr>
+
+<tr>
+    <h5 style="color: #1b95b2"> Le nombre des abonnes total est <span style="color: black;">{{s}}</span></h5>
+</tr>
+     <tr>
+    <h5 style="color: #1b95b2"> Le nombre des abonnements est <span style="color: black;">{{type_abonns|length}}</span></h5>
+     </tr>    
+</table>
 
 {% endblock %}
 

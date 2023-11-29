@@ -44,4 +44,16 @@ class ReservationOfferRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function getCountByTypeOffer($type)
+{
+    return $this->createQueryBuilder('r')
+        ->select('COUNT(r.idreservation)')
+        ->join('r.idoffer', 'o') // Join with the Offer entity
+        ->where('o.titleoffer = :type')
+        ->setParameter('type', $type)
+        ->getQuery()
+        ->getSingleScalarResult();
+}
+
 }

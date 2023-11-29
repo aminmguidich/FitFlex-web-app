@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class OfferType extends AbstractType
 {
@@ -25,9 +26,16 @@ class OfferType extends AbstractType
             ->add('datefinoffer', DateType::class, [
                 'years' => range(2023,2024),
                 'format' => 'dd-MM-yyyy',
-
             ])
-            ->add('img')
+            ->add('nb_max_reservation')
+            //->add('img')
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de loffre ( des images uniquement)',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'required' => true
+            ])
         ;
     }
 

@@ -2,11 +2,15 @@
 
 {% block title %}New Abonnement{% endblock %}
 
-{% block body %}
+{% block abonn %}
 
-    {{ include('abonnement/_form.html.twig') }}
+     {{ include('abonnement/_form.html.twig') }}
 
-    <a href="{{ path('affiche_TypeAbonn') }}">back to list</a>
+    <a href="{{ path('affiche_TypeAbonn') }}">back to list</a> 
+
+
+
+
 {% endblock %}
   {% block viewDetails%}
 

@@ -54,6 +54,9 @@ class User
     #[ORM\OneToMany(mappedBy: 'Id', targetEntity: ReservationOffer::class)]
     private Collection $usersR;
 
+    #[ORM\Column]
+    private ?int $numtel = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -208,6 +211,20 @@ class User
 
         return $this;
     }
+
+    public function getNumtel(): ?int
+    {
+        return $this->numtel;
+    }
+
+    public function setNumtel(int $numtel): static
+    {
+        $this->numtel = $numtel;
+
+        return $this;
+    }
+
+    
 
 
 }

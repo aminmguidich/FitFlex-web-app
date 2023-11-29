@@ -99,6 +99,17 @@ class TypeAbonn
 
         return $this;
     }
+    
+    public function getnb_abonnement(): ?int
+    {
+        return $this->nb_abonnement;
+    }
+    public function setnb_abonnement(int $nb_abonnement): static
+    {
+        $this->nb_abonnement = $nb_abonnement;
+
+        return $this;
+    }
 
     public function getDescription(): ?string
     {

@@ -1,3 +1,9 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+new_reservation_offer:
+    path: '/new_reservation_offer/{id}'
+    controller: 'App\Controller\ReservationOfferController::new'
+app_reservation_offer_index:
+    path: 'app_reservation_offer_index'
+    controller: 'App\Controller\ReservationOfferController::index'

@@ -18,9 +18,17 @@ class Abonnement
     private ?int $idabonement=null;
 
     
-    #[Assert\NotBlank(message: "champ obligatoire")]
-    #[ORM\Column]
+    //#[ORM\Column]
+    //private \DateTime $dateabonnement;
+
+    #[ORM\Column(type: "datetime")]
     private \DateTime $dateabonnement;
+
+    public function __construct()
+    {
+        // Initialisez la date d'abonnement lors de la création de l'objet Abonnement
+        $this->dateabonnement = new \DateTime();
+    }
 
     #[Assert\NotBlank(message: "champ obligatoire")]
     #[ORM\ManyToOne(inversedBy: 'users')]
@@ -32,10 +40,17 @@ class Abonnement
     #[ORM\JoinColumn(nullable: false , referencedColumnName: "id",name: "typeAbon",onDelete: "CASCADE")]
     private ?TypeAbonn $typeabon=null;
 
+    #[ORM\Column]
+    private ?int $VerificationCode = 0;
+
     public function getIdabonement(): ?int
     {
         return $this->idabonement;
     }
+    /*public function getidabonement() : ?int
+    {
+        return $this->idabonement;
+    }*/
 
     public function getDateabonnement(): ?\DateTimeInterface
     {
@@ -69,6 +84,18 @@ class Abonnement
     public function setTypeabon(?TypeAbonn $typeabon): static
     {
         $this->typeabon = $typeabon;
+
+        return $this;
+    }
+
+    public function getVerificationCode(): ?int
+    {
+        return $this->VerificationCode;
+    }
+
+    public function setVerificationCode(int $VerificationCode): static
+    {
+        $this->VerificationCode = $VerificationCode;
 
         return $this;
     }

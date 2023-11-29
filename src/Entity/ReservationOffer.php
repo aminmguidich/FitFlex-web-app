@@ -16,7 +16,7 @@ class ReservationOffer
     #[ORM\Column(name: "idReservation")]
     private ?int $idreservation=null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "datetime", options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTime $datereservation;
 
     #[ORM\Column(length:255)]

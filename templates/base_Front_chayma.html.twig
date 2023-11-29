@@ -21,7 +21,7 @@ https://templatemo.com/tm-548-training-studio
     {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{asset('FrontOffice/css/bootstrap.min.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="{{asset('FontOffice/css/font-awesome.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('FrontOffice/css/font-awesome.css')}}">
 
     <link rel="stylesheet" href="{{asset('FrontOffice/css/templatemo-training-studio.css')}}">
 
@@ -52,14 +52,13 @@ https://templatemo.com/tm-548-training-studio
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">FETFLIX<em> GYM</em></a>
+                        <a href="index.html" class="logo">FITFLIX<em> GYM</em></a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                             <li class="scroll-to-section"><a href="#features">Abonnement</a></li> 
-
-                            <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
+                             <li class="scroll-to-section"><a href="#features">Abonnement</a></li>
+                            <li class="scroll-to-section"><a href="#our-classes">Offer</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
                             <li class="main-button"><a href="#">Sign Up</a></li>
                         </ul>        
@@ -77,7 +76,7 @@ https://templatemo.com/tm-548-training-studio
     <!-- ***** Main Banner Area Start ***** -->
     
     <div class="main-banner" id="top">
-        <video autoplay muted loop id="bg-video">{ % block video %}
+        <video autoplay muted loop id="bg-video">
             <source src="{{asset('FrontOffice/images/gym-video.mp4')}}" type="video/mp4" />
             
         </video>
@@ -91,14 +90,13 @@ https://templatemo.com/tm-548-training-studio
                 </div>
             </div>
         </div>
-        { % endblock %}
+       
     </div>
     
     <!-- ***** Main Banner Area End ***** -->
 
     <!-- ***** Features Item Start ***** -->
-
-
+    {% block abonn %}
     <section class="section" id="features">
         <div class="container">
             <div class="row">
@@ -106,52 +104,74 @@ https://templatemo.com/tm-548-training-studio
                     <div class="section-heading">
                         <h2>Choisir <em>Abonnement</em></h2>
                         <img src="{{asset('FrontOffice/images/line-dec.png')}}" alt="waves">
+                        <div class="d-flex justify-content-center">
 
-                            
-                             {% block body %}  
-                            {% endblock %} 
+                              {# {% block Abonnement %}  
+                            {% endblock %} #}
+                            </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <ul class="features-items">
-                        <li class="feature-item">
-                            <div class="left-icon">
-                                <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="First One">
-                            </div>
-                            <div class="right-content">
-                                <h4>BLUE PASS_SPORT</h4>
-                                <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>
-
-                                
-                            </div>
-                        </li>
-                        
-                    </ul>
-                </div>
                 
-                <div class="col-lg-6">
-                    <ul class="features-items">
-                        <li class="feature-item">
-                            <div class="left-icon">
-                                <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="fourth muscle">
-                            </div>
-                            <div class="right-content">
-                                <h4>YELLOW PASS_SPORT</h4>
-                                <p>You may want to browse through <a rel="nofollow" href="https://templatemo.com/tag/digital-marketing" target="_parent">Digital Marketing</a> or <a href="https://templatemo.com/tag/corporate">Corporate</a> HTML CSS templates on our website.</p>  
-
-                            </div>
-                        </li>
+                            <div class="col-lg-6">
+                                    <ul class="features-items">
+                                        <li class="feature-item">
+                                            <div class="left-icon">
+                                                <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="First One">
+                                            </div>
+                                                <div class="right-content">
+                                                    <h4>Offer 1</h4>
+                                                    <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>   
+                                                </div>
+                                        </li>   
+                                    </ul>
+                                      <ul class="features-items">
+                                        <li class="feature-item">
+                                            <div class="left-icon">
+                                                <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="fourth muscle">
+                                            </div>
+                                                <div class="right-content">
+                                                    <h4>offer 3</h4>
+                                                    <p>You may want to browse through <a rel="nofollow" href="https://templatemo.com/tag/digital-marketing" target="_parent">Digital Marketing</a> or <a href="https://templatemo.com/tag/corporate">Corporate</a> HTML CSS templates on our website.</p>  
+                                                </div>
+                                         </li>
                         
-                    </ul>
-                </div>
-                
+                                    </ul> 
+                            </div>
+                            <div class="col-lg-6">
+                                    <ul class="features-items">
+                                        <li class="feature-item">
+                                            <div class="left-icon">
+                                                <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="First One">
+                                            </div>
+                                            <div class="right-content">
+                                                <h4>offer 2</h4>
+                                                <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>  
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="features-items">
+                                        <li class="feature-item">
+                                            <div class="left-icon">
+                                                <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="First One">
+                                            </div>
+                                                <div class="right-content">
+                                                    <h4>offer 4</h4>
+                                                    <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>
+
+                                                </div>
+                                        </li>
+                                    </ul>
+                            </div>   
             </div>
         </div>
         
     </section>
+    {% endblock %}
+    
     <!-- ***** Features Item End ***** -->
 
     <!-- ***** Call to Action Start ***** -->
+    
     <section class="section" id="call-to-action">
         <div class="container">
             <div class="row">
@@ -170,6 +190,7 @@ https://templatemo.com/tm-548-training-studio
     <!-- ***** Call to Action End ***** -->
 
     <!-- ***** Our Classes Start ***** -->
+{% block affichOffer %}
     <section class="section" id="our-classes">
         <div class="container">
             <div class="row">
@@ -230,6 +251,7 @@ https://templatemo.com/tm-548-training-studio
             </div>
         </div>
     </section>
+    {% endblock %}
     <!-- ***** Our Classes End ***** -->
 
 

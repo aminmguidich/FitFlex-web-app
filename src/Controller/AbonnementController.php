@@ -11,7 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\TypeAbonn;
+use App\Entity\Offer;
+use App\Entity\User;
 use App\Repository\TypeAbonnRepository;
+use App\Repository\OfferRepository;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Notifier\NotifierInterface;
+use Symfony\Component\Notifier\Recipient\PhoneNumber;
+use Symfony\Component\Notifier\Message\SmsMessage;
+use Symfony\Component\Security\Core\Security;
+use Twilio\Rest\Client;
 
 #[Route('/abonnement')]
 class AbonnementController extends AbstractController
@@ -25,38 +34,215 @@ class AbonnementController extends AbstractController
     }*/
 
     #[Route('/', name: 'affiche_TypeAbonn', methods: ['GET'])]
-    public function index(TypeAbonnRepository $typeAbonnRepository): Response
+    public function index(TypeAbonnRepository $typeAbonnRepository,OfferRepository $offerRepository): Response
     {
+        $offers = $this->getDoctrine()->getRepository(Offer::class)->findAll();
         return $this->render('abonnement/afiiche_TypeAbonn.html.twig', [
             'type_abonns' => $typeAbonnRepository->findAll(),
+            'offers' => $offers,
+        ]);
+    }
+
+    #[Route('/AfiicheOffer', name: 'AfiicheOffer', methods: ['GET'])]
+    public function AfiicheOffer(OfferRepository $offerRepository): Response
+    {
+        $offers = $this->getDoctrine()->getRepository(Offer::class)->findAll();
+
+        return $this->render('abonnement/AfiicheOffer.html.twig', [
+            'offers' => $offers,
         ]);
     }
 
 
-    #[Route('/new', name: 'app_abonnement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    /*#[Route('/new/{id}', name: 'app_abonnement_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager,$id,NotifierInterface $notifier, Security $security): Response
     {
+
+    $typeAbonn = $entityManager->getRepository(TypeAbonn::class)->find($id);
+      if (!$typeAbonn) {
+        throw $this->createNotFoundException('TypeAbonn not found');
+            }
+
         $abonnement = new Abonnement();
+        $abonnement->setTypeabon($typeAbonn);
+        //$abonnement->setDateabonnement(new \DateTime());
+        //$abonnement->setIduser($user); // Ensure this is correctly set based on the user selection
+
         $form = $this->createForm(AbonnementType::class, $abonnement);
         $form->handleRequest($request);
 
+        $verificationCode = random_int(100000, 999999);
+        $abonnement->setVerificationCode($verificationCode);
+        
+
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //Incrémentation nombre des abonnement pour chaque typeAbonn
-            $nb =  $abonnement->getTypeabon()->getNbAbonnement() + 1;
-            $abonnement->getTypeabon()->setNbAbonnement($nb);
+            // Here, you need to make sure that the selected user from the combo box is set correctly
+        $selectedUserId = $request->request->get('abonnement')['iduser'];
+        // Fetch the user based on the selected user ID
+        $user = $entityManager->getRepository(User::class)->find((int) $selectedUserId);
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        // Associate the user with the Abonnement
+        $abonnement->setIduser($user);
+            
+            
+            //$nb =  $abonnement->getTypeabon()->getnb_abonnement() + 1;
+            //$abonnement->getTypeabon()->setnb_abonnement($nb);
 
             $entityManager->persist($abonnement);
             $entityManager->flush();
+            $str = (string) $verificationCode;
 
-            return $this->redirectToRoute('affiche_TypeAbonn', [], Response::HTTP_SEE_OTHER);
-        }
-        
+                        $sid = "ACa950ac6d2cb9002dfaaa0c1601b09fbf";
+                        $token = "7ae7c5497e42f0ee85fdc96318af6dc9";
+                        $twilio = new Client($sid, $token);
+                        $phoneNumber = '+216' . $user->getNumtel();
+                        $message = $twilio->messages
+                            ->create($phoneNumber, // to
+                                array(
+                                    "from" => "+12677280183",
+                                    "body" => "GYM.tn : Votre code de confirmation est ".$str
+                                )
+                            );
+            // Redirect to the verification page
+            return $this->redirectToRoute('verification_page', ['id' => $abonnement->getIdabonement()]);
+            }
+                               
+            //return $this->redirectToRoute('affiche_TypeAbonn', [], Response::HTTP_SEE_OTHER);
+            //}
+
         return $this->renderForm('abonnement/new.html.twig', [
             'abonnement' => $abonnement,
             'form' => $form,
         ]);
-    }
+    }*/
+
+    /*#[Route('/verify-code/{id}', name: 'verification_page', methods: ['GET', 'POST'])]
+        public function verifyCode(Request $request, Abonnement $abonnement, EntityManagerInterface $entityManager): Response
+        {
+            if ($request->isMethod('POST')) {
+                $enteredCode = $request->request->get('verification_code');
+                $generatedCode = $abonnement->getVerificationCode();
+                if ($enteredCode == $generatedCode) {
+
+                    //Incrémentation nombre des abonnement pour chaque typeAbonn
+                    $abonnement->getTypeabon()->setnb_abonnement($abonnement->getTypeabon()->getnb_abonnement() + 1);
+        
+                    $entityManager->persist($abonnement);
+                    $entityManager->flush();
+
+                    $this->addFlash('success', 'Verification successful!');
+                    return $this->redirectToRoute('affiche_TypeAbonn');
+                    
+                    }
+                
+                 else {
+                    $this->addFlash('error', 'Invalid verification code. Please try again.');
+                }
+            }
+
+            // Render the verification form
+            return $this->render('abonnement/verify_code.html.twig', [
+                'abonnement' => $abonnement,
+            ]);
+        }*/
+        #[Route('/new/{id}', name: 'app_abonnement_new', methods: ['GET', 'POST'])]
+        public function new(Request $request, EntityManagerInterface $entityManager, $id, NotifierInterface $notifier, Security $security): Response
+        {
+            $typeAbonn = $entityManager->getRepository(TypeAbonn::class)->find($id);
+    
+            if (!$typeAbonn) {
+                throw $this->createNotFoundException('TypeAbonn not found');
+            }
+    
+            $abonnement = new Abonnement();
+            $abonnement->setTypeabon($typeAbonn);
+    
+            $form = $this->createForm(AbonnementType::class, $abonnement);
+            $form->handleRequest($request);
+            $verificationCode = random_int(100000, 999999);
+            $abonnement->setVerificationCode($verificationCode);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+               
+    
+                $selectedUserId = $request->request->get('abonnement')['iduser'];
+                $user = $entityManager->getRepository(User::class)->find((int) $selectedUserId);
+    
+                if (!$user) {
+                    throw $this->createNotFoundException('User not found');
+                }
+    
+                $abonnement->setIduser($user);
+    
+                $entityManager->persist($abonnement);
+                $entityManager->flush();
+    
+                $this->sendVerificationCode($abonnement, $user);
+    
+                // Redirect to the verification page
+                return $this->redirectToRoute('verification_page', ['id' => $abonnement->getIdabonement()]);
+            }
+    
+            return $this->renderForm('abonnement/new.html.twig', [
+                'abonnement' => $abonnement,
+                'form' => $form,
+            ]);
+        }
+
+        #[Route('/verify-code/{id}', name: 'verification_page', methods: ['GET', 'POST'])]
+        public function verifyCode(Request $request, Abonnement $abonnement, EntityManagerInterface $entityManager): Response
+        {
+            if ($request->isMethod('POST')) {
+                $enteredCode = $request->request->get('verification_code');
+                $generatedCode = $abonnement->getVerificationCode();
+    
+                if ($enteredCode == $generatedCode) {
+                    $this->updateAbonnementAfterVerification($abonnement);
+    
+                    $this->addFlash('success', 'Verification successful!');
+                    return $this->redirectToRoute('affiche_TypeAbonn');
+                } else {
+                    $this->addFlash('error', 'Invalid verification code. Please try again.');
+                }
+            }
+    
+            return $this->render('abonnement/verify_code.html.twig', [
+                'abonnement' => $abonnement,
+            ]);
+        }
+
+        private function updateAbonnementAfterVerification(Abonnement $abonnement): void
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $abonnement->getTypeabon()->setnb_abonnement($abonnement->getTypeabon()->getnb_abonnement() + 1);
+            $entityManager->persist($abonnement);
+            $entityManager->flush();
+        }
+        private function sendVerificationCode(Abonnement $abonnement, User $user): void
+        {
+            $verificationCode = $abonnement->getVerificationCode();    
+            $str = (string) $verificationCode;
+
+                        $sid = "ACa950ac6d2cb9002dfaaa0c1601b09fbf";
+                        $token = "7ae7c5497e42f0ee85fdc96318af6dc9";
+                        $twilio = new Client($sid, $token);
+                        $phoneNumber = '+216' . $user->getNumtel();
+                        $message = $twilio->messages
+                            ->create($phoneNumber, // to
+                                array(
+                                    "from" => "+12677280183",
+                                    "body" => "GYM.tn : Votre code de confirmation est ".$str
+                                )
+                            );
+            
+    
+        }
+
 
     #[Route('/{idabonement}', name: 'app_abonnement_show', methods: ['GET'])]
     public function show(Abonnement $abonnement): Response

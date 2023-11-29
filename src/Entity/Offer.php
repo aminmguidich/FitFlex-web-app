@@ -9,8 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\OfferRepository;
 use App\Entity\ReservationOffer;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass:OfferRepository::class)]
+#[Vich\Uploadable]
 class Offer
 {
     
@@ -46,13 +51,25 @@ class Offer
     private \DateTime $datefinoffer;
 
 
-    #[Assert\NotBlank(message: "champ obligatoire")]
-    #[Assert\Positive(message: "champ invalid")]
-    #[ORM\Column(length:255)]
+    
+
+    #[Vich\UploadableField(mapping: 'art', fileNameProperty: 'img')]
+    private ?File $imageFile = null;
+
+    //#[ORM\Column(name: "image_name",length: 255)]
+    //private ?string  $imageName = null;
+    //#[Assert\NotBlank(message: "champ obligatoire")]
+    #[ORM\Column(name: "img",length:255, nullable:true)]
     private ?string $img=null;
 
     #[ORM\OneToMany(mappedBy: 'idOffer', targetEntity: ReservationOffer::class)]
     private Collection $offers;
+
+    #[ORM\Column]
+    private ?int $nb_reservation = 0;
+
+    #[ORM\Column]
+    private ?int $nb_max_reservation = 0;
 
     public function __construct()
     {
@@ -125,17 +142,7 @@ class Offer
         return $this;
     }
 
-    public function getImg(): ?string
-    {
-        return $this->img;
-    }
-
-    public function setImg(string $img): static
-    {
-        $this->img = $img;
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, ReservationOffer>
@@ -166,6 +173,89 @@ class Offer
 
         return $this;
     }
+
+
+     /**
+     * @param  File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        /*if ($imageFile) {
+            $this->datedeboffer = new \DateTime('now');
+        }*/
+
+        
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): void
+    {
+        $this->img = $img;
+
+        
+    }
+
+    public function getnb_reservation(): ?int
+    {
+        return $this->nb_reservation;
+    }
+
+    public function setnb_reservation(int $nb_reservation): static
+    {
+        $this->nb_reservation = $nb_reservation;
+
+        return $this;
+    }
+
+    public function getNbReservation(): ?int
+    {
+        return $this->nb_reservation;
+    }
+
+    public function setNbReservation(int $nb_reservation): static
+    {
+        $this->nb_reservation = $nb_reservation;
+
+        return $this;
+    }
+
+    public function getNbMaxReservation(): ?int
+    {
+        return $this->nb_max_reservation;
+    }
+    
+    public function setNbMaxReservation(int $nb_max_reservation): static
+    {
+        $this->nb_max_reservation = $nb_max_reservation;
+
+        return $this;
+    }
+    public function getnb_max_reservation(): ?int
+    {
+        return $this->nb_max_reservation;
+    }
+    public function setnb_max_reservation(int $nb_max_reservation): static
+    {
+        $this->nb_max_reservation = $nb_max_reservation;
+
+        return $this;
+    }
+
+    
 
 
 }

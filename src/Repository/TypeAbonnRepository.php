@@ -77,4 +77,33 @@ public function remove(TypeAbonn $entity, bool $flush = false): void
         $this->getEntityManager()->flush();
     }
 }
+
+
+public function searchByType(string $query): array
+{
+    return $this->createQueryBuilder('t')
+        ->andWhere('t.type LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+}
+
+public function searchByDes(string $query): array
+{
+    return $this->createQueryBuilder('t')
+        ->andWhere('t.description LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+}
+
+public function searchByAbonn(string $query): array
+{
+    return $this->createQueryBuilder('t')
+        ->andWhere('t.nb_abonnement LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+}
+
 }
