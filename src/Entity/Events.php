@@ -6,6 +6,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventsRepository;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: EventsRepository::class)]
 
@@ -50,6 +53,21 @@ class Events
 
     private ?string $imgevent = null;
 
+    #[ORM\OneToMany(targetEntity: "Participation", mappedBy: "events")]
+    private Collection $participations;
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
+
+    #[ORM\OneToMany(targetEntity: "Participation", mappedBy: "events")]
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+   
     #[ORM\Column]
     private ?int $nombreplacesreservees= null;
     

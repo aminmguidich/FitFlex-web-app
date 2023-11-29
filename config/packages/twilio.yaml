@@ -1,4 +1,4 @@
 parameters:
     twilio_account_sid: 'AC9fbdaf2a96674c00d4700cc8b8b1f50a'
-    twilio_auth_token: '8d40c742b86fa2dbec6e534d4aee9422'
+    twilio_auth_token: '7ab806c19ba291353aaf677744b54b9f'
     twilio_phone_number: '+16063904993'

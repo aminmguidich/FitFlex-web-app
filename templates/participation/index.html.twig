@@ -27,7 +27,7 @@
                     <td>{{ participation.datepart ? participation.datepart|date('Y-m-d H:i:s') : '' }}</td>
                     <td>
                         <a href="{{ path('app_participation_show', {'idpart': participation.idpart}) }}" class="btn btn-info">Show</a>
-                        <a href="{{ path('app_participation_edit', {'idpart': participation.idpart}) }}" class="btn btn-warning">edit</a>
+                        {#<a href="{{ path('app_participation_edit', {'idpart': participation.idpart}) }}" class="btn btn-warning">edit</a>#}
                     </td>
                 </tr>
             {% else %}
