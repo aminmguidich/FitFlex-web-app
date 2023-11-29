@@ -1,4 +1,24 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+{{ form_row(form.date) }}
+{{ form_row(form.adresse) }}
+{{ form_row(form.type) }}
+
+<div class="form-group">
+    <label for="{{ form.produits.vars.id }}">Produits:</label>
+    {% for produit in form.produits %}
+        <div class="form-check">
+            {{ form_widget(produit) }}
+            <label class="form-check-label" for="{{ produit.vars.id }}">
+                {{ produit.vars.label }}
+                {% if produit.vars.attr['data-image'] is defined %}
+                    {# Utilisez asset() pour générer le chemin absolu vers l'image #}
+                    <img src="{{ asset('uploads/images/' ~ produit.vars.attr['data-image']) }}" alt="Product Image" style="max-width: 50px; max-height: 50px;">
+                {% endif %}
+            </label>
+        </div>
+    {% endfor %}
+</div>
+{{ form_row(form.iduser) }}
+{{ form_widget(form.submit) }}
 {{ form_end(form) }}

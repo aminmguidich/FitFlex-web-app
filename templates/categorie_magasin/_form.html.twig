@@ -1,6 +1,6 @@
 {# src/Resources/views/produit/_form.html.twig #}
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
 <div class="form-group">
     {{ form_label(form.categorie) }}

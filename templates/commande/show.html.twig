@@ -1,8 +1,7 @@
 {%extends "base_front_ayari.html.twig"%}
 
 
-<title>Commande</title>
-
+{% block title %}Commande{% endblock %}
 {% block body %}
     <h1>Commande</h1>
 
@@ -30,6 +29,7 @@
     <a href="{{ path('app_commande_index') }}">back to list</a>
 
     <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
+    <a href="{{ path('app_pdf', {'id': commande.id}) }}">PDF</a>
 
     {{ include('commande/_delete_form.html.twig') }}
 {% endblock %}

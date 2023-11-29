@@ -2,61 +2,48 @@
 
 namespace App\Entity;
 
-
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\UserRepository;
-use App\Entity\Commande;
 
-#[ORM\Entity(repositoryClass:UserRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(name: "Id")]
-    private ?int $id=null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
 
-    #[ORM\Column(length:255)]
-    private ?string $nom=null;
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
 
-  
-    #[ORM\Column(length:255)]
-    private ?string $prenom=null;
- 
-    #[ORM\Column(length:255)]
-    private ?string $mdp=null;
-    
-    #[ORM\Column(length:255)]
-    private ?string $role=null;
+    #[ORM\Column(length: 255)]
+    private ?string $mdp = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $role = null;
 
-    #[ORM\Column(length:255)]
-    private ?string $email=null;
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $img = null;
 
+    #[ORM\Column(type: 'integer')]
+    private ?int $age = null;
 
-    #[ORM\Column(length:255)]
-    private ?string $img=null;
-
-
-
-    #[ORM\Column]
-    private ?int $age=null;
-
-   
-
-    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Commande::class)]
-    private Collection $usersC;
+    #[ORM\OneToMany(mappedBy: "iduser", targetEntity: Commande::class)]
+    private Collection $commandes;
 
     public function __construct()
     {
-        $this->usersC = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
- 
     public function getId(): ?int
     {
         return $this->id;
@@ -67,7 +54,7 @@ class User
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -79,7 +66,7 @@ class User
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -91,7 +78,7 @@ class User
         return $this->mdp;
     }
 
-    public function setMdp(string $mdp): static
+    public function setMdp(?string $mdp): self
     {
         $this->mdp = $mdp;
 
@@ -103,7 +90,7 @@ class User
         return $this->role;
     }
 
-    public function setRole(string $role): static
+    public function setRole(?string $role): self
     {
         $this->role = $role;
 
@@ -115,7 +102,7 @@ class User
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -127,7 +114,7 @@ class User
         return $this->img;
     }
 
-    public function setImg(string $img): static
+    public function setImg(?string $img): self
     {
         $this->img = $img;
 
@@ -139,43 +126,42 @@ class User
         return $this->age;
     }
 
-    public function setAge(int $age): static
+    public function setAge(?int $age): self
     {
         $this->age = $age;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getUsersC(): Collection
+    public function getCommandes(): Collection
     {
-        return $this->usersC;
+        return $this->commandes;
     }
 
-    public function addUsersC(Commande $usersC): static
+    public function addCommande(Commande $commande): self
     {
-        if (!$this->usersC->contains($usersC)) {
-            $this->usersC->add($usersC);
-            $usersC->setId($this);
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setIduser($this);
         }
 
         return $this;
     }
 
-    public function removeUsersC(Commande $usersC): static
+    public function removeCommande(Commande $commande): self
     {
-        if ($this->usersC->removeElement($usersC)) {
+        if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)
-            if ($usersC->getId() === $this) {
-                $usersC->setId(null);
+            if ($commande->getIduser() === $this) {
+                $commande->setIduser(null);
             }
         }
 
         return $this;
     }
 
-
-
+    public function __toString(): string
+    {
+        return $this->prenom . ' ' . $this->nom;
+    }
 }

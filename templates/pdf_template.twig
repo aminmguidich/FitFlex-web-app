@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Commande PDF</title>
+    <style>
+        /* Ajoutez du CSS pour centrer l'image */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            max-width: 200px;
+        }
+    </style>
+    {% block stylesheets %}
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="{{asset('BackOffice/css/styles.css')}}" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    {% endblock %}
+</head>
+<body>
+    <!-- Ajoutez la classe 'header' à la div contenant l'image -->
+    <div class="header">
+        <img src="{{ asset('uploads/images/logo.jpg') }}" alt="Logo">
+    </div>
+<h1>Commande numéro {{ commande.id }}</h1>
+<p>Date: {{ commande.date|date('Y-m-d') }}</p>
+<p>Adresse: {{ commande.adresse }}</p>
+<!-- Ajoutez d'autres informations de commande selon vos besoins -->
+
+<h2>Produits</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Titre du Produit</th>
+        <th>Image</th>
+        <!-- Ajoutez d'autres colonnes si nécessaire -->
+    </tr>
+    </thead>
+    <tbody>
+    {% for produit in commande.getCommandeProduits() %}
+        <tr>
+            <td>{{ produit.Produits.titre }}</td>
+            <td>{{ produit.Produits.image }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

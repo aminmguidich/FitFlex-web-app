@@ -1,5 +1,4 @@
-
-{%extends "base_front_ayari.html.twig"%}
+{% extends "base_front_ayari.html.twig" %}
 {% block title %}Commande index{% endblock %} 
 {% block body %}
     <h1>Commande index</h1>
@@ -7,20 +6,27 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Date</th>
                 <th>Adresse</th>
                 <th>Type</th>
-                <th>actions</th>
+                <th>User Email</th>
+                <th>Produits</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for commande in commandes %}
             <tr>
-                <td>{{ commande.id }}</td>
                 <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
                 <td>{{ commande.adresse }}</td>
                 <td>{{ commande.type }}</td>
+                <td>{{ commande.iduser.email }}</td>
+                <td>
+                    {% for produit in commande.getCommandeProduits() %}
+                        <img src="{{ asset('uploads/images/' ~ produit.Produits.image) }}" alt="{{ produit.Produits.titre }}" style="max-width: 50px; max-height: 50px;">
+                        {{ produit.Produits.image }}<br>
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('app_commande_show', {'id': commande.id}) }}">show</a>
                     <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
@@ -28,7 +34,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
