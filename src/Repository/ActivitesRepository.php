@@ -21,6 +21,34 @@ class ActivitesRepository extends ServiceEntityRepository
         parent::__construct($registry, Activites::class);
     }
 
+    public function findByField($field, $value, $dateDeb = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->andWhere('a.' . $field . ' LIKE :' . $field)
+            ->setParameter($field, '%' . $value . '%');
+
+        if ($dateDeb) {
+            // Create a date range for the entire day
+            $startDate = new \DateTime($dateDeb);
+            $startDate->setTime(0, 0, 0);
+
+            $endDate = new \DateTime($dateDeb);
+            $endDate->setTime(23, 59, 59);
+
+            $queryBuilder
+                ->andWhere('a.dateDeb BETWEEN :startDate AND :endDate')
+                ->setParameter('startDate', $startDate)
+                ->setParameter('endDate', $endDate);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
 //    /**
 //     * @return Activites[] Returns an array of Activites objects
 //     */

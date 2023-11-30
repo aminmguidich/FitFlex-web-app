@@ -36,8 +36,11 @@ class ActivitesType extends AbstractType
             ->add('salle',ChoiceType::class,[
                 'choices' => [
                     'Salle des cours' => 'Salle des cours',
-                    'Salle cross training' => 'Salle cross training',
-                    'Salle RPM'=>'Salle RPM'
+                    'Salle Cross training' => 'Salle cross training',
+                    'Salle RPM'=>'Salle RPM',
+                    'Salle Zen'=>'Salle Zen',
+                    'Salle BOX'=>'Salle BOX',
+                    'Piscine'=>'Piscine'
                 ]
                 ,'constraints' => [
                     new Assert\NotBlank(['message' => 'salle cannot be blank.']),
@@ -58,8 +61,10 @@ class ActivitesType extends AbstractType
                     'BOXING' => 'BOXING',
                     'TRX' => 'TRX',
                     'YOGA' => 'YOGA',
-
-
+                    'AQUABODYBIKE'=>'AQUABODYBIKE',
+                    'AQUADYNAMIC'=>'AQUADYNAMIC',
+                    'ABDO 30`'=>'ABDO 30`',
+                    'BODYPUMP'=>'BODYPUMP',
                 ],
                 'constraints' => [
                     new Assert\NotBlank(['message' => 'titre cannot be blank.']),

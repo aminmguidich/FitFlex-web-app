@@ -14,10 +14,14 @@ class MainController extends AbstractController
     {
         $events = $activitesRepository->findAll();
         $categoryColors = [
-            'Aquatique' => '#33A6FF', // Replace with actual colors or use a color library
+            'Aquatique' => '#33A6FF',
             'Force' => '#FF334F',
             'Souplesse' => '#33FF7E',
-            // Add more categories and colors as needed
+            'Cardio' => '#8A19B1',
+            'Training' => '#38CECB',
+            'Danse' =>'#ED59DD',
+            'Kids Island' =>'#EDC82B'
+
         ];
 
         $rdvs = [];
@@ -25,21 +29,62 @@ class MainController extends AbstractController
         foreach($events as $event){
             $category = $event->getIdcategorie()->getCategorie(); // Assuming getName() returns the category name
             $backgroundColor = $categoryColors[$category] ?? '#CCCCCC'; // Default to a fallback color if category not found
+            $coach = $event->getIdUser()->getNom();
+            $title = $event->getTitre() . ' (' . $coach . ')';
             $rdvs[] = [
                 'id' => $event->getCode(),
                 'start' => $event->getDateDeb()->format('Y-m-d H:i:s'),
                 'end' => $event->getDateFin()->format('Y-m-d H:i:s'),
-                'title' => $event->getTitre(),
+                'title' => $title,
                 //'description' => $event->getDescription(),
                 'backgroundColor' => $backgroundColor,
-                 'borderColor' => $backgroundColor,
-                //'textColor' => $event->getTextColor(),
-                //'allDay' => $event->getAllDay(),
+                 'borderColor' => '#FFFFFF',
+                //'' => $event->getTextColor(),
+                //'coach' => $event->getIdUser(),
             ];
         }
 
         $data = json_encode($rdvs);
 
         return $this->render('main/index.html.twig', compact('data'));
+    }
+    #[Route('/mainn', name: 'app_mainn')]
+    public function indexx(ActivitesRepository $activitesRepository)
+    {
+        $events = $activitesRepository->findAll();
+        $categoryColors = [
+            'Aquatique' => '#33A6FF',
+            'Force' => '#FF334F',
+            'Souplesse' => '#33FF7E',
+            'Cardio' => '#8A19B1',
+            'Training' => '#38CECB',
+            'Danse' =>'#ED59DD',
+            'Kids Island' =>'#EDC82B'
+
+        ];
+
+        $rdvs = [];
+
+        foreach($events as $event){
+            $category = $event->getIdcategorie()->getCategorie(); // Assuming getName() returns the category name
+            $backgroundColor = $categoryColors[$category] ?? '#CCCCCC'; // Default to a fallback color if category not found
+            $coach = $event->getIdUser()->getNom();
+            $title = $event->getTitre() . ' (' . $coach . ')';
+            $rdvs[] = [
+                'id' => $event->getCode(),
+                'start' => $event->getDateDeb()->format('Y-m-d H:i:s'),
+                'end' => $event->getDateFin()->format('Y-m-d H:i:s'),
+                'title' => $title,
+                //'description' => $event->getDescription(),
+                'backgroundColor' => $backgroundColor,
+                'borderColor' => '#FFFFFF',
+                //'' => $event->getTextColor(),
+                //'coach' => $event->getIdUser(),
+            ];
+        }
+
+        $data = json_encode($rdvs);
+
+        return $this->render('main/backcalendar.html.twig', compact('data'));
     }
 }

@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
     <title>{% block tittre %}SALLE DE SPORT {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
     <!--
 
     TemplateMo 548 Training Studio
@@ -19,6 +20,12 @@
     -->
     <!-- Additional CSS Files -->
     {% block stylesheets %}
+        <style>
+            #calendrier{
+                width: 80%;
+                margin: auto ;
+            }
+        </style>
         <link rel="stylesheet" type="text/css" href="{{asset('FrontOffice/css/bootstrap.min.css')}}">
 
         <link rel="stylesheet" type="text/css" href="{{asset('FontOffice/css/font-awesome.css')}}">
@@ -107,47 +114,18 @@
                     <h2>Choisir <em>Activite</em></h2>
                     <img src="{{asset('FrontOffice/images/line-dec.png')}}" alt="waves">
 
-
-                    {% block body %}
-                    {% endblock %}
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <ul class="features-items">
-                    <li class="feature-item">
-                        <div class="left-icon">
-                            <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="First One">
-                        </div>
-                        <div class="right-content">
-                            <h4>BLUE PASS_SPORT</h4>
-                            <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>
 
-
-                        </div>
-                    </li>
-
-                </ul>
             </div>
 
-            <div class="col-lg-6">
-                <ul class="features-items">
-                    <li class="feature-item">
-                        <div class="left-icon">
-                            <img src="{{asset('FrontOffice/images/features-first-icon.png')}}" alt="fourth muscle">
-                        </div>
-                        <div class="right-content">
-                            <h4>YELLOW PASS_SPORT</h4>
-                            <p>You may want to browse through <a rel="nofollow" href="https://templatemo.com/tag/digital-marketing" target="_parent">Digital Marketing</a> or <a href="https://templatemo.com/tag/corporate">Corporate</a> HTML CSS templates on our website.</p>
 
-                        </div>
-                    </li>
 
-                </ul>
-            </div>
+
 
         </div>
     </div>
-
+    {% block body %}
+    {% endblock %}
 </section>
 <!-- ***** Features Item End ***** -->
 
@@ -378,9 +356,37 @@
 <!-- Bootstrap -->
 <script src="{{asset('FrontOffice/js/popper.js')}}"></script>
 <script src="{{asset('FrontOffice/js/bootstrap.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
 
 <!-- Plugins -->
 {% block javascripts %}
+    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#calendrier")
+
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView: 'timeGridWeek',
+                locale: 'fr',
+                timeZone: 'Europe/Paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridDay,timeGridWeek'
+                },
+
+                nowIndicator: true,
+                events: {{ data|raw }},
+                allDaySlot: false,
+                slotMinTime: '07:00:00', // Adjust the start time
+                slotMaxTime: '23:00:00', // Adjust the end time
+                firstDay: 1,
+
+            })
+            calendar.render()
+        }
+    </script>
+
     <script src="{{asset('FrontOffice/js/scrollreveal.min.js')}}"></script>
     <script src="{{asset('FrontOffice/js/waypoints.min.js')}}"></script>
     <script src="{{asset('FrontOffice/js/jquery.counterup.min.js')}}"></script>

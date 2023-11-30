@@ -21,8 +21,7 @@ class Activites
     private ?int $code= null;
     #[Assert\NotBlank(message: "champ obligatoire")]
     #[Assert\Positive(message: "champ invalid")]
-    #[ORM\Column(length: 255 )]
-
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $categorie;
 
     #[ORM\Column]
