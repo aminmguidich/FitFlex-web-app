@@ -7,3 +7,7 @@ new_reservation_offer:
 app_reservation_offer_index:
     path: 'app_reservation_offer_index'
     controller: 'App\Controller\ReservationOfferController::index'
+
+app_offer_index:
+    path: '/offer/'
+    controller: 'App\Controller\OfferController::index'
