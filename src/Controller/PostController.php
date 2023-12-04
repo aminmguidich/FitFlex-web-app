@@ -166,30 +166,6 @@ class PostController extends AbstractController
 
         return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
     }*/
-
-    /*#[Route('/{idPost}', name: 'app_post_delete', methods: ['POST'])]
-public function delete(Request $request, Post $post, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
-{
-    $csrfToken = $request->request->get('_token');
-    if ($this->isCsrfTokenValid('delete'.$post->getIdPost(), $csrfToken)) {
-        $entityManager->remove($post);
-        $entityManager->flush();
-        $email = (new Email())
-            ->from('asma.zakraoui@esprit.tn')
-            ->to('asmazakraoui4@gmail.com')
-            ->subject('Suppression de post')
-            ->html('<p>Un post a été supprimé:</p>' .
-                '<ul>' .
-                '<li>Id du post: ' . $post->getIdPost() . '</li>' .
-                '<li>Description: ' . $post->getDescription() . '</li>' .
-               // '<li>Image: ' . $post->getImage() . '</li>' .
-                '</ul>');
-
-        $mailer->send($email);
-    }
-
-    return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
-}*/
 #[Route('/{idPost}', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, PostRepository $postRepository, MailerInterface $mailer): Response
     {
@@ -197,8 +173,8 @@ public function delete(Request $request, Post $post, EntityManagerInterface $ent
             $postRepository->remove($post, true);
                
             $email = (new Email())
-            ->from('asma.zakraoui@esprit.tn')
-            ->to('asmazakraoui4@gmail.com ')
+            ->from('asmazakraoui4@gmail.com')
+            ->to('asma.zakraoui@esprit.tn ')
             ->subject('Supression de post')
             ->html('<p>Un post a été suprrimé:</p>' .
             '<ul>' .

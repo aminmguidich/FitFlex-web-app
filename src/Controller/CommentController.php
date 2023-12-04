@@ -31,7 +31,7 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Vérification des badwords
-            $badwords = ['fuck', 'stupid', 'bitch']; // Remplacez cela par votre liste de badwords
+            $badwords = ['disgusting', 'stupid', 'bad']; // Remplacez cela par votre liste de badwords
             $commentContent = $comment->getContent();
 
             foreach ($badwords as $badword) {
