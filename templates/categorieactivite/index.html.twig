@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Categorie</th>
                 <th>actions</th>
             </tr>
@@ -16,11 +15,9 @@
         <tbody>
         {% for categorieactivite in categorieactivites %}
             <tr>
-                <td>{{ categorieactivite.id }}</td>
                 <td>{{ categorieactivite.categorie }}</td>
                 <td>
-                    <a href="{{ path('app_categorieactivite_show', {'id': categorieactivite.id}) }}">show</a>
-                    <a href="{{ path('app_categorieactivite_edit', {'id': categorieactivite.id}) }}">edit</a>
+                    {{ include('categorieactivite/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -30,6 +27,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_categorieactivite_new') }}">Create new</a>
+<div class="text-right mb-4">
+    <a href="{{ path('app_categorieactivite_new') }}"class="btn btn-primary"><i class="fas fa-plus"></i>Ajouter</a>
+</div>
 {% endblock %}
