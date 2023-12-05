@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %}New Activity{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Create New Activity</h1>
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <div class="form-group">
+            {{ form_label(form.idcategorie, 'Category') }}
+            {{ form_widget(form.idcategorie, {'attr': {'class': 'form-control' ~ (form.idcategorie.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+            {{ form_errors(form.idcategorie) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.dateDeb, 'Start Date') }}
+            {{ form_widget(form.dateDeb, {'attr': {'class': 'form-control' ~ (form.dateDeb.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+            {{ form_errors(form.dateDeb) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.dateFin, 'End Date') }}
+            {{ form_widget(form.dateFin, {'attr': {'class': 'form-control' ~ (form.dateFin.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+            {{ form_errors(form.dateFin) }}
+        </div>
+
+        <div class="form-group" >
+            {{ form_label(form.description, 'Description') }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control' ~ (form.description.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.salle, 'Salle') }}
+            {{ form_widget(form.salle, {'attr': {'class': 'form-control' ~ (form.salle.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+            {{ form_errors(form.salle) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.titre, 'Title') }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control' ~ (form.titre.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+            {{ form_errors(form.titre) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.idUser, 'Coach') }}
+            {{ form_widget(form.idUser, {'attr': {'class': 'form-control' ~ (form.idUser.vars.errors|length > 0 ? ' is-invalid' : '')}, 'choice_label': 'nomPrenom'}) }}
+            {{ form_errors(form.idUser) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
