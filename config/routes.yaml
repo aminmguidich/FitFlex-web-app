@@ -1,5 +1,6 @@
 #index:
 #    path: /
+
 #    controller: App\Controller\DefaultController::index
 
 # config/routes.yaml
@@ -21,4 +22,5 @@ app_reservation_offer_index:
 app_offer_index:
     path: '/offer/'
     controller: 'App\Controller\OfferController::index'
+
 
