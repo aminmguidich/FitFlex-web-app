@@ -1,0 +1,12 @@
+{# templates/forms/bootstrap_form_layout.html.twig #}
+
+{% block form_row %}
+    <div class="form-group row">
+        {{ form_label(form) }}
+        <div class="col-sm-8">
+            {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}
+
