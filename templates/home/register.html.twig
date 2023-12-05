@@ -52,7 +52,7 @@ https://templatemo.com/tm-548-training-studio
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">FETFLIX<em> GYM</em></a>
+                        <a href="{{ path('app_home') }}" class="logo">FETFLIX<em> GYM</em></a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
@@ -128,7 +128,19 @@ https://templatemo.com/tm-548-training-studio
                                                     
                                                 </div>
                                             </div>
+                                            
+                                            
                                         </div>
+                                        <div class="col-md-6">
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="numtel" type="number" name="numtel" placeholder="Enter your number" />
+                                                    
+                                                </div>
+                                        </div>
+                                         <input type="radio" id="sex1" name="sex" value="Homme">
+                                            <label for="sex1">Homme</label>
+                                         <input type="radio" id="sex2" name="sex" value="Femme">
+                                            <label for="sex2">Femme</label><br>  
                                         <!-- Submit Button -->
                                         <button type="submit" class="btn btn-primary">Register</button>
                                         

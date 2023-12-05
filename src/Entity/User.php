@@ -37,6 +37,15 @@ class User implements UserInterface
     #[ORM\Column]
     private ?int $age = null;
 
+    #[ORM\Column(name: "numtel", type: "integer", nullable: false)]
+    private ?int $numtel = null;
+
+    #[ORM\Column(name: "sex", type: "string", length: 300, nullable: false)]
+    private ?string $sex = null;
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,4 +166,28 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+    public function getsex(): ?string
+    {
+        return $this->sex;
+    }
+
+    public function setsex(string $sex): self
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    public function getnumtel(): ?int
+    {
+        return $this->numtel;
+    }
+
+    public function setnumtel(int $numtel): self
+    {
+        $this->numtel = $numtel;
+
+        return $this;
+    }
+   
 }

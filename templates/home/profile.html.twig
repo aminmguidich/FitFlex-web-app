@@ -15,6 +15,8 @@
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="#" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.20.0/font/bootstrap-icons.css">
+
  <link rel="stylesheet" type="text/css" href="{{asset('FrontOffice/css/bootstrap.min.css')}}">
 
     <link rel="stylesheet" type="text/css" href="{{asset('FontOffice/css/font-awesome.css')}}">
@@ -90,7 +92,7 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">FETFLIX<em> GYM</em></a>
+                       <a href="{{ path('app_home') }}" class="logo">FETFLIX<em> GYM</em></a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
@@ -99,7 +101,7 @@
 
                             <li class="scroll-to-section"><a href="/#our-classes">Classes</a></li>
                             <li class="scroll-to-section"><a href="/#contact-us">Contact</a></li> 
-                            <li class="main-button"><a href="/logout">Logout</a></li>
+                            <li class="main-button"><a href="/logout">Déconnexion</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -116,7 +118,6 @@
             <source src="{{asset('FrontOffice/images/gym-video.mp4')}}" type="video/mp4" />
             
         </video>
-
         <div class="video-overlay header-text">
             <div class="caption" style="z-index: 100%;">
             <div class="container bg-white" >
@@ -134,25 +135,43 @@
             {% endif %}
             <span class="font-weight-bold">{{user.nom}}  {{user.prenom}}</span><span class="text-black-50">{{user.email}}</span><span> </span></div>
         </div>
+
         <div class="col-md-5 border-right">
-        
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+                    <h4 class="text-right">Mon profile</h4>
+                     <button id="modifyProfileBtn" class="btn btn-primary" >
+               <svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1 .8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> Edit
+            </button>
                 </div>
+                <form action="{{path('app_user_profile_save', {'id': user.id}) }}" method="POST" enctype="multipart/form-data">
+
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="{{user.nom}}" disabled></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="{{user.prenom}}" placeholder="last name" disabled></div>
+                    <div class="col-md-6"><label class="labels">Nom</label><input type="text" name="nom" id="nom"  disabled   class="form-control editable-field" placeholder="first name" value="{{user.nom}}" ></div>
+                    <div class="col-md-6"><label class="labels">Prénom</label><input type="text" name="prenom" class="form-control editable-field" value="{{user.prenom}}" placeholder="last name" disabled></div>
                 </div>
+                <div class="row mt-2" id="imgg" hidden>
+                    <div class="col-md-12"><label class="labels">Image</label> <input type="file"  name="img" class="form-control editable-field" accept="image/*" ></div>
+                </div>
+               
+           
                 <div class="row mt-3">
                 
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value="{{user.email}}" disabled></div>
+                    <div class="col-md-12"><label class="labels">Email </label><input type="text" name="email" class="form-control editable-field" placeholder="enter email id" value="{{user.email}}"disabled></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">age</label><input type="number" class="form-control" placeholder="Age" value="{{user.age}}" disabled></div>
+                    <div class="col-md-6"><label class="labels">Age</label><input type="number" name="age" class="form-control editable-field" placeholder="Age" value="{{user.age}}"disabled></div>
                 </div>
-
+                 <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Numéro</label><input type="number" name="numtel" class="form-control editable-field" placeholder="Age" value="{{user.numtel}}" disabled></div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="123"  hidden="true" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
+  <path d="M11 2H9v3h2z"/>
+  <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
+</svg>Enregistrer</button>
+            </form>
             </div>
+           
         </div>
 
     </div>
@@ -199,4 +218,21 @@
     
     <!-- Global Init -->
     <script src="{{asset('FrontOffice/js/custom.js')}}"></script>
-                                
+    <script>
+$(document).ready(function () {
+    $("#modifyProfileBtn").click(function () {
+        $("#123").prop("hidden", false);
+        $("#imgg").prop("hidden", false);
+
+        $(".editable-field").prop("disabled", false);
+        $("#editProfileBtn").show();
+        $(this).hide();
+    });
+
+    $("#editProfileBtn").click(function () {
+        $(".editable-field").prop("disabled", true);
+        $(this).hide();
+        $("#modifyProfileBtn").show();
+    });
+});
+</script>

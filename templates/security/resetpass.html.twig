@@ -40,7 +40,7 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">FETFLIX<em> GYM</em></a>
+                       <a href="{{ path('app_home') }}" class="logo">FETFLIX<em> GYM</em></a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
@@ -49,7 +49,7 @@
 
                             <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
-                            <li class="main-button"><a href="/register">Sign Up</a></li>
+                            <li class="main-button"><a href="/register">S'inscrire</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -74,24 +74,24 @@
                     <div class="col-lg-7">
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header">
-                                <h3 class="text-center font-weight-light my-4 text-black">reset password</h3>
+                                <h3 class="text-center font-weight-light my-4 text-black">Réinitialiser le mot de passe</h3>
                             </div>
                             <div class="card-body">
                                 <form action="{{ path('app_reset_pass') }}" method="post">
                                     <!-- Email Input -->
                                     <div class="form-floating mb-3">
-                                        <label for="password">password:</label>
-                                        <input type="password" id="password" name="password" class="form-control"  placeholder="Enter your new password">
+                                        <label for="password">Mot de passe :</label>
+                                        <input type="password" id="password" name="password" class="form-control"  placeholder="Entrez votre nouveau mot de passe">
                                     </div>
                                     <!-- Password Input -->
                                      <div class="form-floating mb-3">
-                                        <label for="cpassword">Confirm password:</label>
-                                        <input type="password" id="cpassword" name="cpassword" class="form-control"  placeholder="Enter your new password">
+                                        <label for="cpassword">Confirmer le mot de passe :</label>
+                                        <input type="password" id="cpassword" name="cpassword" class="form-control"  placeholder="Confirmez votre mot de passe">
                                     </div>
                                     <input type="hidden" id="email"  name="email" value="{{email}}" />
 
                                     <!-- Submit Button -->
-                                    <button type="submit" class="btn btn-primary">save</button>
+                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
                                     <div class="card-footer text-center py-3">
                                     
                                 </div>

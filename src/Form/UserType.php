@@ -48,6 +48,16 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('age')
+            ->add('numtel')
+            ->add('sex', ChoiceType::class, [
+                'label' => 'Sex',
+                'choices' => [
+                    'Homme' => 'Homme',
+                    'Femme' => 'Femme',
+                ],
+                'expanded' => true, // Render as radio buttons
+                'multiple' => false, // Allow only one option to be selected
+            ])
             
         ;
     }
