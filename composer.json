@@ -56,7 +56,7 @@
         "twig/twig": "^2.12|^3.0",
         "twilio/sdk": "^7.12",
         "vich/uploader-bundle": "^2.2",
-        "victor-prdh/recaptcha-bundle": "^1.7",
+        "victor-prdh/recaptcha-bundle": "^1.7"
 
 
     },
