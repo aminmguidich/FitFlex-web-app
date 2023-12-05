@@ -77,7 +77,15 @@
 
 <a href="{{ path('app_event_new') }}" class="btn btn-success">Create New</a>
     {{ knp_pagination_render(page) }}
-
+    
+    {% if app.request.get('flashDisplayed') is not defined %}
+        {% if app.flashes('notice') is not empty %}
+            <div class="alert alert-success">
+                {{ app.flashes('notice')[0] ?? '' }}
+            </div>
+        {% endif %}
+        {{ app.request.attributes.set('flashDisplayed', true) }}
+    {% endif %}
 <script>
     // Optional: If you have jQuery included in your project
     // $('.thumb').hover(function() {

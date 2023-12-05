@@ -13,6 +13,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\SearchEventType;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\Label\LabelAlignmentCenter;
+use Endroid\QrCode\Margin\Margin;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Writer\PngWriter;
 
 #[Route('/event')]
 class EventController extends AbstractController
@@ -55,15 +65,18 @@ class EventController extends AbstractController
         'events' => $events,
     ]);
     }
+    
 
     #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
+        $qrCodes = [];
         $event = new Events();
         $form = $this->createForm(EventsType::class, $event);
         $form->handleRequest($request);
-    
+       
         if ($form->isSubmitted() && $form->isValid()) {
+           
             // Generate a unique file name
             $file = $form->get('imgevent')->getData();
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
@@ -79,18 +92,57 @@ class EventController extends AbstractController
     
             // Set the file name in the entity
             $event->setImgevent($fileName);
-    
+
+    $url = 'https://www.google.com/search?q=';
+
+        $objDateTime = new \DateTime('NOW');
+        $dateString = $objDateTime->format('d-m-Y H:i:s');
+        $path = dirname(__DIR__, 2) . '/public/';
+
+        $result = Builder::create()
+            ->writer(new PngWriter())
+            ->writerOptions([])
+            ->data('Titre: ' . $event->getTitreevent() . "\n"
+                . 'Adresse: ' . $event->getAdresseevent() . "\n"
+                . 'Prix: ' . $event->getPrixevent() . "\n"
+                . 'images: ' . $event->getImgevent() . "\n"
+                
+            )
+            ->encoding(new Encoding('UTF-8'))
+            //->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+            ->size(400)
+            ->margin(10)
+            ->labelText($dateString)
+            //->labelAlignment(new LabelAlignmentCenter())
+           // ->labelMargin(new Margin(15, 5, 5, 5))
+           //->logoPath('uploads/images/' . $fileNames)
+           //->logoResizeToWidth('100')
+            //->logoResizeToHeight('100')
+            ->backgroundColor(new Color(255, 255, 255))
+            ->build();
+
+        $namePng = uniqid('', '') . '.png';
+        $result->saveToFile($path . 'uploads/images' . $namePng);
+        $result->getDataUri();
+
+        $event->setQrcode($namePng);
+        
             $entityManager->persist($event);
             $entityManager->flush();
+            $this->addFlash('notice', 'Event has been successfully added.');
+            dump($this->get('session')->getFlashBag()->all()); // Debug line
 
-            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+
+        return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('event/new.html.twig', [
             'event' => $event,
             'form' => $form,
+            'qrCodes' => $qrCodes,
         ]);
     }
+   
 
     #[Route('/{idevent}', name: 'app_event_show', methods: ['GET'])]
     public function show(Events $event): Response
@@ -149,16 +201,17 @@ public function delete(Request $request, Events $event, EntityManagerInterface $
     if ($this->isCsrfTokenValid('delete'.$event->getIdevent(), $request->request->get('_token'))) {
         // Get participants associated with the event
         $participations = $event->getParticipations();
-        $this->addFlash('success', 'evenement supprimée avec succès!');
 
  
-        // Notify participants by email
+       /* // Notify participants by email
        foreach ($event->getParticipations() as $participation) {
             $this->sendNotificationEmail($participation->getIdUser().getEmail(), 'Event Deleted', 'The event has been canceled.');
-       }
+       }*/
            // Remove the event
            $entityManager->remove($event);
            $entityManager->flush();
+           $this->addFlash('success', 'evenement supprimée avec succès!');
+
     }
 
     return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
@@ -232,5 +285,6 @@ public function search(Request $request, EventsRepository $eventsRepository): Re
             'searchTerm' => $searchTerm,
         ]);
     }
+    
     
 }

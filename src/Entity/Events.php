@@ -220,6 +220,18 @@ class Events
 
         return $this;
     }
+    
+    public function getQrcode(): string
+    {
+        return $this->qrcode;
+    }
 
+    /**
+     * @param string $qrcode
+     */
+    public function setQrcode(string $qrcode): void
+    {
+        $this->qrcode = $qrcode;
+    }
 
 }

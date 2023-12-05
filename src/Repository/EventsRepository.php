@@ -76,7 +76,7 @@ public function findByTitre($searchTerm)
         $qb = $this->createQueryBuilder('e')
             ->andWhere('e.titreevent LIKE :searchTerm ')
             ->setParameter('searchTerm', '%'.$searchTerm.'%')
-            ->orderBy('e.prixevent', 'DESC')
+            ->orderBy('e.prixevent', 'ASC')
             ->getQuery();
     
         return $qb->getResult();
