@@ -1,0 +1,28 @@
+{% extends 'base_Front_chayma.html.twig' %} 
+
+{% block abonn %}
+    <h1>Verify Code</h1>
+
+
+    {% for flashMessage in app.flashes('success') %}
+        <div class="alert alert-success">{{ flashMessage }}</div>
+    {% endfor %}
+
+    {% for flashMessage in app.flashes('error') %}
+        <div class="alert alert-danger">{{ flashMessage }}</div>
+    {% endfor %}
+
+    
+
+     <form method="post"> 
+        {# <form method="post" action="{{ path('verification_page', {'id': abonnement.idabonement}) }}"> #}
+        <label for="verification_code">Enter the verification code:</label>
+        <input type="text" id="verification_code" name="verification_code" required>
+        <button type="submit">Verify</button>
+    </form>
+<div>
+<br>
+     <a href="{{ path('affiche_TypeAbonn') }}">back to list</a>
+<br>
+</div>
+ {% endblock %} 
