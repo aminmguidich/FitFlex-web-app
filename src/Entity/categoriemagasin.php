@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Entity;
-use App\Repository\categoriemagasinRepository;
-use Doctrine\ORM\Mapping;
 
-#[Mapping\Entity(repositoryClass: categoriemagasinRepository::class)]
+use App\Repository\categoriemagasinRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: categoriemagasinRepository::class)]
 class categoriemagasin
 {
-    #[Mapping\Id]
-    #[Mapping\GeneratedValue(strategy: "IDENTITY")]
-    #[Mapping\Column(name: "id")]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
+    #[ORM\Column(name: "id")]
     private ?int $id = null;
 
-    #[Mapping\Column(length: 255)]
+    #[ORM\Column(length: 255)]
     private ?string $categorie = null;
 
     public function getId(): ?int
@@ -30,5 +31,13 @@ class categoriemagasin
         $this->categorie = $categorie;
 
         return $this;
+    }
+
+    /**
+     * Méthode magique pour convertir l'objet en chaîne de caractères.
+     */
+    public function __toString(): string
+    {
+        return $this->getCategorie() ?? '';
     }
 }

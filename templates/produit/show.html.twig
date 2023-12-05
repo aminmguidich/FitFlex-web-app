@@ -1,5 +1,5 @@
 
-{% extends "base_back_ayari.html.twig" %}
+{% extends "base_front_ayari.html.twig" %}
 
 {% block title %}Produit{% endblock %}
 
@@ -9,21 +9,20 @@
 
         <table class="table table-bordered mx-auto">
             <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ produit.id }}</td>
-                </tr>
-                <tr>
-                    <th>Idadmin</th>
-                    <td>{{ produit.idadmin }}</td>
-                </tr>
+              
                 <tr>
                     <th>Titre</th>
                     <td>{{ produit.titre }}</td>
                 </tr>
                 <tr>
                     <th>Image</th>
-                    <td>{{ produit.image }}</td>
+                    <td>
+                        {% if produit.image %}
+                            <img src="{{ asset('uploads/images/' ~ produit.image) }}" alt="{{ produit.titre }}" style="max-width: 200px; max-height: 200px;">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
                 </tr>
                 <tr>
                     <th>Date</th>
