@@ -7,7 +7,6 @@ endroid_qr_code:
         errorCorrectionLevel: 'low'
         roundBlockSizeMode: 'margin'
         validateResult: false
-
     custom:
         writer: Endroid\QrCode\Writer\SvgWriter
         writerOptions:
@@ -20,4 +19,3 @@ endroid_qr_code:
         logoPath: '%kernel.project_dir%/vendor/endroid/qr-code/tests/assets/symfony.png'
         logoResizeToWidth: 150
         validateResult: false
-

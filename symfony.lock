@@ -8,7 +8,12 @@
             "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
         },
         "files": [
+<<<<<<< HEAD
             "./config/routes/annotations.yaml"
+=======
+            "./config/routes/annotations.yaml",
+            "config/routes/annotations.yaml"
+>>>>>>> parent of d0020b9 (Merge branch 'ranim2' into TestAll)
         ]
     },
     "doctrine/doctrine-bundle": {

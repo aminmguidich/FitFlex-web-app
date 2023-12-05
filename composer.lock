@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "a34b8d6e4b2d6eb4f4a3e2641d99b8ee",
+=======
+    "content-hash": "0797dbe28210d528b072e14f7b8dddcc",
+>>>>>>> parent of d0020b9 (Merge branch 'ranim2' into TestAll)
     "packages": [
         {
             "name": "bacon/bacon-qr-code",

@@ -8,16 +8,14 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "bacon/bacon-qr-code": "^2.0",
-
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
         "dompdf/dompdf": "^2.0",
-        "knplabs/knp-snappy-bundle": "^1.0",
-        "endroid/qr-code": "^5.0",
         "endroid/qr-code-bundle": "^5.0",
         "knplabs/knp-paginator-bundle": "^5.9",
+        "knplabs/knp-snappy-bundle": "^1.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpmailer/phpmailer": "^6.9",
         "phpoffice/phpspreadsheet": "^1.29",
@@ -57,8 +55,11 @@
         "twilio/sdk": "^7.12",
         "vich/uploader-bundle": "^2.2",
         "victor-prdh/recaptcha-bundle": "^1.7"
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of d0020b9 (Merge branch 'ranim2' into TestAll)
     },
     "config": {
         "allow-plugins": {
