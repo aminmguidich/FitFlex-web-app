@@ -46,7 +46,11 @@ class User implements UserInterface
 
 
 
+    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Abonnement::class)]
+    private Collection $users;
 
+    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: ReservationOffer::class)]
+    private Collection $usersR;
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Activites::class)]
     private Collection $activites;
@@ -238,6 +242,64 @@ class User implements UserInterface
         return $this->reservationCours;
     }
 
+  /**
+     * @return Collection<int, Abonnement>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
 
+    public function addUser(Abonnement $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Abonnement $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getId() === $this) {
+                $user->setId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationOffer>
+     */
+    public function getUsersR(): Collection
+    {
+        return $this->usersR;
+    }
+
+    public function addUsersR(ReservationOffer $usersR): static
+    {
+        if (!$this->usersR->contains($usersR)) {
+            $this->usersR->add($usersR);
+            $usersR->setId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersR(ReservationOffer $usersR): static
+    {
+        if ($this->usersR->removeElement($usersR)) {
+            // set the owning side to null (unless already changed)
+            if ($usersR->getId() === $this) {
+                $usersR->setId(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

@@ -78,16 +78,16 @@ class TypeAbonnController extends AbstractController
             $entityManager->persist($typeAbonn);
             $entityManager->flush();
              // Générer le QR code personnalisé
-             $qrCode = $this->generateQrCode($typeAbonn);
+             //$qrCode = $this->generateQrCode($typeAbonn);
 
               
         //$pngWriter = new PngWriter();
-        $qrCode->save( '/public/uploads/offer/' . $typeAbonn->getId() . '_qrcode.png');
+      //  $qrCode->save( '/public/uploads/offer/' . $typeAbonn->getId() . '_qrcode.png');
 
 
             return $this->render('type_abonn/show_qr_code.html.twig', [
                 'type_abonn' => $typeAbonn,
-                'qr_code' => $qrCode->getDataUri(),
+                //'qr_code' => $qrCode->getDataUri(),
             ]);
             }
             //return $this->redirectToRoute('app_type_abonn_index', [], Response::HTTP_SEE_OTHER);}
@@ -112,7 +112,7 @@ class TypeAbonnController extends AbstractController
             // Set the path to your logo image
         //$logoPath = '/public/images/offer/art/QROffer.jpg';
         //$logo = Logo::create($logoPath);
-        $qrCode->setLogoPath('/path/to/your/logo.png'); // Update this with the actual path to your logo
+       // $qrCode->setLogoPath('/path/to/your/logo.png'); // Update this with the actual path to your logo
 
         // Set the logo
         //$qrCode->setLogo($logo);
