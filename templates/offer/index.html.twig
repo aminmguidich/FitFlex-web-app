@@ -1,0 +1,120 @@
+{% extends 'base_Back_chayma.html.twig' %}
+{# calcul somme de reservations #}
+{% set s=0 %}
+ {% for i in offers %}
+{% set s=s+i.nb_reservation%}
+{% endfor%}
+
+{% block title %}Offer{% endblock %}
+
+ {% block nom %}
+ 
+                         <h1 class="mt-4">Offer</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Offer</li>
+                        </ol>                        
+{% endblock %}
+
+{% block recherche %}
+   <form action="{{ path('search_offer') }}" method="get" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" id="searchInput" name="q" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+</form>
+{% endblock %}
+
+{% block body %}
+
+
+    <table class="table" border="2px"  style="width: 80rem;" >
+        <thead>
+            <tr>
+             <th style="color: #1b95b2">{{ 'Title'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Description'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Prix'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Date debut'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Date fin'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Nombre de reservation'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'Nombre de place disponible'|trans|raw  }}</th>
+             <th style="color: #1b95b2">{{ 'actions'|trans|raw  }}</th>
+               
+            </tr>
+        </thead>
+        <tbody id="searchResults">
+        {% for offer in offers %}
+            <tr>
+                <td>{{ offer.titleoffer }}</td>
+                <td>{{ offer.descriptionoffer }}</td>
+                <td>{{ offer.prix }}</td>
+                <td>{{ offer.datedeboffer ? offer.datedeboffer|date('Y-m-d') : '' }}</td>
+                <td>{{ offer.datefinoffer ? offer.datefinoffer|date('Y-m-d') : '' }}</td>
+                <td>{{ offer.nb_reservation }}</td>
+                <td>{{ offer.nb_max_reservation }}</td>
+                <td>
+                    <td > <form action = "{{path('app_offer_show', {'idoffer': offer.idoffer}) }}"> <button style="background-color: #1b95b2; color: white;"><i class="fa fa-download" aria-hidden="true"></i></button></form></td>
+                    <td> <form action = "{{path('app_offer_edit', {'idoffer': offer.idoffer}) }}"> <button style="background-color: #1b95b2; color: white;">edit</button></form></td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchInput').on('input', function() {
+            var query = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ path('search_offer') }}',
+                data: { q: query },
+                success: function(data) {
+                    // Update the table with the search results
+                    $('#searchResults').html(data);
+                }
+            });
+        });
+    });
+</script>
+
+<table align="center">
+<tr>
+    <td align="center"> <form action = "{{path('app_offer_new') }}"> <button style="background-color: #1b95b2; color: white; width: 120px;">Create new</button></form></td>
+ </tr>
+ <tr>
+    <td align="center"> 
+    <form action = "{{path('generate_excel_and_stats') }}">
+    <button style="background-color: #1b95b2; color: white; width: 200px;">Excel</button>
+    </form>
+    </td>
+ </tr>
+
+ <tr>
+    <td align="center"> 
+    <form action = "{{path('generate_stat') }}">
+    <button style="background-color: #1b95b2; color: white; width: 230px;">Statistique</button>
+    </form>
+    </td>
+ </tr>
+<tr>
+    <h5 style="color: #1b95b2"> Le nombre des reservation total est <span style="color: black;">{{s}}</span></h5>
+</tr>
+     <tr>
+    <h5 style="color: #1b95b2"> Le nombre des offers est <span style="color: black;">{{offers|length}}</span></h5>
+     </tr>    
+</table>
+
+{% endblock %}
+
+{% block viewDetails%}
+
+                            {% if app.request.attributes.get('_route') != 'app_offer_index' %}
+                        {% endif %}
+                        {% endblock %}
+

@@ -1,0 +1,20 @@
+{% extends 'base_Front_chayma.html.twig' %}
+
+{% block title %}New Abonnement{% endblock %}
+
+{% block abonn %}
+
+     {{ include('abonnement/_form.html.twig') }}
+
+    <a href="{{ path('affiche_TypeAbonn') }}">back to list</a> 
+
+
+
+
+{% endblock %}
+  {% block viewDetails%}
+
+                            {% if app.request.attributes.get('_route') != 'app_offer_new' %}
+                        {% endif %}
+                        {% endblock %}
+

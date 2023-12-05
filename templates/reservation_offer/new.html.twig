@@ -1,0 +1,10 @@
+{% extends 'base_Front_chayma.html.twig' %}
+
+{% block title %}New ReservationOffer{% endblock %}
+
+{% block affichOffer %}
+
+    {{ include('reservation_offer/_form.html.twig') }}
+
+    <a href="{{ path('app_reservation_offer_index') }}">back to list</a>
+{% endblock %}
