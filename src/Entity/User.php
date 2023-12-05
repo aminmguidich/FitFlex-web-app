@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass:UserRepository::class)]
+
 class User implements UserInterface
 {
     #[ORM\Id]
@@ -45,6 +46,13 @@ class User implements UserInterface
 
 
 
+
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Activites::class)]
+    private Collection $activites;
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: ReservationCours::class)]
+    private Collection $reservationCours;
 
     public function getId(): ?int
     {
@@ -189,5 +197,47 @@ class User implements UserInterface
 
         return $this;
     }
-   
+    /**
+     * @return Collection<int, Activites>
+     */
+    public function getActivites(): Collection
+    {
+        return $this->activites;
+    }
+
+    public function addActivite(Activites $activite): static
+    {
+        if (!$this->activites->contains($activite)) {
+            $this->activites->add($activite);
+            $activite->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivite(Activites $activite): static
+    {
+        if ($this->activites->removeElement($activite)) {
+            // set the owning side to null (unless already changed)
+            if ($activite->getIdUser() === $this) {
+                $activite->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->getNom() . ' ' . $this->getPrenom();
+    }
+    /**
+     * @return Collection<int, ReservationCours>
+     */
+    public function getReservationCours(): Collection
+    {
+        return $this->reservationCours;
+    }
+
+
+
 }
