@@ -51,6 +51,7 @@
 
     <!-- Global Init -->
     <script src="{{asset('FrontOffice/js/custom.js')}}"></script>
+    {% if data is defined  %}
     <script>
         window.onload = () => {
             let calendarElt = document.querySelector("#calendrier")
@@ -76,7 +77,7 @@
             calendar.render()
         }
     </script>
-
+{% endif %}
     <script src="{{asset('FrontOffice/js/scrollreveal.min.js')}}"></script>
     <script src="{{asset('FrontOffice/js/waypoints.min.js')}}"></script>
     <script src="{{asset('FrontOffice/js/jquery.counterup.min.js')}}"></script>
