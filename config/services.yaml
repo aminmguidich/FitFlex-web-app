@@ -8,7 +8,6 @@ parameters:
 
 
     your_images_directory: '%kernel.project_dir%/public/BackOffice/images'
-    images_directory: '%kernel.project_dir%/public/uploads/images'
 
 services:
     # default configuration for services in *this* file

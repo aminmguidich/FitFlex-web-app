@@ -57,10 +57,7 @@ class User implements UserInterface
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Activites::class)]
     private Collection $activites;
 
-    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: ReservationCours::class)]
-    private Collection $reservationCours;
-    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Comment::class)]
-    private Collection $users;
+  
 
     #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Post::class)]
     private Collection $userP;
