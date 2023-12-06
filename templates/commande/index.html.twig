@@ -31,6 +31,8 @@
                         <td>
                             <a href="{{ path('app_commande_show', {'id': commande.id}) }}" class="btn btn-info btn-sm">Show</a>
                             <a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="{{ path('app_pdf', {'id': commande.id}) }}" style="color: #336699; margin-left: 20px;">PDF</a>
+
                         </td>
                     </tr>
                 {% else %}
