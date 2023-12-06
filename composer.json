@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
 
+
         "bacon/bacon-qr-code": "^2.0",
 
 
@@ -28,6 +29,7 @@
         "knplabs/knp-paginator-bundle": "^5.9",
         "kreait/firebase-bundle": "^3.1",
 
+
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpmailer/phpmailer": "^6.9",
         "phpoffice/phpspreadsheet": "^1.29",
@@ -47,12 +49,14 @@
         "symfony/intl": "5.4.*",
         "symfony/mailer": "5.4.*",
         "symfony/mime": "5.4.*",
-        "symfony/monolog-bundle": "^3.0",
+        "symfony/monolog-bundle": "*",
         "symfony/notifier": "5.4.*",
         "symfony/process": "5.4.*",
         "symfony/property-access": "5.4.*",
         "symfony/property-info": "5.4.*",
+
         "symfony/runtime": "^6.4",
+
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",

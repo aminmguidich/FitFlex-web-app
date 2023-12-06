@@ -1,0 +1,15 @@
+{% extends "base_back_ayari.html.twig" %}
+
+{% block title %}New Produit{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Create new Produit</h1>
+
+        <div class="border p-3">
+            {{ include('produit/_form.html.twig') }}
+        </div>
+
+        <a href="{{ path('app_produit_index') }}" class="btn btn-primary d-block mx-auto mt-3">Back to list</a>
+    </div>
+{% endblock %}
