@@ -718,7 +718,7 @@
         },
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
-igin/said
+
         ]
     },
     "symfony/console": {
