@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType; // Use Symfony's built-
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
+
+
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -59,6 +62,7 @@ class UserType extends AbstractType
                 'multiple' => false, // Allow only one option to be selected
             ])
             
+
         ;
     }
 
@@ -68,4 +72,7 @@ class UserType extends AbstractType
             'data_class' => User::class,
         ]);
     }
+
 }
+
+

@@ -1,0 +1,35 @@
+{%extends 'base_front_asma.html.twig'%}
+ {% block title %}Comment index{% endblock %}
+
+{% block body %}
+    <h1>Comment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idc</th>
+                <th>Content</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+            
+                <td>{{ comment.idc }}</td>
+                <td>{{ comment.content }}</td>
+                <td>
+                     <a href="{{ path('app_comment_show', {'idc': comment.idc}) }}" class="btn btn-info">Show</a>
+                        <a href="{{ path('app_comment_edit', {'idc': comment.idc}) }}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_comment_new') }}" class="btn btn-success">Create new</a>
+{% endblock %}

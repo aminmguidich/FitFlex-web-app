@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass:UserRepository::class)]
@@ -57,6 +59,40 @@ class User implements UserInterface
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: ReservationCours::class)]
     private Collection $reservationCours;
+    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Comment::class)]
+    private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Post::class)]
+    private Collection $userP;
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->userP = new ArrayCollection();
+    }
+
+    public function addUserP(Post $userP): static
+    {
+        if (!$this->userP->contains($userP)) {
+            $this->userP->add($userP);
+            $userP->setId($this);
+
+        }
+
+        return $this;
+    }
+    public function removeUserP(Post $userP): static
+    {
+        if ($this->userP->removeElement($userP)) {
+            // set the owning side to null (unless already changed)
+            if ($userP->getId() === $this) {
+                $userP->setId(null);
+
+            }
+        }
+
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
@@ -68,7 +104,9 @@ class User implements UserInterface
         return $this->nom;
     }
 
+
     public function setNom(string $nom): self
+
     {
         $this->nom = $nom;
 
@@ -80,7 +118,9 @@ class User implements UserInterface
         return $this->prenom;
     }
 
+
     public function setPrenom(string $prenom): self
+
     {
         $this->prenom = $prenom;
 
@@ -91,6 +131,7 @@ class User implements UserInterface
     {
         return $this->mdp;
     }
+
 
     public function setMdp(string $mdp): self
     {
@@ -107,6 +148,7 @@ class User implements UserInterface
         return $this->role;
     }
 
+
     public function setRole(string $role): self
     {
         $this->role = $role;
@@ -118,6 +160,7 @@ class User implements UserInterface
     {
         return $this->email;
     }
+
 
     public function setEmail(string $email): self
     {
@@ -131,6 +174,7 @@ class User implements UserInterface
         return $this->img;
     }
 
+
     public function setImg(string $img): self
     {
         $this->img = $img;
@@ -143,12 +187,14 @@ class User implements UserInterface
         return $this->age;
     }
 
+
     public function setAge(int $age): self
     {
         $this->age = $age;
 
         return $this;
     }
+
 
     // Required methods for UserInterface
 
@@ -244,11 +290,13 @@ class User implements UserInterface
 
   /**
      * @return Collection<int, Abonnement>
+
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
+
 
     public function addUser(Abonnement $user): static
     {
@@ -259,6 +307,7 @@ class User implements UserInterface
 
         return $this;
     }
+
 
     public function removeUser(Abonnement $user): static
     {
@@ -273,6 +322,7 @@ class User implements UserInterface
     }
 
     /**
+
      * @return Collection<int, ReservationOffer>
      */
     public function getUsersR(): Collection
@@ -290,16 +340,20 @@ class User implements UserInterface
         return $this;
     }
 
+
     public function removeUsersR(ReservationOffer $usersR): static
     {
         if ($this->usersR->removeElement($usersR)) {
             // set the owning side to null (unless already changed)
             if ($usersR->getId() === $this) {
                 $usersR->setId(null);
+
             }
         }
 
         return $this;
     }
 
+
 }
+

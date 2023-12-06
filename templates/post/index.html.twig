@@ -1,0 +1,62 @@
+{%extends "base_back_asma.html.twig"%}
+ {% block title %} index{% endblock %}
+
+{% block body %}
+
+{% if successMessage is defined %}
+        <div class="alert alert-success">
+            {{ successMessage }}
+        </div>
+    {% endif %}
+
+
+
+ <form action="{{ path('app_post_index') }}" method="get">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="Search...">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form> 
+    <h1>Post index</h1>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>idpost</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in page %}
+            <tr>
+                <td>{{ post.idPost }}</td>
+                <td>{{ post.description }}</td>
+              <td>
+                    {% if post.image %}
+                        <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="{{ post.description }}" style="max-width: 50px; max-height: 50px;">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_post_show', {'idPost': post.idPost}) }}" class="btn btn-info">Show</a>
+                        <a href="{{ path('app_post_edit', {'idPost': post.idPost}) }}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_post_new') }}" class="btn btn-success">Create new</a>
+     {{ knp_pagination_render(page) }}
+{% endblock %}

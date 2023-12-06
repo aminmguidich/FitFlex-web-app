@@ -7,17 +7,27 @@
         "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+
         "bacon/bacon-qr-code": "^2.0",
+
+
 
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
+
         "dompdf/dompdf": "^2.0",
         "knplabs/knp-snappy-bundle": "^1.0",
         "endroid/qr-code": "^5.0",
         "endroid/qr-code-bundle": "^5.0",
         "knplabs/knp-paginator-bundle": "^5.9",
+
+        "firebase/php-jwt": "^6.9",
+        "friendsofsymfony/rest-bundle": "^3.6",
+        "knplabs/knp-paginator-bundle": "^5.9",
+        "kreait/firebase-bundle": "^3.1",
+
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpmailer/phpmailer": "^6.9",
         "phpoffice/phpspreadsheet": "^1.29",
@@ -46,6 +56,7 @@
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
+        "symfony/swiftmailer-bundle": "*",
         "symfony/translation": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/twilio-notifier": "5.4.*",
@@ -54,10 +65,14 @@
         "symfony/yaml": "5.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
+
         "twilio/sdk": "^7.12",
         "vich/uploader-bundle": "^2.2",
         "victor-prdh/recaptcha-bundle": "^1.7",
 
+
+
+        "webmozart/assert": "^1.11"
 
     },
     "config": {
