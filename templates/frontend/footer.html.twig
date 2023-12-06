@@ -51,4 +51,39 @@
 
     <!-- Global Init -->
     <script src="{{asset('FrontOffice/js/custom.js')}}"></script>
+    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#calendrier")
+
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView: 'timeGridWeek',
+                locale: 'fr',
+                timeZone: 'Europe/Paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridDay,timeGridWeek'
+                },
+                
+                nowIndicator: true,
+                events: {{ data|raw }},
+                allDaySlot: false,
+                slotMinTime: '07:00:00', // Adjust the start time
+                slotMaxTime: '23:00:00', // Adjust the end time
+                firstDay: 1,
+
+            })
+            calendar.render()
+        }
+    </script>
+
+    <script src="{{asset('FrontOffice/js/scrollreveal.min.js')}}"></script>
+    <script src="{{asset('FrontOffice/js/waypoints.min.js')}}"></script>
+    <script src="{{asset('FrontOffice/js/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('FrontOffice/js/imgfix.min.js')}}"></script>
+    <script src="{{asset('FrontOffice/js/mixitup.js')}}"></script>
+    <script src="{{asset('FrontOffice/js/accordions.js')}}"></script>
+
+    <!-- Global Init -->
+    <script src="{{asset('FrontOffice/js/custom.js')}}"></script>
 {% endblock %}

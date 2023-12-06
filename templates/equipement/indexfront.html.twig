@@ -1,10 +1,12 @@
-{% extends 'base_front_said.html.twig' %}
+{% extends "frontend/base.html.twig" %}
 
-{% block title %}Liste Equipement{% endblock %}
-
-{% block bodyequipement %}  <center>
-    <h1>Liste des equipements</h1>
-
+{% block title %}
+	Equipement
+{% endblock %}
+{% block headerCard %}
+	<h3 class="text-center font-weight-light my-4">Equipement</h3>
+{% endblock %}
+{% block container %}
     <table class="table" border="1">
         <thead>
             <tr>
