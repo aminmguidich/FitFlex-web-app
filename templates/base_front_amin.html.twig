@@ -43,6 +43,12 @@
 				background-color: #111;
 				border-radius: 5px;
 			}
+            .fc-col-header-cell-cushion {
+  color: white !important;
+}
+.fc-toolbar-title  {
+  color: white !important;
+}
 		</style>
 		
 		
@@ -106,7 +112,9 @@ allDaySlot: false,
 slotMinTime: '07:00:00', // Adjust the start time
 slotMaxTime: '23:00:00', // Adjust the end time
 firstDay: 1
-
+ eventRender: function (info) {
+      info.el.style.color = 'white'; // Set text color to white
+    }
 })
 calendar.render()
 }
