@@ -58,7 +58,8 @@ class User implements UserInterface
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Activites::class)]
     private Collection $activites;
 
-  
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Equipement::class)]
+    private Collection $equipements;
 
     #[ORM\OneToMany(mappedBy: 'Id', targetEntity: Post::class)]
     private Collection $userP;
@@ -381,6 +382,35 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, Equipement>
+     */
+    public function getEquipements(): Collection
+    {
+        return $this->equipements;
+    }
+
+    public function addEquipement(Equipement $equipement): static
+    {
+        if (!$this->equipements->contains($equipement)) {
+            $this->equipements->add($equipement);
+            $equipement->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipement(Equipement $equipement): static
+    {
+        if ($this->equipements->removeElement($equipement)) {
+            // set the owning side to null (unless already changed)
+            if ($equipement->getIdUser() === $this) {
+                $equipement->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 }
 

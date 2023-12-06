@@ -47,7 +47,7 @@ class Equipement
     private ?Categorie $IdCategorie = null;
      
     #[ORM\ManyToOne(inversedBy: 'equipements')]
-    #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'id', nullable: false)]
+    #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'Id', nullable: false)]
     private ?User $idUser = null;
 
     
