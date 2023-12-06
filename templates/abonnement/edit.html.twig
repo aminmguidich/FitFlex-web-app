@@ -1,8 +1,7 @@
-{% extends 'base_Front_chayma.html.twig' %}
+{% extends "frontend/base.html.twig" %}
 
-{% block title %}Edit Abonnement{% endblock %}
-
-{% block body %}
+{% block title %} Edit Abonnement{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">Edit Abonnement</h3>{% endblock %}
     <h1>Edit Abonnement</h1>
 
     {{ include('abonnement/_form.html.twig', {'button_label': 'Update'}) }}

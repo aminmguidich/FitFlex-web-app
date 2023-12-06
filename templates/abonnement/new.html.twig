@@ -1,8 +1,9 @@
-{% extends 'base_Front_chayma.html.twig' %}
+{% extends "frontend/base.html.twig" %}
 
-{% block title %}New Abonnement{% endblock %}
+{% block title %} New Abonnement{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">New Abonnement</h3>{% endblock %}
 
-{% block abonn %}
+{% block container %}
 
      {{ include('abonnement/_form.html.twig') }}
 

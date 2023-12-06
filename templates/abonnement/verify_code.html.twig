@@ -1,7 +1,9 @@
-{% extends 'base_Front_chayma.html.twig' %} 
+{% extends "frontend/base.html.twig" %}
 
-{% block abonn %}
-    <h1>Verify Code</h1>
+{% block title %}Verify Code{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">Verify Code</h3>{% endblock %}
+
+{% block container %}
 
 
     {% for flashMessage in app.flashes('success') %}
