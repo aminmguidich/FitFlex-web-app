@@ -37,6 +37,51 @@ class EventsRepository extends ServiceEntityRepository
 
         return 0;
     }
+    public function searchEvents($searchData)
+{
+    $queryBuilder = $this->createQueryBuilder('e')
+        ->leftJoin('e.idtype', 't'); // Assuming 'idtype' is the association in your Events entity
+
+    // Add search conditions based on form data
+
+    if ($searchData['type']) {
+        $queryBuilder->andWhere('t.type LIKE :type')
+            ->setParameter('type', '%' . $searchData['type'] . '%');
+    }
+
+    if ($searchData['date']) {
+        $queryBuilder->andWhere('e.dateevent = :dateevent')
+            ->setParameter('dateevent', $searchData['date']);
+    }
+
+    // Ajoutez d'autres conditions selon vos besoins
+
+    return $queryBuilder->getQuery()->getResult();
+}
+public function findByCriteria($criteria)
+{
+    $queryBuilder = $this->createQueryBuilder('e');
+
+    if (isset($criteria['date']) && $criteria['date']) {
+        $queryBuilder
+            ->andWhere('e.dateevent = :date')
+            ->setParameter('date', $criteria['date']);
+    }
+
+
+    return $queryBuilder->getQuery()->getResult();
+}
+public function findByTitre($searchTerm)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->andWhere('e.titreevent LIKE :searchTerm ')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->orderBy('e.prixevent', 'ASC')
+            ->getQuery();
+    
+        return $qb->getResult();
+    }
+
 //    /**
 //     * @return Events[] Returns an array of Events objects
 //     */

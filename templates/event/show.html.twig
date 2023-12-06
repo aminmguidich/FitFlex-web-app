@@ -6,10 +6,7 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id event</th>
-                <td>{{ event.idevent }}</td>
-            </tr>
+          
             <tr>
                 <th>Titre</th>
                 <td>{{ event.titreevent }}</td>
@@ -20,7 +17,7 @@
             </tr>
             <tr>
                 <th>Type</th>
-                <td>{{ event.typeevent }}</td>
+                <td>{{ event.idtype.type }}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
@@ -52,6 +49,7 @@
                 <th>Nombre places total</th>
                 <td>{{ event.nombreplacestotal }}</td>
             </tr>
+          
         </tbody>
     </table>
 

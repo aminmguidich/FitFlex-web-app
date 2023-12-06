@@ -1,6 +1,3 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-EventController:
-    path: '/generate-qr-code'
-    controller: 'App\Controller\EventController::generateQrCode'

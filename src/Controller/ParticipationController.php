@@ -46,7 +46,7 @@ class ParticipationController extends AbstractController
                 $entityManager->persist($participation);
                 $entityManager->flush();
                 // Envoyer un SMS
-            $to = '+21693008976'; // Numéro de téléphone du destinataire
+            $to =$participation->getNtel(); // Numéro de téléphone du destinataire
             $messageBody = 'Votre Reservation est confirmé';
 
             $messageSid = $twilioService->sendSMS($to, $messageBody);
@@ -93,17 +93,27 @@ class ParticipationController extends AbstractController
         ]);
     }
 
-     #[Route('/{idpart}/delete', name: 'app_participation_delete', methods: ['POST'])]
+    #[Route('/{idpart}', name: 'app_participation_delete', methods: ['POST'])]
     public function delete(Request $request, Participation $participation, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$participation->getIdpart(), $request->request->get('_token'))) {
-            $entityManager->remove($participation);
+            // Get the event associated with the participation
+            $event = $participation->getIdevent();
+            $event->setNombreplacesreservees($event->getNombreplacesreservees() - 1);
+    
+            // Remove associated reservations
+           /* $participations = $event->getParticipation();
+            foreach ($participations as $participation) {*/
+                $entityManager->remove($participation);
+        //    }
+    
+           
             $entityManager->flush();
         }
-
+    
         return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
     }
-
+    
     public function sendSmsAction(TwilioService $twilioService)
     {
         // Utilisez le service TwilioService pour envoyer un SMS

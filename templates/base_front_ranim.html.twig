@@ -59,13 +59,16 @@ https://templatemo.com/tm-548-training-studio
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
+
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#features">Events</a></li>
                             <li class="scroll-to-section"><a href="#our-classes">Offers</a></li>
                             <li class="scroll-to-section"><a href="#schedule">Activities</a></li>
-                            <li class="scroll-to-section"><a href="#contact-us">Forum</a></li> 
-                            <li class="scroll-to-section"><a href="#contact-us">Shop</a></li> 
+                            <li class="scroll-to-section"><a href="#features1">Forum</a></li> 
+                            <li class="scroll-to-section"><a href="#shop">Shop</a></li> 
+                            <li class="scroll-to-section"><a href="#tools">Tools</a></li> 
                             <li class="main-button"><a href="#">Sign Up</a></li>
+                            
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -269,7 +272,9 @@ https://templatemo.com/tm-548-training-studio
         </div>
     </section>
     <!-- ***** Our Classes End ***** -->
+
     
+    {%block Activities% }
     <section class="section" id="schedule">
         <div class="container">
             <div class="row">
@@ -334,78 +339,180 @@ https://templatemo.com/tm-548-training-studio
             </div>
         </div>
     </section>
+    {%endblock% }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-    <!-- ***** Testimonials Starts ***** -->
-    <section class="section" id="trainers">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading">
-                        <h2>Expert <em>Trainers</em></h2>
-                        <img src="{{asset('FrontOffice/images/line-dec.png')}}" alt="">
-                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .post {
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        .comment {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #111;
+            border-radius: 5px;
+        }
+    </style>
+    {%block forum% }
+    <section class="section" id="features1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="section-heading dark-bg">
+                    <h2><em>Bienvenue au Forum</em></h2>
+                   
+                    
+                    <!-- Affichage statique des posts -->
+                    <div id="forumPosts">
+                        <div class="post">
+                            <h3>Post 1</h3>
+                            <p>Contenu du Post 1</p>
+                            <div class="comment">
+                                <p>Commentaire 1 pour le Post 1</p>
+                            </div>
+                            <div class="comment">
+                                <p>Commentaire 2 pour le Post 1</p>
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <h3>Post 2</h3>
+                            <p>Contenu du Post 2</p>
+                            <div class="comment">
+                                <p>Commentaire 1 pour le Post 2</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="trainer-item">
-                        <div class="image-thumb">
-                            <img src="{{asset('FrontOffice/images/first-trainer.jpg')}}" alt="">
-                        </div>
-                        <div class="down-content">
-                            <span>Strength Trainer</span>
-                            <h4>Bret D. Bowers</h4>
-                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="trainer-item">
-                        <div class="image-thumb">
-                            <img src="{{asset('FrontOffice/images/second-trainer.jpg')}}" alt="">
-                        </div>
-                        <div class="down-content">
-                            <span>Muscle Trainer</span>
-                            <h4>Hector T. Daigl</h4>
-                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="trainer-item">
-                        <div class="image-thumb">
-                            <img src="{{asset('FrontOffice/images/third-trainer.jpg')}}" alt="">
-                        </div>
-                        <div class="down-content">
-                            <span>Power Trainer</span>
-                            <h4>Paul D. Newman</h4>
-                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
-                        </div>
+                    
+                    <!-- Zone pour ajouter un nouveau commentaire -->
+                    <div>
+                        <textarea id="commentInput" placeholder="Ajouter un commentaire"></textarea>
+                        <button onclick="addComment()">Ajouter un commentaire</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- ***** Testimonials Ends ***** -->
+    </div>
+</section>
+<script>
+    // Fonction pour ajouter un commentaire
+    function addComment() {
+        var comment = document.getElementById("commentInput").value;
+        // Envoyer le commentaire au backend (par exemple, via une requête AJAX)
+        // Mettre à jour la liste des commentaires après l'ajout
+        // Exemple :
+        // var newCommentElement = document.createElement("p");
+        // newCommentElement.textContent = comment;
+        // document.getElementById("forumPosts").appendChild(newCommentElement);
+    }
+
+    // Fonction pour charger les posts depuis le backend (par exemple, via une requête AJAX)
+    function loadPosts() {
+        // Charger les posts depuis le backend et les afficher
+        // Exemple :
+        // var posts = /* Récupérer les posts depuis le backend */;
+        // var forumPostsElement = document.getElementById("forumPosts");
+        // posts.forEach(function(post) {
+        //     var postElement = document.createElement("div");
+        //     postElement.innerHTML = "<p>" + post.content + "</p>";
+        //     forumPostsElement.appendChild(postElement);
+        // });
+    }
+
+    // Charger les posts lors du chargement de la page
+    window.onload = loadPosts;
+</script>
+{%endblock% }
+{%block shop% }
+    <!-- ***** shop ***** -->
+    <section class="main-banner" id="shop">
+    <video autoplay muted loop id="bg-video">
+        <source src="{{asset('FrontOffice/images/gym-video.mp4')}}" type="video/mp4" />
+    </video>
+
+    <div class="video-overlay header-text">
+        <div class="caption">
+            <h6>Explorez notre</h6>
+            <h2>Magasin <em>en ligne</em></h2>
+            <div class="main-button scroll-to-section">
+                <a href="#our-store">Consulter le magasin</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock% }
+    <!-- ***** shop Ends ***** -->
+
+{%block tools% }
+      <!-- ***** tools ***** -->
+   <section class="main-banner" id="tools">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Équipements</h2>
+
+                <div class="equipment-gallery">
+                    <div class="equipment-item">
+                        <img src="{{asset('FrontOffice/images/equip1.jpg')}}" alt="Equipment 1">
+                    </div>
+                    <div class="equipment-item">
+                        <img src="{{asset('FrontOffice/images/equip2.jpg')}}" alt="Equipment 2">
+                    </div>
+                    <div class="equipment-item">
+                        <img src="{{asset('FrontOffice/images/equip3.jpg')}}" alt="Equipment 3">
+                    </div>
+                    <!-- Ajoutez autant d'images que nécessaire -->
+                </div>
+
+                <div class="main-button">
+                    <a href="#our-store">Consulter le magasin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .equipment-gallery {
+        display: flex; /* Utiliser le modèle de boîte flexible pour aligner les éléments en ligne */
+        justify-content: space-between; /* Espace équitable entre les éléments */
+        flex-wrap: wrap; /* Permettre le retour à la ligne si nécessaire */
+    }
+
+    .equipment-item {
+        width: 30%; /* Ajuster la largeur selon vos besoins */
+        margin-bottom: 20px; /* Ajouter un espacement entre les éléments */
+    }
+
+    .equipment-item img {
+        width: 100%; /* Assurer que les images remplissent complètement leur conteneur */
+        height: auto; /* Maintenir les proportions de l'image */
+        border: 1px solid #ddd; /* Ajouter une bordure pour un meilleur aspect */
+        border-radius: 5px; /* Ajouter des coins arrondis */
+    }
+</style>
+
+
+{%endblock%}
+
+    <!-- ***** tools Ends ***** -->
+
+
     
     <!-- ***** Contact Us Area Starts ***** -->
     <section class="section" id="contact-us">

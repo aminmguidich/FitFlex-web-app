@@ -42,7 +42,7 @@ class EventsType extends AbstractType
             ],
         ])
         
-      /*  ->add('typeevent', null, [
+       /* ->add('typeevent', null, [
             'label' => 'type',
             'attr' => ['class' => 'form-control'],
             'constraints' => [
