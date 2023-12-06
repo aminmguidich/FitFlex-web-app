@@ -1,153 +1,166 @@
-	<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-					<div class="sb-sidenav-menu">
-						<div class="nav">
-							<div class="sb-sidenav-menu-heading">Gestion</div>
-							<!-- user------------------------------------------!-->
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion utilisateur
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="{{ path('app_user_new') }}">ajouter utilisateur</a>
-									<a class="nav-link" href="{{ path('app_user_index') }}">afficher liste  utilisateurs</a>
-								</nav>
-							</div>
-							<!--!              evenement                !-->
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion evenement
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="{{ path('app_event_new') }}">ajouter evenement</a>
-									<a class="nav-link" href="{{ path('app_event_index') }}">afficher liste  evenements</a> 
-									<a class="nav-link" href="/type/event/">Type Evenement</a> 
-								</nav>
-							</div>
-							
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion Activite
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="{{ path('app_activites_new') }}">ajouter Activite</a>
-									<a class="nav-link" href="{{ path('app_activites_index') }}">afficher Activite</a>
-								</nav>
-							</div>
+<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+        <div class="nav">
+            <div class="sb-sidenav-menu-heading">Gestion</div>
 
-							
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion equipement
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="{{ path('app_equipement_new') }}">ajout equipement</a>
-									<a class="nav-link" href="{{ path('app_equipement_index') }}">affichage equipement</a>
-									<a class="nav-link" href="{{ path('export_Excel') }}">Excell</a>
-								</nav>
-							</div>
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion categorie
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="{{ path('app_categorie_new') }}">ajout categorie</a>
-									<a class="nav-link" href="{{ path('app_categorie_index') }}">affichage categorie</a>
-								</nav>
-							</div>
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion calendrier
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="/mainn">calendrier des Activitées</a>
-									<a class="nav-link" href="/mainnn">calendrier des  équipement</a>
-								</nav>
-							</div>
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion Offre/Abonnement
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="{{ path('app_offer_index') }}">Offres</a>
-									<a class="nav-link" href="/type/abonn/">Abonnement</a>
-								</nav>
-							</div>
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion Magasin
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="{{ path('app_categorie_magasin_index') }}">Categorie</a>
-									<a class="nav-link" href="/produit">Produit</a>
-								</nav>
-							</div>
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
-								<div class="sb-nav-link-icon">
-									<i class="fas fa-columns"></i>
-								</div>
-								Gestion Poste
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="/post">Poste</a>
-								</nav>
-							</div>
-							
-						</div>
-					</div>
-					<div class="sb-sidenav-footer">
-						<div class="small">Logged in as:</div>
-						Start Bootstrap
-					</div>
+            <!-- User Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsUser" aria-expanded="false" aria-controls="collapseLayoutsUser">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion utilisateur
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsUser" aria-labelledby="headingUser" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ path('app_user_new') }}">ajouter utilisateur</a>
+                    <a class="nav-link" href="{{ path('app_user_index') }}">afficher liste utilisateurs</a>
+                </nav>
+            </div>
+
+            <!-- Event Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsEvent" aria-expanded="false" aria-controls="collapseLayoutsEvent">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion evenement
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsEvent" aria-labelledby="headingEvent" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ path('app_event_new') }}">ajouter evenement</a>
+                    <a class="nav-link" href="{{ path('app_event_index') }}">afficher liste evenements</a>
+                    <a class="nav-link" href="/type/event/">Type Evenement</a>
+                </nav>
+            </div>
+
+            <!-- Activity Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsActivity" aria-expanded="false" aria-controls="collapseLayoutsActivity">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion Activite
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsActivity" aria-labelledby="headingActivity" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ path('app_activites_new') }}">ajouter Activite</a>
+                    <a class="nav-link" href="{{ path('app_activites_index') }}">afficher Activite</a>
+                </nav>
+            </div>
+
+            <!-- Equipment Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsEquipment" aria-expanded="false" aria-controls="collapseLayoutsEquipment">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion equipement
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsEquipment" aria-labelledby="headingEquipment" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ path('app_equipement_new') }}">ajout equipement</a>
+                    <a class="nav-link" href="{{ path('app_equipement_index') }}">affichage equipement</a>
+                    <a class="nav-link" href="{{ path('export_Excel') }}">Excell</a>
+                </nav>
+            </div>
+
+            <!-- Categorie Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCategorie" aria-expanded="false" aria-controls="collapseLayoutsCategorie">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion categorie
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsCategorie" aria-labelledby="headingCategorie" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ path('app_categorie_new') }}">ajout categorie</a>
+                    <a class="nav-link" href="{{ path('app_categorie_index') }}">affichage categorie</a>
+                </nav>
+            </div>
+
+            <!-- Calendrier Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCalendrier" aria-expanded="false" aria-controls="collapseLayoutsCalendrier">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion calendrier
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsCalendrier" aria-labelledby="headingCalendrier" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="/mainn">calendrier des Activitées</a>
+                    <a class="nav-link" href="/mainnn">calendrier des équipement</a>
+                </nav>
+            </div>
+
+            <!-- Offre/Abonnement Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsOffreAbonnement" aria-expanded="false" aria-controls="collapseLayoutsOffreAbonnement">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion Offre/Abonnement
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsOffreAbonnement" aria-labelledby="headingOffreAbonnement" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ path('app_offer_index') }}">Offres</a>
+                    <a class="nav-link" href="/type/abonn/">Abonnement</a>
+                </nav>
+            </div>
+
+            <!-- Magasin Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsMagasin" aria-expanded="false" aria-controls="collapseLayoutsMagasin">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion Magasin
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsMagasin" aria-labelledby="headingMagasin" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ path('app_categorie_magasin_index') }}">Categorie</a>
+                    <a class="nav-link" href="/produit">Produit</a>
+                </nav>
+            </div>
+
+            <!-- Poste Section -->
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsPoste" aria-expanded="false" aria-controls="collapseLayoutsPoste">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                Gestion Poste
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseLayoutsPoste" aria-labelledby="headingPoste" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="/post">Poste</a>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+    <div class="sb-sidenav-footer">
+        <div class="small">Logged in as:</div>
+        Start Bootstrap
+    </div>
 </nav>
