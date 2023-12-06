@@ -1,0 +1,13 @@
+{% extends 'base_back_said.html.twig' %}
+
+{% block title %}Nouveau Equipement{% endblock %}
+
+{% block body %}
+<center>
+    <h1>Ajouter un nouveau equipement</h1>
+
+    {{ include('equipement/_form.html.twig') }}
+ 
+    <a href="{{ path('app_equipement_index') }}">back to list</a>
+    </center>
+{% endblock %}
