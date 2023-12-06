@@ -1,4 +1,4 @@
-{%extends "base_back_asma.html.twig"%}
+{% extends 'base_front_hssan.html.twig' %}
  {% block title %} index{% endblock %}
 
 {% block body %}
@@ -60,3 +60,8 @@
     <a href="{{ path('app_post_new') }}" class="btn btn-success">Create new</a>
      {{ knp_pagination_render(page) }}
 {% endblock %}
+{% block  hahaha %}
+
+                            {% if app.request.attributes.get('_route') != 'app_post_indexf' %}
+                        {% endif %}
+                        {% endblock %}

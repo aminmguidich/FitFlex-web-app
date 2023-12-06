@@ -2,7 +2,7 @@
 
 {% block title %}ReservationOffer {% endblock %}
 
-{% block affichOffer %}
+{% block body %}
     <section class="section" id="our-classes">
         <div class="container">
             <div class="row">
@@ -48,36 +48,8 @@
 {% endblock %}
 
 
-{# {% block body %}
-    <h1>ReservationOffer index</h1>
+{% block Details %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Idreservation</th>
-                <th>Datereservation</th>
-                <th>Codepromo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reservation_offer in reservation_offers %}
-            <tr>
-                <td>{{ reservation_offer.idreservation }}</td>
-                <td>{{ reservation_offer.datereservation ? reservation_offer.datereservation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reservation_offer.codepromo }}</td>
-                <td>
-                    <a href="{{ path('app_reservation_offer_show', {'idreservation': reservation_offer.idreservation}) }}">show</a>
-                    <a href="{{ path('app_reservation_offer_edit', {'idreservation': reservation_offer.idreservation}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_reservation_offer_new') }}">Create new</a>
-{% endblock %} #}
+                            {% if app.request.attributes.get('_route') != 'app_reservation_offer_index' %}
+                        {% endif %}
+                        {% endblock %}
