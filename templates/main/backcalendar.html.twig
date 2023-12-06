@@ -1,6 +1,6 @@
 {#  {% extends 'calander.html.twig' %}#}
-{% extends 'base.html.twig' %}
-{#
+{% extends '/backend/base.html.twig' %}
+
 {% block stylesheets%}
     <style>
         #calendrier{
@@ -10,7 +10,7 @@
     </style>
 
 {% endblock %}
-#}
+
 {% block title %}Planing{% endblock %}
 {% block body %}
     <div id="calendrier">
