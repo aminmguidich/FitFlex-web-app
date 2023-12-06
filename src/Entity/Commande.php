@@ -25,7 +25,7 @@ class Commande
     private ?string $type = null;
 
     #[ORM\ManyToOne(inversedBy: "commandes")]
-    #[ORM\JoinColumn(nullable: false, referencedColumnName: "id", name: "iduser", onDelete: "CASCADE")]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: "Id", name: "iduser", onDelete: "CASCADE")]
     private ?User $iduser = null;
 
     #[ORM\OneToMany(mappedBy: 'Commandes', targetEntity: CommandeProduit::class, orphanRemoval: true)]
