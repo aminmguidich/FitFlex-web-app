@@ -34,7 +34,7 @@ class categoriemagasinController extends AbstractController
             $entityManager->persist($categoriemagasin);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_categorie_magasin_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('categorie_magasin/new.html.twig', [
