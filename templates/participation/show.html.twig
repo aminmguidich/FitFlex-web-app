@@ -1,0 +1,40 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block title %} Participation{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">Participation</h3>{% endblock %}
+
+{% block container %}
+    
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ participation.idpart }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ participation.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ participation.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Ntel</th>
+                <td>{{ participation.ntel }}</td>
+            </tr>
+            <tr>
+                <th>Datepart</th>
+                <td>{{ participation.datepart ? participation.datepart|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_participation_index') }}">back to list</a>
+
+    <a href="{{ path('app_participation_edit', {'idpart': participation.idpart}) }}">Edit</a>
+
+    {{ include('participation/_delete_form.html.twig') }}
+{% endblock %}

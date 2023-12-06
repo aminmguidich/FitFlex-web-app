@@ -1,0 +1,15 @@
+
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Nouveau utilisateur{% endblock %}
+
+
+{% block body %}
+    <h1>Créer un nouveau utilisateur</h1>
+
+    {{ include('user/_form.html.twig') }}
+
+
+    <a href="{{ path('app_user_index') }}" class="btn btn-secondary" style="width:15% !important;margin-left:50%;margin-top:-40px;">Back to List</a>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+<div class="container">
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+<table border="1">
+
+
+<tr>
+<div class="col-md-6 col-sm-12">
+    <div class="form-group card-label">
+    <td>
+    {{ form_label(form.NomCategorie, "Nom Categorie")  }}
+    </td>
+    <td>
+    {{ form_widget(form.NomCategorie,({'class':'form-control'})) }}
+    </td>
+    </div>
+    <td>
+    {% if form_errors(form.NomCategorie) is not empty %}
+    <div class="alert alert-danger"
+    {{ form_errors(form.NomCategorie) }}
+    </td>
+    </div>
+    {% endif %}
+    </div>
+</tr>
+<tr>
+    <div class="col-md-6 col-sm-12">
+    <div class="form-group card-label">
+    <td>
+    {{ form_label(form.DescriptionCategorie, "Description categorie")  }}
+    </td>
+    <td>
+    {{ form_widget(form.DescriptionCategorie,({'class':'form-control'})) }}
+    </td>
+    </div>
+    <td>
+    {% if form_errors(form.DescriptionCategorie) is not empty %}
+    <div class="alert alert-danger"
+    {{ form_errors(form.DescriptionCategorie) }}
+    </td>
+    </div>
+    {% endif %}
+    </div>
+    <tr>
+
+    
+
+    
+
+    
+
+    
+   
+
+    </table>
+
+<button class="btn btn-primary submit-btn"> 
+     {{ button_label|default('Save') }}
+    </button>
+
+
+
+{{ form_end(form) }}
+</div>

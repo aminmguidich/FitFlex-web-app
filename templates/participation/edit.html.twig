@@ -1,0 +1,14 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block title %} Edit reservation{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">Edit reservation</h3>{% endblock %}
+
+{% block container %}
+    <h1>Edit Participation</h1>
+
+    {{ include('participation/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_participation_index') }}">back to list</a>
+
+    {{ include('participation/_delete_form.html.twig') }}
+{% endblock %}

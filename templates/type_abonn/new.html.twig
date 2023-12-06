@@ -1,0 +1,24 @@
+{% extends 'backend/base.html.twig' %}
+
+
+{% block titre %}New TypeAbonn{% endblock %}
+{% block nom %}
+ 
+                         <h1 class="mt-4">Abonnement</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Creat new Abonnement</li>
+                        </ol> 
+                        {% endblock %}
+{% block body %}
+    
+
+    {{ include('type_abonn/_form.html.twig') }}
+
+    <a href="{{ path('app_type_abonn_index') }}">back to list</a>
+{% endblock %}
+
+                  {% block viewDetails%}
+
+                            {% if app.request.attributes.get('_route') != 'app_type_abonn_new'  %}
+                        {% endif %}
+                        {% endblock %}

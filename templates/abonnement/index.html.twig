@@ -1,0 +1,35 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block title %} abonnement{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">Abonnement</h3>{% endblock %}
+
+{% block container %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idabonement</th>
+                <th>Dateabonnement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for abonnement in abonnements %}
+            <tr>
+                <td>{{ abonnement.idabonement }}</td>
+                <td>{{ abonnement.dateabonnement ? abonnement.dateabonnement|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_abonnement_show', {'idabonement': abonnement.idabonement}) }}">show</a>
+                    <a href="{{ path('app_abonnement_edit', {'idabonement': abonnement.idabonement}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_abonnement_new') }}">Create new</a>
+{% endblock %}

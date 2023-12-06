@@ -1,0 +1,18 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4"> Book an Event</h3>{% endblock %}
+
+{% block container %}
+   
+
+    {% for flashError in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger">
+            {{ flashError }}
+        </div>
+    {% endfor %}
+
+    {{ include('participation/_form.html.twig') }}
+
+    <a href="/participation/">back to list</a>
+{% endblock %}

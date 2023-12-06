@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorieactivite index{% endblock %}
+
+{% block body %}
+    <h1>Categorieactivite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Categorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieactivite in categorieactivites %}
+            <tr>
+                <td>{{ categorieactivite.categorie }}</td>
+                <td>
+                    {{ include('categorieactivite/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<div class="text-right mb-4">
+    <a href="{{ path('app_categorieactivite_new') }}"class="btn btn-primary"><i class="fas fa-plus"></i>Ajouter</a>
+</div>
+{% endblock %}

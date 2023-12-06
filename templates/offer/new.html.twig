@@ -1,0 +1,25 @@
+{% extends 'backend/base.html.twig' %}
+
+
+{% block title %}New Offer{% endblock %}
+ {% block nom %}
+ 
+                         <h1 class="mt-4">Offer</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Creat new Offer</li>
+                        </ol>
+
+                        
+                        {% endblock %}
+{% block body %}
+
+    {{ include('offer/_form.html.twig') }}
+
+    <a href="{{ path('app_offer_index') }}">back to list</a>
+{% endblock %}
+
+{% block viewDetails%}
+
+                            {% if app.request.attributes.get('_route') != 'app_offer_new' %}
+                        {% endif %}
+                        {% endblock %}

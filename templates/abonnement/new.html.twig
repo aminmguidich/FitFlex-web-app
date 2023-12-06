@@ -1,0 +1,21 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block title %} New Abonnement{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">New Abonnement</h3>{% endblock %}
+
+{% block container %}
+
+     {{ include('abonnement/_form.html.twig') }}
+
+    <a href="{{ path('affiche_TypeAbonn') }}">back to list</a> 
+
+
+
+
+{% endblock %}
+  {% block viewDetails%}
+
+                            {% if app.request.attributes.get('_route') != 'app_offer_new' %}
+                        {% endif %}
+                        {% endblock %}
+

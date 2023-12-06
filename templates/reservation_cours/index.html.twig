@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationCours index{% endblock %}
+
+{% block body %}
+    <h1>ReservationCours index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>DateRes</th>
+            <th>User</th> {# Add this line #}
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation_cour in reservation_cours %}
+            <tr>
+                <td>{{ reservation_cour.id }}</td>
+                <td>{{ reservation_cour.dateRes ? reservation_cour.dateRes|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation_cour.idUser ? reservation_cour.idUser.nom ~ ' ' ~ reservation_cour.idUser.prenom : '' }}</td> {# Add this line #}
+                <td>
+                    <a href="{{ path('app_reservation_cours_show', {'id': reservation_cour.id}) }}">show</a>
+                    <a href="{{ path('app_reservation_cours_edit', {'id': reservation_cour.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td> {# Update colspan to match the number of columns #}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_cours_new') }}">Create new</a>
+{% endblock %}

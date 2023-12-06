@@ -1,0 +1,73 @@
+
+
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Liste Equipement{% endblock %}
+
+{% block body %}<center>
+    
+    
+    <h1>Liste des equipements</h1>
+    <input type="text" class="form-control" id="searchInput" placeholder="Search&hellip;">
+  
+
+<br>
+<script>
+        function filterTable() {
+            const filter = document.getElementById('searchInput').value.toUpperCase();
+            const rows = document.querySelectorAll('table tr');
+            for (let i = 1; i < rows.length; i++) {
+                const cols = rows[i].querySelectorAll('td');
+                let visible = false;
+                for (let j = 0; j < cols.length; j++) {
+                    const cell = cols[j];
+                    if (cell.innerText.toUpperCase().indexOf(filter) > -1) {
+                        visible = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = visible ? '' : 'none';
+            }
+        }
+        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+    </script>
+    </center>
+    
+    <br>
+
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>IdEquipement</th>
+                <th>NomEquipement</th>
+                <th>Quantite</th>
+                <th>DateAchat</th>
+                <th>PrixAchat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipement in equipements %}
+                <tr>
+                    <td>{{ equipement.IdEquipement }}</td>
+                    <td>{{ equipement.NomEquipement }}</td>
+                    <td>{{ equipement.Quantite }}</td>
+                    <td>{{ equipement.DateAchat ? equipement.DateAchat|date('Y-m-d') : '' }}</td>
+                    <td>{{ equipement.PrixAchat }}</td>
+                    <td>
+                        <a href="{{ path('app_equipement_show', {'IdEquipement': equipement.IdEquipement}) }}">show</a>
+                        <a href="{{ path('app_equipement_edit', {'IdEquipement': equipement.IdEquipement}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipement_new') }}">Create new</a>
+</center>
+
+{% endblock %}

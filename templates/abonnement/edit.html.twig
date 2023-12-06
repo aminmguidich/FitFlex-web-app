@@ -1,0 +1,12 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block title %} Edit Abonnement{% endblock %}
+{% block headerCard %}<h3 class="text-center font-weight-light my-4">Edit Abonnement</h3>{% endblock %}
+    <h1>Edit Abonnement</h1>
+
+    {{ include('abonnement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_abonnement_index') }}">back to list</a>
+
+    {{ include('abonnement/_delete_form.html.twig') }}
+{% endblock %}
