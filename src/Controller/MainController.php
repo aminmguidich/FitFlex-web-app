@@ -91,7 +91,7 @@ class MainController extends AbstractController
 
         return $this->render('main/backcalendar.html.twig', compact('data'));
     }
-
+    #[Route('/mainnn', name: 'app_main_back')]
     public function indexSaid(EquipementRepository $equipement): Response
     {
         
@@ -108,7 +108,7 @@ class MainController extends AbstractController
     
            $data =json_encode($rdvs);
     
-            return $this->render('main/index.html.twig', compact('data'));
+            return $this->render('mainBack/main.html.twig', compact('data'));
         
         }
 

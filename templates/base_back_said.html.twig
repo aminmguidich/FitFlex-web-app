@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    {% block headersaid%}
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -17,6 +18,7 @@
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css"
         integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+        {% endblock %}
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -63,7 +65,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ path('app_equipement_new') }}">ajout equipement</a>
                                     <a class="nav-link" href="{{ path('app_equipement_index') }}">affichage equipement</a>
-                                <a class="nav-link" href="{{ path('app_main') }}">calendrier</a>
+                                <a class="nav-link" href="/mainnn">calendrier</a>
                                 <a class="nav-link" href="{{ path('export_Excel') }}">Excell</a>
                                 </nav>
                             </div>
