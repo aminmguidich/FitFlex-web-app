@@ -8,9 +8,11 @@
             "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
         },
         "files": [
+
             "./config/routes/annotations.yaml",
             "config/routes/annotations.yaml",
             "./config/routes/annotations.yaml",
+
 
             "./config/routes/annotations.yaml"
         ]
@@ -24,9 +26,9 @@
             "ref": "013b823e7fee65890b23e40f31e6667a1ac519ac"
         },
         "files": [
-            "config/packages/doctrine.yaml",
-            "src/Entity/.gitignore",
-            "src/Repository/.gitignore"
+            "./config/packages/doctrine.yaml",
+            "./src/Entity/.gitignore",
+            "./src/Repository/.gitignore"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -38,8 +40,8 @@
             "ref": "1d01ec03c6ecbd67c3375c5478c9a423ae5d6a33"
         },
         "files": [
-            "config/packages/doctrine_migrations.yaml",
-            "migrations/.gitignore"
+            "./config/packages/doctrine_migrations.yaml",
+            "./migrations/.gitignore"
         ]
     },
     "endroid/qr-code-bundle": {
@@ -703,6 +705,7 @@
         },
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
+
         ]
     },
     "sensio/framework-extra-bundle": {
@@ -715,6 +718,7 @@
         },
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
+igin/said
         ]
     },
     "symfony/console": {
@@ -742,7 +746,7 @@
         ]
     },
     "symfony/flex": {
-        "version": "2.4",
+        "version": "2.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -876,6 +880,7 @@
         },
         "files": [
             "./config/packages/security.yaml"
+
         ]
     },
     "symfony/swiftmailer-bundle": {
@@ -890,6 +895,7 @@
             "./config/packages/dev/swiftmailer.yaml",
             "./config/packages/swiftmailer.yaml",
             "./config/packages/test/swiftmailer.yaml"
+
         ]
     },
     "symfony/translation": {
@@ -950,6 +956,20 @@
         "files": [
             "./config/packages/web_profiler.yaml",
             "./config/routes/web_profiler.yaml"
+
+        ]
+    },
+    "symfony/webapp-pack": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "aece95c8a188f6e6d04f01ccb8678d1764fd2642"
+        },
+        "files": [
+            "./config/packages/messenger.yaml"
+
         ]
     },
     "twig/extra-bundle": {
